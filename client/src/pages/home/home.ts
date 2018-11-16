@@ -3,9 +3,8 @@ import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { UserProvider } from './../../providers/user/user';
-
 
 @Component({
   selector: 'page-home',
@@ -20,8 +19,12 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController, public menuCtrl: MenuController) {
 
+  }
+
+  ionViewDidLoad(){
+    this.menuCtrl.enable(false);
   }
 
   ionViewCanEnter(){
@@ -42,6 +45,7 @@ export class HomePage {
         buttons: ['OK']
       })).present();
   }else this.userProvider.login(this.user).subscribe((res:any) => {
+    this.user.username=this.user.username.toLowerCase()
     if(res.status === 200) {
       this.nativeStorage.setItem('userToken', res.token);
       this.tokenProvider.token=res.token;

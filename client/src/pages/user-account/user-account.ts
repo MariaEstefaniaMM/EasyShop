@@ -83,7 +83,39 @@ export class UserAccountPage {
   });
   }
 
+  deleteAccout(){
+    let alert = this.alertCtrl.create({
+      title: 'Do you want delete your account?',
+      inputs: [
+        {
+          name: 'password',
+          placeholder: 'password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'Cancel',
+          handler: data =>{
+            console.log('cancel clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: data =>{
+            console.log('cancel clicked');
+            this.user.user_password=data.password;
+            this.deleteUser()
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   deleteUser(){
+    this.errorAlert(this.user.user_password)
     this.userProvider.deleteUser(this.user).subscribe((res:any) => {
       console.log('deleted');
         if (res.status==200){

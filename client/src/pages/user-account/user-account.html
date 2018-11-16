@@ -8,11 +8,11 @@
     </div>
     <div class="inputs">
         <div class="div-img" align="center">
-            <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
-            <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
+            <img *ngIf="user.user_photo" class="img-camera"src="{{ user.user_photo }}"> 
+            <img *ngIf="!user.user_photo" class="img-note" src="/assets/imgs/logo.png">
         </div>   
-        <button *ngIf="user.photo"ion-button full class="btn-si" (click)="chooseImag()">Change photo</button>          
-        <button *ngIf="!user.photo" ion-button full class="btn-si" (click)="chooseImag()">Add photo</button>
+        <button *ngIf="user.user_photo && !readonly"ion-button class="btn-si" (click)="chooseImage()">Change photo</button>          
+        <button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>
         <ion-item>
             <ion-label color="primary" fixed>Name:</ion-label>
             <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" [readonly]="readonly"></ion-input>
@@ -34,8 +34,9 @@
             <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
         </ion-item>
         <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
+        <button *ngIf="readonly" ion-button full (click)="deleteAccout()" color="danger">DELETE PROFILE</button>
         <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>
-        <button ion-button full (click)="changePass()">CHANGE PASSORD</button>
+        <button *ngIf="!readonly" ion-button full (click)="changePass()">CHANGE PASSORD</button>
     </div>
 </ion-content>
   

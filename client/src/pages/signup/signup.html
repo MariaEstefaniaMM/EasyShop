@@ -10,7 +10,7 @@
       <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
       <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
   </div>
-  <button ion-button full class="btn-si" (click)="chooseImag()">Add a photo</button>
+  <button ion-button class="btn-si" (click)="chooseImag()">Add a photo</button>
   <ion-item class="user">
     <ion-label floating>Name</ion-label>
     <ion-input [(ngModel)]="user.name" type="text"></ion-input>
@@ -25,7 +25,7 @@
   </ion-item>
   <ion-item class="user">
     <ion-label floating>Phone Number</ion-label>
-  <ion-input [(ngModel)]="user.phone" type="phone"></ion-input>
+  <ion-input [(ngModel)]="user.phone" type="tel"></ion-input>
   </ion-item>
   <ion-item class="user">
       <ion-label floating>Address</ion-label>
@@ -35,7 +35,7 @@
     <ion-label floating>Password</ion-label>
   <ion-input [(ngModel)]="user.password" type="password"></ion-input>
   </ion-item>
-  <button ion-button full class="btn-si" (click)="signUp()">Sign Up </button>
+  <button ion-button full class="btn-sign" (click)="signUp()">Sign Up </button>
     <p class="p-si">Have already an account? <a button (click)="goToHome()" style="color: gray"> Sign in now</a></p>
 </div>
 </ion-content>

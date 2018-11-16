@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ProductsPage } from './../pages/products/products';
 import { WishlistPage } from '../pages/wishlist/wishlist';
+import { TokenProvider } from './../providers/token/token';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,14 +19,15 @@ export class MyApp {
 
   pages: Array<{title: string; component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private tokenProvider: TokenProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: ProductsPage, icon: 'home' },
-      { title: 'Wishlist', component: WishlistPage, icon: 'create' },
-      { title: 'My Account', component: UserAccountPage, icon: 'create' },
+      { title: 'Wishlist', component: WishlistPage, icon: 'cart' },
+      { title: 'My Account', component: UserAccountPage, icon: 'contact' },
       { title: 'Logout', component: HomePage, icon: 'log-out' }
     ];
   }
@@ -42,6 +44,10 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    if(page.title=='Logout'){
+      this.tokenProvider.removeToken();
+      console.log(this.tokenProvider.token)
+  }
     this.nav.setRoot(page.component);
     console.log('do iit')
   }
