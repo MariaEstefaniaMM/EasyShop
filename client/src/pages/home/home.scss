@@ -1,0 +1,44 @@
+page-home {
+    html, body{
+        margin: 0%;
+        padding: 0%;
+        height: 100%;  
+    }
+    .bg{
+        position: absolute;
+        top: -24px;
+    }
+    .head{
+        display: block;
+        color: rgb(133, 130, 130);
+        transform: translate(60%, 30%);
+        width: 150px;
+    }
+    .head h3{
+        font-size: 25px;
+        font-weight: lighter !important;
+        color: black;
+    }
+    .inputs{
+        width: 300px;
+        transform: translate(4.5%, 100%);  
+    }
+    .user, .pass{
+        background-color: white;
+        color: black;
+    }
+    .pass{
+        position: absolute;
+        top: 80px;      
+    }
+    .btn-login{
+        position: absolute;
+        top: 155px;
+        background-color: black;
+    }
+    .p-su{
+        position: absolute;
+        top: 198px;
+    }
+
+}

@@ -1,0 +1,34 @@
+page-notes-list {
+    .n-note{
+        position: absolute;
+        transform: translate(490%, 890%);
+    }
+    .serachbar{
+        width: 280px;
+    } 
+    .n-h1{
+        position: absolute;
+        transform: translate(2%, 65%);
+        width: 300px;
+    }
+    ion-list.list.list-md {
+        position: relative;
+        top: 110px;
+    }
+    .img-note {
+        width: 64px;
+        height: 64px;
+    }
+    .item-md ion-thumbnail[item-start] {
+        margin: 8px 10px 8px 0;
+    }
+    h6 {
+        transform: translate(46%, 40%);
+    }
+    h5 {
+        transform: translateY(40%);
+    }
+    h2 {
+        transform: translateY(20%);
+    }
+}

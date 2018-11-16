@@ -14,3 +14,19 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.user-profile{
+    .user-avatar{
+        width: 68px;
+        height: 68px;
+        display: inline-block;
+        border-radius: 50%;
+        box-shadow: inset 0 0 10rem transparent, 0 0  4rem transparent;
+        img{
+            border-radius: 30%;
+        }
+    }
+    .toolbar-background{
+        background-image: linear-gradient(#abff91, rgb(15, 159, 255));
+    }
+}

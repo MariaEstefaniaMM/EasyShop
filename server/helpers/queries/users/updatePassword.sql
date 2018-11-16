@@ -1,0 +1,1 @@
+UPDATE users SET user_password=$1 WHERE id_user=$2
