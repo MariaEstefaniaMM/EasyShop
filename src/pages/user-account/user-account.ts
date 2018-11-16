@@ -16,6 +16,8 @@ import { EditaccountPage } from '../editaccount/editaccount';
 })
 export class UserAccountPage {
 
+  private isDisabled: boolean = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
