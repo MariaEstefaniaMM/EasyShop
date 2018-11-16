@@ -7,33 +7,37 @@
         <h1 ion-text color="secondary">MY ACCOUT</h1>
     </div>
     <div class="inputs">
-        <ion-item>
-            <img class="logo" src="/assets/imgs/logo.png" >
-        </ion-item>              
+        <div class="div-img" align="center">
+            <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
+            <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
+        </div>   
+        <button ion-button full class="btn-si" (click)="chooseImag()">Change photo</button>          
         <ion-item>
             <ion-label color="primary" fixed>Name:</ion-label>
-            <ion-input type="text" placeholder="Name"></ion-input>
+            <ion-input type="text" placeholder="Name" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Lastname:</ion-label>
-            <ion-input type="text" placeholder="Lastname"></ion-input>
+            <ion-input type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Username:</ion-label>
-            <ion-input type="text" placeholder="Username"></ion-input>
+            <ion-input type="text" placeholder="Username" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Phone Number:</ion-label>
-            <ion-input type="tel" placeholder="Phone Number"></ion-input>
+            <ion-input type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Email:</ion-label>
-            <ion-input type="email" placeholder="email"></ion-input>
+            <ion-input type="email" placeholder="email" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-textarea color="primary" fixed placeholder="Address">Address</ion-textarea>
+            <ion-textarea color="primary" fixed placeholder="Address" [readonly]="readonly">Address</ion-textarea>
         </ion-item>
-        <button ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
+        <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
+        <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>
+        <button ion-button full (click)="changePass()">CHANGE PASSORD</button>
     </div>
 </ion-content>
   

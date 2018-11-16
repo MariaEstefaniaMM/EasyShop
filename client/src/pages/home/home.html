@@ -7,14 +7,13 @@
     <div class="inputs">
       <ion-item class="user">
         <ion-label floating>Email</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input [(ngModel)]="user.email" type="email"></ion-input>
       </ion-item>
       <ion-item class="pass">
         <ion-label floating>Password</ion-label>
-        <ion-input fomrControlName="password" clearOnEdit="true"type="password"></ion-input>
-       <!-- <ion-icon item-end [name]="passwordIcon" (click)="showHide()" name="eye" style="font-size:32px;"></ion-icon> -->
+        <ion-input fomrControlName="password" clearOnEdit="true" [(ngModel)]="user.password" type="password"></ion-input>
       </ion-item>
-      <button ion-button full class="btn-login" (click)="gotoToHome()">login</button>
+      <button ion-button full class="btn-login" (click)="gotoToProducts()">login</button>
       <p class="p-su">New To EasyShop? <a button (click)="goToSignUp()" style="color: gray"> Sign up now</a></p>
     </div>
   </div>
