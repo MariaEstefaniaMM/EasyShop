@@ -15,6 +15,7 @@ export class HomePage {
 
   gotoToHome(){
     this.navCtrl.push(ProductsPage);
+    console.log('hi')
   }
 
   goToSignUp(){
