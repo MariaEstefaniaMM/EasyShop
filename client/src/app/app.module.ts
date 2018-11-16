@@ -1,6 +1,7 @@
 import { NativeStorage } from '@ionic-native/native-storage';
 import { MenuComponent } from './../components/menu/menu';
 import { NotesListPage } from './../pages/notes-list/notes-list';
+import { ProductsPage } from './../pages/products/products';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -19,6 +20,7 @@ import { NoteProvider } from '../providers/note/note';
 import { CameraProvider } from '../providers/camera/camera';
 import { TokenProvider } from '../providers/token/token';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -26,6 +28,7 @@ import { TokenProvider } from '../providers/token/token';
     SignupPage,
     NotesListPage,
     MenuComponent,
+    ProductsPage
   ],
   imports: [
     BrowserModule,
@@ -37,8 +40,12 @@ import { TokenProvider } from '../providers/token/token';
     MyApp,
     HomePage,
     SignupPage,
+<<<<<<< HEAD:client/src/app/app.module.ts
     NotesListPage,
     MenuComponent
+=======
+    ProductsPage
+>>>>>>> master:src/app/app.module.ts
   ],
   providers: [
     StatusBar,
