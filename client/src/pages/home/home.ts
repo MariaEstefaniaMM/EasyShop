@@ -14,7 +14,7 @@ import { UserProvider } from './../../providers/user/user';
 export class HomePage {
 
   user={ 
-    email:"",
+    username:"",
     password:""
   }
 
@@ -27,7 +27,7 @@ export class HomePage {
   ionViewCanEnter(){
     console.log('CanEnter HomePage');
     if (this.tokenProvider.getToken()){
-      console.log('go to NotesListPage');
+      console.log('go to ProductPage');
       this.navCtrl.setRoot(ProductsPage);
     }else{
       return true;
@@ -35,8 +35,7 @@ export class HomePage {
   }
 
   gotoToProducts(){
-    console.log(this.user);
-    if (this.user.email=="" || this.user.password=="" ){
+    if (this.user.username=="" || this.user.password=="" ){
       (this.alertCtrl.create({
         title: 'Error',
         subTitle: 'Please fill all the fields',
@@ -67,7 +66,7 @@ export class HomePage {
       buttons: ['OK']
     })).present();    
   }
-  ); 
+  );  
   }
 
   goToSignUp(){

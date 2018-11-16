@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { AlertController, ToastController } from 'ionic-angular';
 import { CameraProvider } from './../../providers/camera/camera';
 import { HomePage } from '../home/home';
+import { ChangepassPage } from '../changepass/changepass';
 
 @IonicPage()
 @Component({
@@ -54,6 +55,10 @@ export class UserAccountPage {
     this.readonly=false;
   }
 
+  changePass(){
+    this.navCtrl.setRoot(ChangepassPage);
+  }
+
   chooseImage(){
     this.cameraProvider.choose().then((res:any)=>{
       this.user.user_photo = res;
@@ -66,6 +71,8 @@ export class UserAccountPage {
     this.userProvider.updateUser(this.user).subscribe((res:any) => {
       if (res.status==200){
         console.log("Modified");
+        this.readonly=true;
+        this.toast("Profile updated");
       }else{
         this.user=this.originalUser;
         this.errorAlert(res.message);

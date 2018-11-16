@@ -15,7 +15,7 @@ router.post('/login', auth.isLogged, function (req, res, next) {
         if (!user) {
             return res.send({
                 status: 401,
-                message: 'User not found, please sign up.',
+                message: 'Incorrect Password',
             });
         }
         req.logIn(user,{session: false}, function (err) {

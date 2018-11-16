@@ -4,11 +4,9 @@ const user = require('../queries').users;
 let cart = require('../models/carts');
 
 module.exports.getUserByEmail = (email)=>{
-    console.log('getUserByEmail');
     return new Promise((res,rej)=>{
         db.connect().then((obj)=>{
             obj.one(user.read,[email]).then((data)=>{
-                console.log(data);
                 res(data);
                 obj.done();                
             }).catch((error)=>{

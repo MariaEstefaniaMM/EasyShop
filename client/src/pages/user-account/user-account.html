@@ -11,29 +11,27 @@
             <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
             <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
         </div>   
-        <button ion-button full class="btn-si" (click)="chooseImag()">Change photo</button>          
+        <button *ngIf="user.photo"ion-button full class="btn-si" (click)="chooseImag()">Change photo</button>          
+        <button *ngIf="!user.photo" ion-button full class="btn-si" (click)="chooseImag()">Add photo</button>
         <ion-item>
             <ion-label color="primary" fixed>Name:</ion-label>
-            <ion-input type="text" placeholder="Name" [readonly]="readonly"></ion-input>
+            <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Lastname:</ion-label>
-            <ion-input type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Username:</ion-label>
-            <ion-input type="text" placeholder="Username" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Phone Number:</ion-label>
-            <ion-input type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+            <ion-input [(ngModel)]="user.user_lastname" type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Email:</ion-label>
-            <ion-input type="email" placeholder="email" [readonly]="readonly"></ion-input>
+            <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" [readonly]="readonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-textarea color="primary" fixed placeholder="Address" [readonly]="readonly">Address</ion-textarea>
+            <ion-label color="primary" fixed>Phone Number:</ion-label>
+            <ion-input [(ngModel)]="user.user_phone" type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Address:</ion-label>
+            <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
         </ion-item>
         <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
         <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>

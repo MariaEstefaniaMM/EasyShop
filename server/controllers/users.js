@@ -70,7 +70,8 @@ router.put('/updatePassword', isAuth, (req, res)=>{
     if (isMatch){
       user.updatePassword(req.body.new_password, req.user.id_user).then((data) => {
         console.log(data);
-        res.send({status:200});
+        res.send({status:200,
+                  message:'Password Updated'});
       }).catch((err) => {
         console.log(err);
         res.send({status:403, message:'Update password failed'})
