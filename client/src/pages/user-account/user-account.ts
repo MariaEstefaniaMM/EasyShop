@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProductsPage } from '../products/products';
+import { EditaccountPage } from '../editaccount/editaccount';
 
 /**
- * Generated class for the SignupPage page.
+ * Generated class for the UserAccountPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +11,20 @@ import { ProductsPage } from '../products/products';
 
 @IonicPage()
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html',
+  selector: 'page-user-account',
+  templateUrl: 'user-account.html',
 })
-export class SignupPage {
+export class UserAccountPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  goToEditProfile(){
+    this.navCtrl.push(EditaccountPage);
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    console.log('ionViewDidLoad UserAccountPage');
   }
-
-  gotoToHome(){
-    this.navCtrl.push(ProductsPage);
-  }
-
 
 }

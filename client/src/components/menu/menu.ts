@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component,  Input } from '@angular/core';
 
 @Component({
   selector: 'menu',
@@ -7,15 +7,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class MenuComponent {
 
   @Input() name: string;
-  myInput:string;
-  @Output() returnFromComp: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
     console.log('Hello MenuComponent Component');
     this.name = 'Hello World';
   }
 
-  onInput(){
-    this.returnFromComp.emit(this.myInput);
-  }
 }

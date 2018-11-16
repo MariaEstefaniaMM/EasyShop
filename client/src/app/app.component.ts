@@ -1,10 +1,11 @@
-import { TokenProvider } from './../providers/token/token';
+import { UserAccountPage } from './../pages/user-account/user-account';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
-import { NotesListPage } from './../pages/notes-list/notes-list';
+import { ProductsPage } from './../pages/products/products';
+import { WishlistPage } from '../pages/wishlist/wishlist';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,13 +18,14 @@ export class MyApp {
 
   pages: Array<{title: string; component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-               private tokenProvider: TokenProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Notes', component: NotesListPage, icon: 'home' },
+      { title: 'Home', component: ProductsPage, icon: 'home' },
+      { title: 'Wishlist', component: WishlistPage, icon: 'create' },
+      { title: 'My Account', component: UserAccountPage, icon: 'create' },
       { title: 'Logout', component: HomePage, icon: 'log-out' }
     ];
   }
@@ -40,11 +42,8 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    if(page.title=='Logout'){
-        this.tokenProvider.removeToken();
-        console.log(this.tokenProvider.token)
-    }
-    this.nav.push(page.component);
+    this.nav.setRoot(page.component);
+    console.log('do iit')
   }
 }
 

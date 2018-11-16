@@ -1,4 +1,3 @@
-
 <ion-menu [content]="content">
     <ion-header>
       <ion-toolbar class="user-profile">
@@ -10,7 +9,7 @@
               </div>
             </ion-col>
             <ion-col padding-top col-8>
-              <h2 ion-text class="no-margin bold text-white" style="color:white">EasyNote</h2>
+              <h2 ion-text class="no-margin bold text-white" style="color:rgba(34, 33, 33, 0.39)">EasyShop</h2>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -20,7 +19,7 @@
     <ion-content>
       <ion-list>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon item-left [name]="p.icon"></ion-icon>
+          <ion-icon item-right [name]="p.icon"></ion-icon>
           <span ion-text>{{p.title}}</span>
         </button>
       </ion-list>

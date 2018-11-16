@@ -9,13 +9,14 @@ page-home {
         top: -24px;
     }
     .head{
+        position: center;
         display: block;
         color: rgb(133, 130, 130);
-        transform: translate(60%, 30%);
-        width: 150px;
+        transform: translate(40%, 30%);
+        width: 180px;
     }
-    .head h3{
-        font-size: 25px;
+    .head h1{
+        font-size: 5ch !important;
         font-weight: lighter !important;
         color: black;
     }
