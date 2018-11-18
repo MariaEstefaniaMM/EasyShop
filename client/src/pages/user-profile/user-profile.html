@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>My Profile</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+<ion-content padding>
+  <div class="inputs">
+      <div class="div-img" align="center">
+          <img *ngIf="user.user_photo" class="img-camera"src="{{ user.user_photo }}"> 
+          <img *ngIf="!user.user_photo" class="img-note" src="/assets/imgs/logo.png">
+      </div>
+      <div class="labels">
+      <button *ngIf="user.user_photo && !readonly"ion-button class="btn-si" (click)="chooseImage()">Change photo</button>          
+      <button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>
+      <ion-item>
+          <ion-label color="primary" fixed>Name:</ion-label>
+          <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" fixed>Lastname:</ion-label>
+          <ion-input [(ngModel)]="user.user_lastname" type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" fixed>Email:</ion-label>
+          <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" fixed>Phone Number:</ion-label>
+          <ion-input [(ngModel)]="user.user_phone" type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" fixed>Address:</ion-label>
+          <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
+      <button *ngIf="readonly" ion-button full (click)="deleteAccout()" color="danger">DELETE PROFILE</button>
+      <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>
+      <button *ngIf="!readonly" ion-button full (click)="changePass()">CHANGE PASSWORD</button>
+    </div>
+</div>
+</ion-content>

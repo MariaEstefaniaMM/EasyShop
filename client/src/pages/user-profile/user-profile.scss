@@ -1,0 +1,22 @@
+page-user-profile {
+    .btn-si{
+        background-color: black;
+        top: -7px;
+        position: relative;
+        left: 115px;
+    }
+
+    .div-img{
+        display: inline-block;
+        border-radius: 50%;
+        box-shadow: inset 0 0 10rem transparent, 0 0  4rem transparent;
+        position: relative;
+        left: 100px;
+        img{
+            border-radius: 30%;
+            width: 140px;
+            height: 140px;
+        }
+    }
+
+}
