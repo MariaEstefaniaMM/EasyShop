@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ProductsPage } from './../pages/products/products';
 import { WishlistPage } from '../pages/wishlist/wishlist';
 import { TokenProvider } from './../providers/token/token';
+import { NewProductPage } from '../pages/new-product/new-product';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,6 +29,7 @@ export class MyApp {
       { title: 'Home', component: ProductsPage, icon: 'home' },
       { title: 'Wishlist', component: WishlistPage, icon: 'cart' },
       { title: 'My Account', component: UserAccountPage, icon: 'contact' },
+      { title: 'New Product', component: NewProductPage, icon: 'add' },
       { title: 'Logout', component: HomePage, icon: 'log-out' }
     ];
   }
@@ -48,7 +50,7 @@ export class MyApp {
       this.tokenProvider.removeToken();
       console.log(this.tokenProvider.token)
   }
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
     console.log('do iit')
   }
 }

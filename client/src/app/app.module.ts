@@ -20,6 +20,12 @@ import { WishlistPage } from '../pages/wishlist/wishlist';
 import { MenuComponent } from '../components/menu/menu';
 import { ChangepassPage } from '../pages/changepass/changepass';
 import { ProductsPage } from '../pages/products/products';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { UserProductsPage } from '../pages/user-products/user-products';
+import { ProductsComponent } from '../components/products/products';
+import { NewProductPage } from '../pages/new-product/new-product';
+import { WishlistComponent } from '../components/wishlist/wishlist';
+import { UserProductPage } from '../pages/user-product/user-product';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,13 @@ import { ProductsPage } from '../pages/products/products';
     UserAccountPage,
     WishlistPage,
     MenuComponent,
-    ChangepassPage
+    ChangepassPage,
+    UserProfilePage,
+    UserProductsPage,
+    ProductsComponent,
+    NewProductPage, 
+    WishlistComponent,
+    UserProductPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +61,13 @@ import { ProductsPage } from '../pages/products/products';
     UserAccountPage,
     WishlistPage,
     MenuComponent,
-    ChangepassPage
+    ChangepassPage,
+    UserProfilePage,
+    UserProductsPage,
+    ProductsComponent,
+    NewProductPage,
+    WishlistComponent,
+    UserProductPage
   ],
   providers: [
     StatusBar,
