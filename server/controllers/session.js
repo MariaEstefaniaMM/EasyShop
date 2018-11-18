@@ -47,12 +47,9 @@ router.post('/signup',auth.isLogged,function(req, res, next) {
             user.signup(req.body.name, req.body.lastName, req.body.email, req.body.password, req.body.photo, req.body.address, req.body.phone)
             .then((data) => {
                 console.log('SignUp Successful');
-                /*let jsonWebToken = jwt.sign(user,config.secret);
-                console.log(jsonWebToken);*/
                 res.send({
                     status: 200,
-                    message:'Sign Up Successful',
-                    //token:jsonWebToken
+                    message:'Sign Up Successful'
                 });
             }).catch((err) => {
                 console.log(err)

@@ -19,5 +19,13 @@ module.exports = {
   // external queries for Carts:
   carts: {
     create: sql("./carts/createCart.sql")
+  },
+  // external queries for Products:
+  products:{
+    readAll: sql("./products/getAll.sql"),
+    create: sql("./products/createProduct.sql"),
+    update: sql("./products/updateProduct.sql"),
+    read: sql("./products/getUserProducts.sql"),
+    delete: sql("./products/deleteProduct.sql")
   }
 };

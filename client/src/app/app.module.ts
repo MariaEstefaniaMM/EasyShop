@@ -20,6 +20,7 @@ import { WishlistPage } from '../pages/wishlist/wishlist';
 import { MenuComponent } from '../components/menu/menu';
 import { ChangepassPage } from '../pages/changepass/changepass';
 import { ProductsPage } from '../pages/products/products';
+import { ProductProvider } from '../providers/product/product';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ProductsPage } from '../pages/products/products';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     CameraProvider,
-    TokenProvider
+    TokenProvider,
+    ProductProvider
   ]
 })
 export class AppModule {}

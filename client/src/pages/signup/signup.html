@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-<div class="inputs">
+<form [formGroup]="signupform">
   <div class="div-img" align="center">
       <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
       <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
@@ -13,29 +13,45 @@
   <button ion-button class="btn-si" (click)="chooseImag()">Add a photo</button>
   <ion-item class="user">
     <ion-label floating>Name</ion-label>
-    <ion-input [(ngModel)]="user.name" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
   </ion-item>
   <ion-item class="lastname">
     <ion-label floating>Lastname</ion-label>
-    <ion-input [(ngModel)]="user.lastName" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
   </ion-item>
   <ion-item class="user">
     <ion-label floating>Email</ion-label>
-    <ion-input [(ngModel)]="user.email" type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="user.email" formControlName="email" name="email"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="signupform.get('email').errors && signupform.get('email').dirty">
+      <p class="error-message" *ngIf="signupform.get('email').hasError('required')">
+          Please enter an email
+      </p>
+      <p class="error-message" *ngIf="signupform.get('email').hasError('pattern')">
+        Please enter a valid email
+  </p>
   </ion-item>
   <ion-item class="user">
     <ion-label floating>Phone Number</ion-label>
-  <ion-input [(ngModel)]="user.phone" type="tel"></ion-input>
+  <ion-input [(ngModel)]="user.phone" type="tel" formControlName="phone"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="signupform.get('phone').errors && signupform.get('phone').dirty">
+      <p class="error-message" *ngIf="signupform.get('phone').hasError('required')">
+          Please enter an phone number
+      </p>
+      <p class="error-message" *ngIf="signupform.get('phone').hasError('pattern')">
+        Please enter a valid phone number
+  </p>
   </ion-item>
   <ion-item class="user">
       <ion-label floating>Address</ion-label>
-      <ion-input [(ngModel)]="user.address" type="text"></ion-input>
+      <ion-input [(ngModel)]="user.address" type="text" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
   <ion-item class="user">
     <ion-label floating>Password</ion-label>
-  <ion-input [(ngModel)]="user.password" type="password"></ion-input>
+  <ion-input [(ngModel)]="user.password" type="password" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
   <button ion-button full class="btn-sign" (click)="signUp()">Sign Up </button>
     <p class="p-si">Have already an account? <a button (click)="goToHome()" style="color: gray"> Sign in now</a></p>
-</div>
+</form>
 </ion-content>

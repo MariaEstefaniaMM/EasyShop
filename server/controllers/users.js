@@ -2,6 +2,8 @@ const express = require('express');
 let router = express.Router();
 const isAuth = require('../middlewares/isAuth').isAuth;
 let user = require('../helpers/models/users');
+let config = require('../helpers/config/config');
+const jwt  = require('jsonwebtoken');
 
 router.put('/updateUser',isAuth, (req,res)=>{
     console.log(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
@@ -9,9 +11,19 @@ router.put('/updateUser',isAuth, (req,res)=>{
       user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
       .then((data) => {
         console.log('Updated-correo es el mismo')
-        res.send({
-          data:data,
-          status:200});
+        user.getUserByEmail(req.user.user_email).then((user)=>{
+          let jsonWebToken = jwt.sign(user,config.secret);
+            console.log(jsonWebToken);
+            res.send({
+                data: data,
+                status: 200,
+                message:'Profile Updated',
+                user: user,
+                token:jsonWebToken
+            });
+      }).catch((err)=>{
+          return done(null, false);
+      });
       }).catch((err) => {
         console.log(err)
         res.send({status:403, message:'Could not update user'});
@@ -23,9 +35,19 @@ router.put('/updateUser',isAuth, (req,res)=>{
           user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
           .then((data) => {
             console.log('Updated-cambie por un correo no repetido')
-            res.send({
-              data:data,
-              status:200});
+            user.getUserByEmail(req.body.user_email).then((user)=>{
+              let jsonWebToken = jwt.sign(user,config.secret);
+                console.log(jsonWebToken);
+                res.send({
+                    data: data,
+                    status: 200,
+                    message:'Profile Updated',
+                    user: user,
+                    token:jsonWebToken
+                });
+          }).catch((err)=>{
+              return done(null, false);
+          });
           }).catch((err) => {
             console.log(err)
             res.send({status:403, message:'Could not update user'});
@@ -70,8 +92,19 @@ router.put('/updatePassword', isAuth, (req, res)=>{
     if (isMatch){
       user.updatePassword(req.body.new_password, req.user.id_user).then((data) => {
         console.log(data);
-        res.send({status:200,
-                  message:'Password Updated'});
+        user.getUserByEmail(req.user.user_email).then((user)=>{
+          let jsonWebToken = jwt.sign(user,config.secret);
+            console.log(jsonWebToken);
+            res.send({
+                status: 200,
+                message:'Password Updated',
+                user: user,
+                token:jsonWebToken
+            });
+      }).catch((err)=>{
+          return done(null, false);
+      });
+        
       }).catch((err) => {
         console.log(err);
         res.send({status:403, message:'Update password failed'})

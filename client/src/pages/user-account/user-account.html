@@ -31,7 +31,7 @@
         </ion-item>
         <ion-item>
             <ion-label color="primary" fixed>Address:</ion-label>
-            <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+            <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Address" [readonly]="readonly"></ion-input>
         </ion-item>
         <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
         <button *ngIf="readonly" ion-button full (click)="deleteAccout()" color="danger">DELETE PROFILE</button>

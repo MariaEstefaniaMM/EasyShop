@@ -4,6 +4,8 @@ import { UserProvider } from './../../providers/user/user';
 import { AlertController, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { UserAccountPage } from '../user-account/user-account';
+import { TokenProvider } from '../../providers/token/token';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -16,7 +18,8 @@ export class ChangepassPage {
   password={old_password:'',new_password:''}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider,
-    public alertCtrl: AlertController, public toastCtrl: ToastController, ) {
+    public alertCtrl: AlertController, public toastCtrl: ToastController, private nativeStorage: NativeStorage, 
+              private tokenProvider:TokenProvider ) {
   }
 
   ionViewDidLoad() {
@@ -27,7 +30,9 @@ export class ChangepassPage {
     this.userProvider.updatePassword(this.password).subscribe((res:any) => {
       if (res.status==200){
         console.log("Modified");
-        console.log(res);
+        this.nativeStorage.setItem('userToken', res.token);
+        this.tokenProvider.token=res.token;
+        console.log(this.tokenProvider.token);
         this.presentToast(res.message);
         this.navCtrl.setRoot(UserAccountPage);
     }},
