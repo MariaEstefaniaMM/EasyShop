@@ -1,0 +1,54 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>User Product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+      <ion-card>
+          <img src="/assets/imgs/logo.png"/>
+          <ion-card-content>
+            <ion-card-title>
+              Name Product
+              </ion-card-title>
+            <p>
+              Descrption:
+              The most popular industrial group ever, and largely
+              responsible for bringing the music to a mass audience.
+            </p>
+          </ion-card-content>
+          <ion-row>
+              <ion-col>
+                <button ion-button icon-start clear small (click)="addAlert()">
+                  <ion-icon name="cart"></ion-icon>
+                  <div>Wishlist</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-start clear small>
+                  <ion-icon name="cash"></ion-icon>
+                  <div>Price</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button icon-start clear small>
+                    <ion-icon name="shop"></ion-icon>
+                    <div>Shop</div>
+                  </button>
+                </ion-col>
+             <!-- <ion-col center text-center>
+                <ion-note>
+                    Created at:
+                    <ion-datetime displayFormat="YYYY MM DD, HH:mm"></ion-datetime>
+                </ion-note>
+              </ion-col> -->
+            </ion-row>
+        </ion-card>
+  </div>
+
+</ion-content>

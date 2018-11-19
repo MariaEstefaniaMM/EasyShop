@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="inputs">
+        <div class="div-img" align="center">
+            <img class="img-camera" src="/assets/imgs/logo.png"> 
+            <!--<img *ngIf="!user.user_photo" class="img-note" src="{{ user.user_photo }}">-->
+        </div>
+        <div class="labels">  
+        <button ion-button class="btn-si" (click)="chooseImage()">Choose Image</button>          
+        <!--<button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>-->
+        <ion-item>
+            <ion-label color="primary" fixed>Name:</ion-label>
+            <ion-input  type="text" placeholder="Name" [readonly]="!readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Description:</ion-label>
+            <ion-textarea type="text" placeholder="Description" [readonly]="!readonly"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Quantity:</ion-label>
+            <ion-input  type="number" placeholder="1" [readonly]="!readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Price:</ion-label>
+            <ion-input  type="number" placeholder="Price" [readonly]="!readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Category:</ion-label>
+            <ion-select class="selector" placeholder=" Select a Category">
+              <ion-option *ngFor="let cat of category">
+                  {{cat.title}}
+              </ion-option>
+            </ion-select>
+        </ion-item>
+        <button *ngIf="readonly" ion-button full (click)="updateProduct()">SAVE</button>
+        <button *ngIf="!readonly" ion-button full (click)="goToEditProduct()">EDIT PRODUCT</button>
+        <button *ngIf="!readonly" ion-button full (click)="deleteProduct()" color="danger">DELETE PRODUCT</button>
+      </div> 
+    </div>
+</ion-content>
