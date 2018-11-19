@@ -20,6 +20,7 @@ import { WishlistPage } from '../pages/wishlist/wishlist';
 import { MenuComponent } from '../components/menu/menu';
 import { ChangepassPage } from '../pages/changepass/changepass';
 import { ProductsPage } from '../pages/products/products';
+import { ProductProvider } from '../providers/product/product';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { UserProductsPage } from '../pages/user-products/user-products';
 import { ProductsComponent } from '../components/products/products';
@@ -79,7 +80,8 @@ import { UserProductPage } from '../pages/user-product/user-product';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     CameraProvider,
-    TokenProvider
+    TokenProvider,
+    ProductProvider
   ]
 })
 export class AppModule {}

@@ -11,6 +11,7 @@ app.use(express.json({limit:'mb'}));
 app.use(methodOverride());
 app.use(cors());
 app.use('*',cors());
+
 app.use(express.urlencoded({limit:'mb',extended:true}));
 app.use(jwt({
     secret: config.secret

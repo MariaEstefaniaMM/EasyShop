@@ -6,6 +6,8 @@ import { AlertController, ToastController } from 'ionic-angular';
 import { CameraProvider } from './../../providers/camera/camera';
 import { HomePage } from '../home/home';
 import { ChangepassPage } from '../changepass/changepass';
+import { TokenProvider } from './../../providers/token/token';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -19,7 +21,7 @@ export class UserProfilePage {
   user:User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, 
-              public  cameraProvider:CameraProvider, private userProvider: UserProvider) {
+              public  cameraProvider:CameraProvider, private userProvider: UserProvider, private nativeStorage: NativeStorage, private tokenProvider:TokenProvider) {
               this.user=this.userProvider.user;
               this.originalUser=JSON.parse(JSON.stringify(this.user));
   }
@@ -68,9 +70,15 @@ export class UserProfilePage {
   }
 
   updateUser(){
+    console.log(this.user);
     this.userProvider.updateUser(this.user).subscribe((res:any) => {
       if (res.status==200){
         console.log("Modified");
+        this.nativeStorage.setItem('userToken', res.token);
+        this.tokenProvider.token=res.token;
+        console.log(this.tokenProvider.token, res.token);
+        this.userProvider.user=res.user;
+        console.log(this.userProvider.user)
         this.readonly=true;
         this.toast("Profile updated");
       }else{
@@ -79,7 +87,7 @@ export class UserProfilePage {
       }
     },
     (err) => {
-      console.log(JSON.stringify(err)); 
+      console.log(err); 
   });
   }
 

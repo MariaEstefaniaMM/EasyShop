@@ -10,11 +10,11 @@
         <ion-card-content>
             <ion-item>
                 <ion-label color="primary" fixed>Current Password:</ion-label>
-                <ion-input [(ngModel)]="password.old_password" type="text" placeholder="Name"></ion-input>
+                <ion-input [(ngModel)]="password.old_password" type="password" placeholder="Current Password"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary" fixed> New Password:</ion-label>
-                <ion-input [(ngModel)]="password.new_password" type="text" placeholder="Name"></ion-input>
+                <ion-input [(ngModel)]="password.new_password" type="password" placeholder="New Password"></ion-input>
             </ion-item>
             <button ion-button full (click)="updatePassword()">UPDATE PASSWORD</button>
         </ion-card-content>

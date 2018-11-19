@@ -1,6 +1,8 @@
 {
   "name": "EasyShop",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
   "pro_id": "f3f8d747"
 }

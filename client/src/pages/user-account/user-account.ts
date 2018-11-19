@@ -6,6 +6,8 @@ import { AlertController, ToastController } from 'ionic-angular';
 import { CameraProvider } from './../../providers/camera/camera';
 import { HomePage } from '../home/home';
 import { ChangepassPage } from '../changepass/changepass';
+import { TokenProvider } from './../../providers/token/token';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { UserProductsPage } from '../user-products/user-products';
 import { WishlistPage } from '../wishlist/wishlist';
@@ -22,7 +24,7 @@ export class UserAccountPage {
   user:User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, 
-              public  cameraProvider:CameraProvider, private userProvider: UserProvider) {
+              public  cameraProvider:CameraProvider, private userProvider: UserProvider, private nativeStorage: NativeStorage, private tokenProvider:TokenProvider) {
               this.user=this.userProvider.user;
               this.originalUser=JSON.parse(JSON.stringify(this.user));
   }
