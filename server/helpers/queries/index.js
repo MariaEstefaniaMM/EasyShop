@@ -29,5 +29,12 @@ module.exports = {
     read: sql("./products/getUserProducts.sql"),
     delete: sql("./products/deleteProduct.sql"),
     addPaymentMode: sql("./products/addPaymentMode.sql")
+  },
+  // external queries for Comments:
+  comments:{
+    create: sql("./comments/createComment.sql"),
+    update: sql("./comments/updateComment.sql"),
+    read: sql("./comments/getProductComments.sql"),
+    delete: sql("./comments/deleteComment.sql")
   }
 };
