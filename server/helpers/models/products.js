@@ -2,9 +2,11 @@ const db = require('../config/db');
 const product = require('../queries').products;
 
 module.exports.getAllProducts = ()=>{
+    console.log(product.readAll);
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
               obj.any(product.readAll).then((data)=>{
+                  console.log(data);
                   res(data);
                   obj.done();
               }).catch((error)=>{
@@ -38,7 +40,7 @@ module.exports.createProduct = (name, description, price, quantity, img_name, ca
 }
 
 module.exports.updateProduct = (name, description, price, quantity, img_name, category, id_product)=>{
-    console.log('updateProduct'+productQueries.updateProduct)
+    console.log('updateProduct'+product.update)
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
               obj.none(product.update,[name, description, price, quantity, img_name, category, id_product]).then((data)=>{

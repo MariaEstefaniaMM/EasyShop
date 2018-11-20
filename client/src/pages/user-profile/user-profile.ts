@@ -31,6 +31,7 @@ export class UserProfilePage {
   }
 
   ionViewCanLeave(){
+    console.log(JSON.stringify(this.originalUser)!==JSON.stringify(this.user))
       if(JSON.stringify(this.originalUser)!==JSON.stringify(this.user)){
         this.alertCtrl.create({
           title:"Confirm",
@@ -71,6 +72,8 @@ export class UserProfilePage {
 
   updateUser(){
     console.log(this.user);
+    this.user.user_email=this.user.user_email.toLowerCase()
+    this.user.username=this.user.username.toLowerCase()
     this.userProvider.updateUser(this.user).subscribe((res:any) => {
       if (res.status==200){
         console.log("Modified");

@@ -19,6 +19,7 @@ export class SignupPage {
     photo: "",
     address: "",
     phone: "",
+    username:"",
   }
 
   signupform: FormGroup;
@@ -58,19 +59,16 @@ export class SignupPage {
 
   signUp() {
     console.log(this.user)
-    if (this.user.name=="" || this.user.lastName=="" || this.user.email=="" || this.user.password==""){
-        (this.alertCtrl.create({
-            title: 'Error',
-            subTitle: 'Please fill all the fields',
-            buttons: ['OK']
-        })).present();
+    if (this.user.name=="" || this.user.lastName=="" || this.user.email=="" || this.user.password=="" || this.user.username==""){
+      this.errorAlert('Please fill all the fields');
     }else{
       this.user.email=this.user.email.toLowerCase()
+      this.user.username=this.user.username.toLowerCase()
     this.userProvider.createUser(this.user).subscribe((res:any) => {
       if (res.status==200){
           console.log(res);    
           this.presentToast(res.message);
-          this.navCtrl.push(HomePage);
+          this.navCtrl.setRoot(HomePage);
       }else{
         this.errorAlert(res.message);
       }

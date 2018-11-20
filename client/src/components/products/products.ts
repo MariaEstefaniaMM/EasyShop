@@ -1,14 +1,8 @@
-import { Component } from '@angular/core';
+import { Product } from './../../models/product';
+import { Component, Input } from '@angular/core';
 import { AlertController, ToastController, NavController } from 'ionic-angular';
-import { UserProductsPage } from '../../pages/user-products/user-products';
 import { UserProductPage } from '../../pages/user-product/user-product';
 
-/**
- * Generated class for the ProductsComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'products',
   templateUrl: 'products.html'
@@ -16,14 +10,15 @@ import { UserProductPage } from '../../pages/user-product/user-product';
 export class ProductsComponent {
 
   text: string;
+  @Input() product: Product;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController) {
     console.log('Hello ProductsComponent Component');
     this.text = 'Hello World';
   }
 
-  goToProduct(){
-    this.navCtrl.push(UserProductPage);
+  goToProduct(product){
+    this.navCtrl.push(UserProductPage, product);
   }
 
   addAlert(){

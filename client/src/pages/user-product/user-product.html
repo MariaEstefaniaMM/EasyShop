@@ -11,44 +11,52 @@
 
   <div>
       <ion-card>
-          <img src="/assets/imgs/logo.png"/>
+        <img class="img-camera" *ngIf="product.img_product"  src="{{product.img_product}}"> 
+        <img class="img-camera" *ngIf="!product.img_product" src="/assets/imgs/logo.png"> 
           <ion-card-content>
             <ion-card-title>
-              Name Product
+              {{this.product.name_product}}
               </ion-card-title>
             <p>
               Descrption:
-              The most popular industrial group ever, and largely
-              responsible for bringing the music to a mass audience.
+              {{this.product.des_product}}
             </p>
           </ion-card-content>
           <ion-row>
               <ion-col>
-                <button ion-button icon-start clear small (click)="addAlert()">
+                <ion-note ion-button icon-start clear small (click)="addAlert()">
                   <ion-icon name="cart"></ion-icon>
-                  <div>Wishlist</div>
-                </button>
+                  <div>{{this.product.price_product}}</div>
+                </ion-note>
               </ion-col>
               <ion-col>
-                <button ion-button icon-start clear small>
+                <ion-note ion-button icon-start clear small>
                   <ion-icon name="cash"></ion-icon>
-                  <div>Price</div>
-                </button>
+                  <div>{{this.product.quantity}}</div>
+                </ion-note>
               </ion-col>
               <ion-col>
+                <ion-note ion-button icon-start clear small>
+                  <ion-icon name="cash"></ion-icon>
+                  <div>{{this.product.des_category}}</div>
+                </ion-note>
+              </ion-col>
+              <ion-col>
+                <ion-note ion-button icon-start clear small>
+                  <ion-icon name="cash"></ion-icon>
+                  <div>{{this.product.username}}</div>
+                </ion-note>
+              </ion-col>
+              <ion-col *ngIf="!owner">
                   <button ion-button icon-start clear small>
                     <ion-icon name="shop"></ion-icon>
                     <div>Shop</div>
                   </button>
-                </ion-col>
-             <!-- <ion-col center text-center>
-                <ion-note>
-                    Created at:
-                    <ion-datetime displayFormat="YYYY MM DD, HH:mm"></ion-datetime>
-                </ion-note>
-              </ion-col> -->
+              </ion-col>
             </ion-row>
         </ion-card>
+        <button *ngIf="owner" ion-button full (click)="goToEditProduct()">EDIT PRODUCT</button>
+        <button *ngIf="owner" ion-button full (click)="deleteAlert()" color="danger">DELETE PRODUCT</button>
   </div>
 
 </ion-content>

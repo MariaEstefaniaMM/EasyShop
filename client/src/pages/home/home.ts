@@ -5,6 +5,7 @@ import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { UserProvider } from './../../providers/user/user';
+import { ProductProvider } from './../../providers/product/product';
 
 @Component({
   selector: 'page-home',
@@ -16,10 +17,11 @@ export class HomePage {
     username:"",
     password:""
   }
+  all:boolean=true;
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
-    public alertCtrl: AlertController, public menuCtrl: MenuController) {
+    public alertCtrl: AlertController, public menuCtrl: MenuController, private productProvider: ProductProvider) {
 
   }
 
@@ -51,7 +53,8 @@ export class HomePage {
       this.tokenProvider.token=res.token;
       console.log(this.tokenProvider.token, res.token);
       this.userProvider.user=res.user;
-      console.log(this.userProvider.user)
+      console.log(this.userProvider.user);
+      this.productProvider.getUserProducts();
       this.navCtrl.setRoot(ProductsPage);
   } else {
     console.log('err');

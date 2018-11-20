@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { MenuComponent } from './menu/menu';
 import { ProductsComponent } from './products/products';
-import { WishlistComponent } from './wishlist/wishlist';
+import { UserProductsComponent } from './user-products/user-products';
 @NgModule({
 	declarations: [MenuComponent,
     ProductsComponent,
-    WishlistComponent],
+    UserProductsComponent],
 	imports: [],
 	exports: [MenuComponent,
     ProductsComponent,
-    WishlistComponent]
+    UserProductsComponent]
 })
 export class ComponentsModule {}

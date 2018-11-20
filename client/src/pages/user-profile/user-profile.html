@@ -24,6 +24,10 @@
           <ion-input [(ngModel)]="user.user_lastname" type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label color="primary" fixed>Username:</ion-label>
+        <ion-input [(ngModel)]="user.username" type="text" placeholder="Username" [readonly]="readonly"></ion-input>
+      </ion-item>
+      <ion-item>
           <ion-label color="primary" fixed>Email:</ion-label>
           <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" [readonly]="readonly"></ion-input>
       </ion-item>

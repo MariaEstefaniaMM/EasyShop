@@ -25,10 +25,12 @@ router.post('/login', auth.isLogged, function (req, res, next) {
                     status: 500,
                     message: 'Could not log in user.'
                 });
-            }       
+            }      
             
-            let jsonWebToken = jwt.sign(user,config.secret);
-            console.log(jsonWebToken);
+            let userWithoutPhoto= JSON.parse(JSON.stringify(user));
+            userWithoutPhoto.user_photo='';
+            
+            let jsonWebToken = jwt.sign(userWithoutPhoto,config.secret);
             res.send({
                 status: 200,
                 message:'Login Successful.',
@@ -40,11 +42,11 @@ router.post('/login', auth.isLogged, function (req, res, next) {
 });
 
 router.post('/signup',auth.isLogged,function(req, res, next) {
-    console.log('postSignUp'+req.body.name+req.body.lastName+req.body.email+ req.body.password)
-    user.checkUser(req.body.email).then((data) => {
+    console.log('postSignUp'+req.body.name+req.body.lastName+req.body.email+ req.body.password+ req.body.username)
+    user.checkUser( req.body.email, req.body.username).then((data) => {
         console.log(data)
         if(data.length==0){
-            user.signup(req.body.name, req.body.lastName, req.body.email, req.body.password, req.body.photo, req.body.address, req.body.phone)
+            user.signup(req.body.name, req.body.lastName, req.body.email, req.body.password, req.body.photo, req.body.address, req.body.phone, req.body.username)
             .then((data) => {
                 console.log('SignUp Successful');
                 res.send({

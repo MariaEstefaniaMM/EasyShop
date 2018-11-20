@@ -19,6 +19,10 @@
     <ion-label floating>Lastname</ion-label>
     <ion-input [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
   </ion-item>
+  <ion-item class="lastname">
+    <ion-label floating>Username</ion-label>
+    <ion-input [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
+  </ion-item>
   <ion-item class="user">
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="user.email" formControlName="email" name="email"></ion-input>

@@ -8,9 +8,13 @@
     <h5>{{product.price_product}}</h5>
   </button>
   <ion-item-options side="right">
-    <button ion-button color="primary" (click)="addAlert()">
-      <ion-icon name="cart" ></ion-icon>
-      ADD TO WISHLIST
+    <button ion-button color="danger" (click)="deleteProduct()">
+        <ion-icon name="trash" ></ion-icon>
+         EDIT
+    </button>
+    <button ion-button color="danger" (click)="deleteAlert(product)">
+        <ion-icon name="trash" ></ion-icon>
+        DELETE
     </button>
   </ion-item-options>
 </ion-item-sliding>

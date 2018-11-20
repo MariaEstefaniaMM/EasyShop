@@ -22,10 +22,9 @@ import { ChangepassPage } from '../pages/changepass/changepass';
 import { ProductsPage } from '../pages/products/products';
 import { ProductProvider } from '../providers/product/product';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
-import { UserProductsPage } from '../pages/user-products/user-products';
 import { ProductsComponent } from '../components/products/products';
+import { UserProductsComponent } from '../components/user-products/user-products';
 import { NewProductPage } from '../pages/new-product/new-product';
-import { WishlistComponent } from '../components/wishlist/wishlist';
 import { UserProductPage } from '../pages/user-product/user-product';
 
 @NgModule({
@@ -37,13 +36,11 @@ import { UserProductPage } from '../pages/user-product/user-product';
     ProductsPage,
     UserAccountPage,
     WishlistPage,
-    MenuComponent,
     ChangepassPage,
     UserProfilePage,
-    UserProductsPage,
     ProductsComponent,
+    UserProductsComponent,
     NewProductPage, 
-    WishlistComponent,
     UserProductPage
   ],
   imports: [
@@ -61,13 +58,11 @@ import { UserProductPage } from '../pages/user-product/user-product';
     ProductsPage,
     UserAccountPage,
     WishlistPage,
-    MenuComponent,
+    UserProductsComponent,
     ChangepassPage,
     UserProfilePage,
-    UserProductsPage,
     ProductsComponent,
     NewProductPage,
-    WishlistComponent,
     UserProductPage
   ],
   providers: [

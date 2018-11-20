@@ -14,7 +14,8 @@ module.exports = {
     read: sql("./users/getUser.sql"),
     update: sql("./users/updateUser.sql"),
     updatePassword: sql("./users/updatePassword.sql"),
-    delete: sql("./users/deleteUser.sql")
+    delete: sql("./users/deleteUser.sql"),
+    checkUser: sql("./users/checkUser.sql")
   },
   // external queries for Carts:
   carts: {
@@ -26,6 +27,7 @@ module.exports = {
     create: sql("./products/createProduct.sql"),
     update: sql("./products/updateProduct.sql"),
     read: sql("./products/getUserProducts.sql"),
-    delete: sql("./products/deleteProduct.sql")
+    delete: sql("./products/deleteProduct.sql"),
+    addPaymentMode: sql("./products/addPaymentMode.sql")
   }
 };

@@ -32,7 +32,7 @@ module.exports.comparePassword = (candidatePassword, hash)=>{
     });
 };
 
-module.exports.signup = (name, lastname, email, password, photo, address, phone)=>{
+module.exports.signup = (name, lastname, email, password, photo, address, phone, username)=>{
     //console.log(name+lastname+email+password+user.create)
     return new Promise((res,rej)=>{
         cart.createCart().then((data) => {
@@ -40,7 +40,7 @@ module.exports.signup = (name, lastname, email, password, photo, address, phone)
             console.log(name+lastname+email+password+user.create)
               db.connect().then((obj)=>{
                   obj.any(user.create,
-                    [name, lastname,email, hashedPass, data.id_cart, photo, address, phone]).then((data)=>{
+                    [name, lastname,email, hashedPass, data.id_cart, photo, address, phone, username]).then((data)=>{
                     console.log(data)
                       res(data);
                       obj.done();
@@ -59,10 +59,11 @@ module.exports.signup = (name, lastname, email, password, photo, address, phone)
     });    
 }
 
-module.exports.checkUser = (email)=>{
+module.exports.checkUser = (email, username)=>{
+    console.log(user.checkUser, username, email);
     return new Promise((res,rej)=>{ 
         db.connect().then((obj)=>{
-            obj.any(user.read,[email]).then((data)=>{
+            obj.any(user.checkUser,[email, username]).then((data)=>{
                 res(data);
                 obj.done();                
             }).catch((error)=>{
@@ -94,11 +95,11 @@ module.exports.deleteUser = (id_user)=>{
 	});
 }
 
-module.exports.updateUser = (name, lastName, email, photo, address, phone, id_user)=>{
+module.exports.updateUser = (name, lastName, email, photo, address, phone, id_user, username)=>{
 	return new Promise((res,rej)=>{
 		db.connect().then((obj)=>{
             console.log(user.update);
-			obj.none(user.update, [name, lastName, email, photo, address, phone, id_user]).then((data)=>{
+			obj.none(user.update, [name, lastName, email, photo, address, phone, id_user, username]).then((data)=>{
 				res(data);
 				obj.done();
 			}).catch((error)=>{

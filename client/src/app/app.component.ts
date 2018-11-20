@@ -49,7 +49,7 @@ export class MyApp {
     if(page.title=='Logout'){
       this.tokenProvider.removeToken();
       console.log(this.tokenProvider.token)
-  }
+    }
     this.nav.push(page.component);
     console.log('do iit')
   }

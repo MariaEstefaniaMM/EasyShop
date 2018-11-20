@@ -1,15 +1,14 @@
+import { ProductsPage } from './../products/products';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from './../../providers/user/user';
 import { User } from '../../models/user';
 import { AlertController, ToastController } from 'ionic-angular';
 import { CameraProvider } from './../../providers/camera/camera';
-import { HomePage } from '../home/home';
 import { ChangepassPage } from '../changepass/changepass';
 import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { UserProductsPage } from '../user-products/user-products';
 import { WishlistPage } from '../wishlist/wishlist';
 
 @IonicPage()
@@ -38,7 +37,7 @@ export class UserAccountPage {
   }
 
   goToUserProducts(){
-    this.navCtrl.push(UserProductsPage);
+    this.navCtrl.setRoot(ProductsPage,{data:true});
   }
 
   goToWishlist(){

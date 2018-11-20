@@ -6,13 +6,16 @@ let config = require('../helpers/config/config');
 const jwt  = require('jsonwebtoken');
 
 router.put('/updateUser',isAuth, (req,res)=>{
-    console.log(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
-    if (req.body.user_email==req.user.user_email){
-      user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
+    console.log(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_address, req.body.user_phone, req.user.id_user, req.body.username)
+    if (req.body.user_email==req.user.user_email && req.body.username==req.user.username){
+      user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user, req.body.username)
       .then((data) => {
-        console.log('Updated-correo es el mismo')
+        console.log('Updated-correo y usuario es el mismo')
         user.getUserByEmail(req.user.user_email).then((user)=>{
-          let jsonWebToken = jwt.sign(user,config.secret);
+          let userWithoutPhoto= JSON.parse(JSON.stringify(user));
+          userWithoutPhoto.user_photo='';
+            
+          let jsonWebToken = jwt.sign(userWithoutPhoto,config.secret);
             console.log(jsonWebToken);
             res.send({
                 data: data,
@@ -29,14 +32,17 @@ router.put('/updateUser',isAuth, (req,res)=>{
         res.send({status:403, message:'Could not update user'});
       })
     }else {
-        user.checkUser(req.body.user_email).then((data) => {
+        user.checkUser(req.body.user_email, req.body.username).then((data) => {
         console.log(data)
         if(data.length==0){
-          user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user)
+          user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user, req.body.username)
           .then((data) => {
-            console.log('Updated-cambie por un correo no repetido')
+            console.log('Updated-cambie por un correo no repetido- data 0')
             user.getUserByEmail(req.body.user_email).then((user)=>{
-              let jsonWebToken = jwt.sign(user,config.secret);
+            let userWithoutPhoto= JSON.parse(JSON.stringify(user));
+            userWithoutPhoto.user_photo='';
+            
+            let jsonWebToken = jwt.sign(userWithoutPhoto,config.secret);
                 console.log(jsonWebToken);
                 res.send({
                     data: data,
@@ -46,12 +52,36 @@ router.put('/updateUser',isAuth, (req,res)=>{
                     token:jsonWebToken
                 });
           }).catch((err)=>{
-              return done(null, false);
+            res.send({status:403, message:'Could not get user'});
           });
           }).catch((err) => {
             console.log(err)
             res.send({status:403, message:'Could not update user'});
           })
+      }else if(data.length==1 && data[0].id_user==req.user.id_user){
+        user.updateUser(req.body.user_name, req.body.user_lastname, req.body.user_email, req.body.user_photo, req.body.user_address, req.body.user_phone, req.user.id_user, req.body.username)
+        .then((data) => {
+          console.log('Updated-cambie por un correo no repetido')
+          user.getUserByEmail(req.body.user_email).then((user)=>{
+          let userWithoutPhoto= JSON.parse(JSON.stringify(user));
+          userWithoutPhoto.user_photo='';
+          
+          let jsonWebToken = jwt.sign(userWithoutPhoto,config.secret);
+              console.log(jsonWebToken);
+              res.send({
+                  data: data,
+                  status: 200,
+                  message:'Profile Updated',
+                  user: user,
+                  token:jsonWebToken
+              });
+        }).catch((err)=>{
+          res.send({status:403, message:'Could not get user'});
+        });
+        }).catch((err) => {
+          console.log(err)
+          res.send({status:403, message:'Could not update user'});
+        })
       }else{
           res.send({
               status: 403,
@@ -62,7 +92,7 @@ router.put('/updateUser',isAuth, (req,res)=>{
       console.log(err);
       res.send({
           status:403,
-          message:'Sign up failed',
+          message:'Update user failed',
       });
     })
   }
@@ -93,7 +123,10 @@ router.put('/updatePassword', isAuth, (req, res)=>{
       user.updatePassword(req.body.new_password, req.user.id_user).then((data) => {
         console.log(data);
         user.getUserByEmail(req.user.user_email).then((user)=>{
-          let jsonWebToken = jwt.sign(user,config.secret);
+          let userWithoutPhoto= JSON.parse(JSON.stringify(user));
+          userWithoutPhoto.user_photo='';
+            
+          let jsonWebToken = jwt.sign(userWithoutPhoto,config.secret);
             console.log(jsonWebToken);
             res.send({
                 status: 200,
@@ -102,7 +135,7 @@ router.put('/updatePassword', isAuth, (req, res)=>{
                 token:jsonWebToken
             });
       }).catch((err)=>{
-          return done(null, false);
+        res.send({status:403, message:'Cant find the user'})
       });
         
       }).catch((err) => {
