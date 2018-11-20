@@ -26,6 +26,7 @@ import { ProductsComponent } from '../components/products/products';
 import { UserProductsComponent } from '../components/user-products/user-products';
 import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
+import { CommentProvider } from '../providers/comment/comment';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { UserProductPage } from '../pages/user-product/user-product';
     UserProvider,
     CameraProvider,
     TokenProvider,
-    ProductProvider
+    ProductProvider,
+    CommentProvider
   ]
 })
 export class AppModule {}
