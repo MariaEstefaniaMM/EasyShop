@@ -17,28 +17,37 @@
         <button ion-button class="btn-si" (click)="chooseImage()">Choose Image</button>          
         <!--<button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>-->
         <ion-item>
-            <ion-label color="primary" fixed>Name:</ion-label>
+            <ion-label fixed>Name:</ion-label>
             <ion-input  type="text" placeholder="Name" [readonly]="!readonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" fixed>Description:</ion-label>
+            <ion-label fixed>Description:</ion-label>
             <ion-textarea type="text" placeholder="Description" [readonly]="!readonly"></ion-textarea>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" fixed>Quantity:</ion-label>
+            <ion-label fixed>Quantity:</ion-label>
             <ion-input  type="number" placeholder="1" [readonly]="!readonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" fixed>Price:</ion-label>
+            <ion-label fixed>Price:</ion-label>
             <ion-input  type="number" placeholder="Price" [readonly]="!readonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" fixed>Category:</ion-label>
+            <ion-label fixed>Category:</ion-label>
             <ion-select class="selector" placeholder=" Select a Category">
               <ion-option *ngFor="let cat of category">
                   {{cat.title}}
               </ion-option>
             </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Payment:</ion-label>
+                <ion-select class="selector" placeholder=" Select a method"  multiple="true">
+                  <ion-option>Cash</ion-option>
+                  <ion-option>Credit Card</ion-option>
+                  <ion-option>Debit Card</ion-option>
+                  <ion-option>Agree with the seller</ion-option>
+                </ion-select>
         </ion-item>
         <button *ngIf="readonly" ion-button full (click)="updateProduct()">SAVE</button>
         <button *ngIf="!readonly" ion-button full (click)="goToEditProduct()">EDIT PRODUCT</button>

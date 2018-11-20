@@ -7,38 +7,83 @@
   </ion-header>
 
 <ion-content padding>
+<form [formGroup]="profileForm">
   <div class="inputs">
       <div class="div-img" align="center">
           <img *ngIf="user.user_photo" class="img-camera"src="{{ user.user_photo }}"> 
-          <img *ngIf="!user.user_photo" class="img-note" src="/assets/imgs/logo.png">
+          <img *ngIf="!user.user_photo" class="img-note" src="/assets/imgs/user.png">
       </div>
       <div class="labels">
       <button *ngIf="user.user_photo && !readonly"ion-button class="btn-si" (click)="chooseImage()">Change photo</button>          
       <button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>
       <ion-item>
-          <ion-label color="primary" fixed>Name:</ion-label>
-          <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" [readonly]="readonly"></ion-input>
+          <ion-label fixed>Name:</ion-label>
+          <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" formControlName="name" [readonly]="readonly"></ion-input>
       </ion-item>
+      <ion-item no-lines *ngIf="(profileForm.get('name').hasError('minlength') || profileForm.get('name').hasError('maxlength') ||profileForm.get('name').hasError('pattern') ||profileForm.get('name').hasError('required') ) && profileForm.get('name').touched">
+        <p class="error-message" *ngIf="profileForm.get('name').hasError('required') && profileForm.get('name').touched">
+            Please enter your name
+        </p>
+        <p class="error-message" *ngIf="profileForm.get('name').hasError('minlength') && profileForm.get('name').touched">
+            Please enter a valid name
+        </p>
+        <p class="error-message" *ngIf="profileForm.get('name').hasError('maxlength') && profileForm.get('name').touched">
+            Maximum 30 characters
+        </p>
+        </ion-item>
       <ion-item>
-          <ion-label color="primary" fixed>Lastname:</ion-label>
-          <ion-input [(ngModel)]="user.user_lastname" type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
+          <ion-label fixed>Lastname:</ion-label>
+          <ion-input [(ngModel)]="user.user_lastname" type="text" formControlName="lastName" placeholder="Lastname" [readonly]="readonly"></ion-input>
       </ion-item>
+      <ion-item no-lines *ngIf="(profileForm.get('lastName').hasError('minlength') || profileForm.get('lastName').hasError('maxlength') ||profileForm.get('lastName').hasError('pattern') ||profileForm.get('lastName').hasError('required') ) && profileForm.get('lastName').touched">
+            <p class="error-message" *ngIf="profileForm.get('lastName').hasError('required') && profileForm.get('lastName').touched">
+              Please enter your lastname
+            </p>
+            <p class="error-message" *ngIf="profileForm.get('lastName').hasError('minlength') && profileForm.get('lastName').touched">
+                Please enter a valid lastname
+              </p>
+              <p class="error-message" *ngIf="profileForm.get('lastName').hasError('maxlength') && profileForm.get('lastName').touched">
+                Maximum 30 characters
+              </p>
+          </ion-item>
       <ion-item>
-          <ion-label color="primary" fixed>Email:</ion-label>
-          <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" [readonly]="readonly"></ion-input>
+          <ion-label fixed>Email:</ion-label>
+          <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" formControlName="email" [readonly]="readonly"></ion-input>
       </ion-item>
+      <ion-item *ngIf="profileForm.get('email').errors && profileForm.get('email').dirty">
+            <p class="error-message" *ngIf="profileForm.get('email').hasError('required') && profileForm.get('email').touched">
+                Please enter an email
+            </p>
+            <p class="error-message" *ngIf="profileForm.get('email').hasError('pattern') && profileForm.get('email').touched">
+              Please enter a valid email
+        </p>
+        </ion-item>
       <ion-item>
-          <ion-label color="primary" fixed>Phone Number:</ion-label>
-          <ion-input [(ngModel)]="user.user_phone" type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+          <ion-label fixed>Phone Number:</ion-label>
+          <ion-input [(ngModel)]="user.user_phone" type="tel" placeholder="Phone Number" formControlName="phone" [readonly]="readonly"></ion-input>
       </ion-item>
+      <ion-item *ngIf="profileForm.get('phone').errors && profileForm.get('phone').dirty">
+            <p class="error-message" *ngIf="profileForm.get('phone').hasError('required') && profileForm.get('phone').touched">
+                Please enter a phone number
+            </p>
+            <p class="error-message" *ngIf="profileForm.get('phone').hasError('pattern') && profileForm.get('phone').touched">
+              Please enter a valid phone number
+        </p>
+        </ion-item>
       <ion-item>
-          <ion-label color="primary" fixed>Address:</ion-label>
-          <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
+          <ion-label fixed>Address:</ion-label>
+          <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Address" formControlName="address" [readonly]="readonly"></ion-input>
       </ion-item>
-      <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
+      <ion-item *ngIf="profileForm.get('address').errors && profileForm.get('address').dirty">
+            <p class="error-message" *ngIf="profileForm.get('address').hasError('required') && profileForm.get('address').touched">
+                Please enter an address
+            </p>
+        </ion-item>
+      <button *ngIf="readonly" ion-button full class="btn" (click)="goToEditProfile()">EDIT PROFILE</button>
       <button *ngIf="readonly" ion-button full (click)="deleteAccout()" color="danger">DELETE PROFILE</button>
-      <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>
-      <button *ngIf="!readonly" ion-button full (click)="changePass()">CHANGE PASSWORD</button>
+      <button *ngIf="!readonly" ion-button full class="btn" (click)="updateUser()">SAVE</button>
+      <button *ngIf="!readonly" ion-button full  class="btn"(click)="changePass()">CHANGE PASSWORD</button>
     </div>
 </div>
+</form>
 </ion-content>

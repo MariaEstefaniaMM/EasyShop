@@ -27,6 +27,7 @@ import { ProductsComponent } from '../components/products/products';
 import { NewProductPage } from '../pages/new-product/new-product';
 import { WishlistComponent } from '../components/wishlist/wishlist';
 import { UserProductPage } from '../pages/user-product/user-product';
+import { CommentsComponent } from '../components/comments/comments';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserProductPage } from '../pages/user-product/user-product';
     ProductsComponent,
     NewProductPage, 
     WishlistComponent,
-    UserProductPage
+    UserProductPage,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { UserProductPage } from '../pages/user-product/user-product';
     ProductsComponent,
     NewProductPage,
     WishlistComponent,
-    UserProductPage
+    UserProductPage,
+    CommentsComponent
   ],
   providers: [
     StatusBar,

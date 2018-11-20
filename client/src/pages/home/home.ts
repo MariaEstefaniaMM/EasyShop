@@ -5,6 +5,7 @@ import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { UserProvider } from './../../providers/user/user';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-home',
@@ -16,16 +17,39 @@ export class HomePage {
     username:"",
     password:""
   }
+  signinForm: FormGroup;
+  validationMsg={
+    'email':[
+      {type:'required', message:'Please enter an email'},
+      {type:'pattern', message:'Please enter a valid email'}
+    ],
+    'password':[
+      {type:'required', message:'Please enter a password'},
+      {type:'pattern', message:'Please enter a valid password'},
+      {type:'minlength', message:'Minimum 6 characters'},
+      {type:'maxlength', message:'Maximum 30 characters'},
+    ]
+  }
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
-    public alertCtrl: AlertController, public menuCtrl: MenuController) {
+    public alertCtrl: AlertController, public menuCtrl: MenuController, public formBuilder: FormBuilder) {
+      this.userForm();
 
   }
 
   ionViewDidLoad(){
     this.menuCtrl.enable(false);
   }
+
+  userForm(){
+    let emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    this.signinForm = this.formBuilder.group({
+      email:(['', [Validators.pattern(emailPattern), Validators.required]]),
+      password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
+    });
+  }
+
 
   ionViewCanEnter(){
     console.log('CanEnter HomePage');

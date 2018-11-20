@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import { UserAccountPage } from '../user-account/user-account';
 import { TokenProvider } from '../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,15 +16,31 @@ import { NativeStorage } from '@ionic-native/native-storage';
 export class ChangepassPage {
 
   user:User;
-  password={old_password:'',new_password:''}
+  password={old_password:'',new_password:''};
+  passForm: FormGroup;
+  validationMsg={
+    'password':[
+      {type:'required', message:'Please enter a password'},
+      {type:'pattern', message:'Please enter a valid password'},
+      {type:'minlength', message:'Minimum 6 characters'},
+      {type:'maxlength', message:'Maximum 30 characters'},
+    ]
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider,
     public alertCtrl: AlertController, public toastCtrl: ToastController, private nativeStorage: NativeStorage, 
-              private tokenProvider:TokenProvider ) {
-  }
+              private tokenProvider:TokenProvider, public formBuilder: FormBuilder ) {
+              this.userForm();
+              }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangepassPage');
+  }
+  
+  userForm(){
+    this.passForm = this.formBuilder.group({
+      password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]])
+    });
   }
 
   updatePassword(){

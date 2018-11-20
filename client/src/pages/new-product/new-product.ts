@@ -15,6 +15,7 @@ export class NewProductPage {
   originalUser:User;
   user: User
   category: Array<{title: string}>;
+  paymentMethod: Array<{title: string}>;
 
   constructor(public navCtrl: NavController, public  cameraProvider:CameraProvider, private userProvider: UserProvider, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController) {
     this.user=this.userProvider.user;
@@ -24,7 +25,12 @@ export class NewProductPage {
       { title: 'Shoes'},
       { title: 'Accesories'},
     ];
-
+   /* this.paymentMethod = [
+      { title: 'Cash'},
+      { title: 'Credit Card'},
+      { title: 'Debit Card'},
+      { title: 'Agree with the seller'},
+    ] */
   }
 
   ionViewDidLoad() {

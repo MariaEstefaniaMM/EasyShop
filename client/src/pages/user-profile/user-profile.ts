@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import { ChangepassPage } from '../changepass/changepass';
 import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -19,11 +20,37 @@ export class UserProfilePage {
   readonly:boolean=true;
   originalUser:User;
   user:User;
+  profileForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, 
-              public  cameraProvider:CameraProvider, private userProvider: UserProvider, private nativeStorage: NativeStorage, private tokenProvider:TokenProvider) {
+              public  cameraProvider:CameraProvider, private userProvider: UserProvider, private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
+              public formBuilder: FormBuilder) {
               this.user=this.userProvider.user;
               this.originalUser=JSON.parse(JSON.stringify(this.user));
+              this.userForm();
+  }
+
+  /*ionViewDidEnter(){
+    this.profileForm = this.formBuilder.group({
+      name: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3), Validators.maxLength(30), Validators.required]]),
+      lastName: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30), Validators.required]]),
+      email:(['', [Validators.pattern('^[a-zA-Z0-9_.+-]+@[A-Za-z0-9-]+.[A-Za-z0-9-.]+$'), Validators.required]]),
+      phone:(['', [Validators.pattern('^[0-9]{3,4}-[0-9]{7}$'), Validators.required]]),
+      password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
+      address: (['', [Validators.pattern('^[a-zA-Z0-9]'), Validators.required]]),
+    });
+  } 
+  */
+  userForm(){
+    let emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    this.profileForm = this.formBuilder.group({
+      name: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3), Validators.maxLength(30), Validators.required]]),
+      lastName: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30), Validators.required]]),
+      email:(['', [Validators.pattern(emailPattern), Validators.required]]),
+      phone:(['', [Validators.pattern('^[0-9]{3,4}-[0-9]{7}$'), Validators.required]]),
+      password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
+      address: (['', [Validators.pattern('^[a-zA-Z0-9]'), Validators.required]]),
+    });
   }
 
   ionViewDidLoad() {

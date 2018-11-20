@@ -15,6 +15,8 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 })
 export class ProductsPage {
 
+  category: string = "AllProducts";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
   }
 
