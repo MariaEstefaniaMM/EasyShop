@@ -1,9 +1,9 @@
 page-signup {
     .btn-si{
         background-color: black;
-        top: 15px;
+        top: -15px;
         position: relative;
-        left: -35px;
+        left: 110px;
     }
     .btn-sign{
         background-color: black;
@@ -27,5 +27,17 @@ page-signup {
     }
     .error-message{
         color:red;
+        text-align: center;
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
     }
 }

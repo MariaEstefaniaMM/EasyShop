@@ -18,45 +18,49 @@
               {{this.product.name_product}}
               </ion-card-title>
             <p>
-              Descrption:
+            <strong>Descrption:</strong>
               {{this.product.des_product}}
+            </p>
+            <p>
+              <strong>Category:</strong> {{this.product.des_category}
+            </p>
+            <p>
+              <strong>Price:</strong>{{this.product.price_product}}
+            </p>
+            <p>
+              <strong>Quantity:</strong>{{this.product.quantity}}
             </p>
           </ion-card-content>
           <ion-row>
-              <ion-col>
-                <ion-note ion-button icon-start clear small (click)="addAlert()">
-                  <ion-icon name="cart"></ion-icon>
-                  <div>{{this.product.price_product}}</div>
-                </ion-note>
-              </ion-col>
-              <ion-col>
-                <ion-note ion-button icon-start clear small>
-                  <ion-icon name="cash"></ion-icon>
-                  <div>{{this.product.quantity}}</div>
-                </ion-note>
-              </ion-col>
-              <ion-col>
-                <ion-note ion-button icon-start clear small>
-                  <ion-icon name="cash"></ion-icon>
-                  <div>{{this.product.des_category}}</div>
-                </ion-note>
-              </ion-col>
-              <ion-col>
-                <ion-note ion-button icon-start clear small>
-                  <ion-icon name="cash"></ion-icon>
-                  <div>{{this.product.username}}</div>
-                </ion-note>
-              </ion-col>
-              <ion-col *ngIf="!owner">
+              <ion-col center text-center>
+                  <ion-note>
+                    Published by: {{this.product.username}}
+                  </ion-note>
+                </ion-col>
+                <ion-col *ngIf="!owner">
                   <button ion-button icon-start clear small>
                     <ion-icon name="shop"></ion-icon>
                     <div>Shop</div>
                   </button>
-              </ion-col>
+                </ion-col>
+                <ion-col>
+                    <ion-fab *ngIf="owner" class="fab" bottom right edge>
+                        <button ion-fab mini><ion-icon name="md-more"></ion-icon></button>
+                        <ion-fab-list side="top">
+                          <button ion-fab (click)="deleteAlert()"><ion-icon name="trash"></ion-icon></button>
+                          <button ion-fab (click)="goToEditProduct()"><ion-icon name="edit"></ion-icon></button>
+                        </ion-fab-list>
+                      </ion-fab>
+                </ion-col>
             </ion-row>
         </ion-card>
-        <button *ngIf="owner" ion-button full (click)="goToEditProduct()">EDIT PRODUCT</button>
-        <button *ngIf="owner" ion-button full (click)="deleteAlert()" color="danger">DELETE PRODUCT</button>
+        <ion-card>
+            <ion-card-header>
+              Comments
+            </ion-card-header>
+            <ion-card-content>
+              <comments></comments>
+            </ion-card-content>
+          </ion-card>
   </div>
-
 </ion-content>

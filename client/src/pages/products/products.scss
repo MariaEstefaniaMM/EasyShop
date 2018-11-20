@@ -1,11 +1,83 @@
 page-products {
+    .segments {
+        position: relative;
+        top: 39px;
+        height: 0px;
+    }
     ion-list.list.list-md {
         position: relative;
-        top: 50px;
+        top: 30px;
+        left: -30px;
     }
-
-    ion-list.list.list-md.user {
+    ion-segment.segment.segment-md.ng-valid.ng-touched.ng-dirty, ion-segment.segment.segment-md.ng-untouched.ng-pristine.ng-valid {
+        width: 360px;
         position: relative;
-        top: 100px;
+        left: -36px;
+        top: -41px;
+    }
+    .slide-zoom {
+        text-align: center;
+        /*display: block;
+        width: 100%; */
+        height: 197px;
+        position: relative;
+        top: 76px;
+    }
+    .products {
+        position: relative;
+        top: -65px;
+    }
+    .swiper-zoom-container {
+        height: 121px;
+    }
+    .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+        border-color: rgb(255, 218, 5);
+        opacity: 1;
+        color: black;
+    }
+    .segment-md .segment-button {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        width: 0;
+        height: 4.2rem;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: rgba(0, 0, 0, 0.1);
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 4rem;
+        text-transform: uppercase;
+        color: gray;
+        background-color: transparent;
+        opacity: 0.7;
+        -webkit-transition: 100ms all linear;
+        transition: 100ms all linear;
+        padding: 0 6px;
+    }
+    .slides {
+        position: relative;
+        left: -3px;
+        width: 336px;
+        top: 1px;
+    }
+    .button-md-primary {
+        color: #fff;
+        background-color: orange;
+    }
+    .button-md-primary:hover:not(.disable-hover) {
+        background-color: rgb(255, 189, 103);
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
     }
 }

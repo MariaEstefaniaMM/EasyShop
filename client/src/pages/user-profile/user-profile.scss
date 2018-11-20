@@ -5,7 +5,6 @@ page-user-profile {
         position: relative;
         left: 115px;
     }
-
     .div-img{
         display: inline-block;
         border-radius: 50%;
@@ -17,6 +16,23 @@ page-user-profile {
             width: 140px;
             height: 140px;
         }
+    }
+    .error-message{
+        color:red;
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    .btn{
+        background-color: black;
     }
 
 }

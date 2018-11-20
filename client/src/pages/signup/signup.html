@@ -8,17 +8,28 @@
 <form [formGroup]="signupform">
   <div class="div-img" align="center">
       <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
-      <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/logo.png">
+      <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/user.png">
   </div>
+  <div>
   <button ion-button class="btn-si" (click)="chooseImag()">Add a photo</button>
   <ion-item class="user">
     <ion-label floating>Name</ion-label>
-    <ion-input [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.name" formControlName="name" type="text"></ion-input>
   </ion-item>
+  <ng-container *ngFor="let validation of validationMsg.name">
+      <p class="error-message" *ngIf="signupform.get('name').hasError(validation.type) && (signupform.get('name').dirty || signupform.get('name').touched)">
+          {{ validation.message }}
+      </p>
+  </ng-container>
   <ion-item class="lastname">
     <ion-label floating>Lastname</ion-label>
-    <ion-input [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.lastName" formControlName="lastName" type="text"></ion-input>
   </ion-item>
+  <ng-container *ngFor="let validation of validationMsg.lastName">
+    <p class="error-message" *ngIf="signupform.get('lastName').hasError(validation.type) && (signupform.get('lastName').dirty || signupform.get('lastName').touched)">
+        {{ validation.message }}
+    </p>
+  </ng-container>
   <ion-item class="lastname">
     <ion-label floating>Username</ion-label>
     <ion-input [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" type="text"></ion-input>
@@ -27,35 +38,40 @@
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="user.email" formControlName="email" name="email"></ion-input>
   </ion-item>
-  <ion-item *ngIf="signupform.get('email').errors && signupform.get('email').dirty">
-      <p class="error-message" *ngIf="signupform.get('email').hasError('required')">
-          Please enter an email
+  <ng-container *ngFor="let validation of validationMsg.email">
+      <p class="error-message" *ngIf="signupform.get('email').hasError(validation.type) && (signupform.get('email').dirty || signupform.get('email').touched)">
+          {{ validation.message }}
       </p>
-      <p class="error-message" *ngIf="signupform.get('email').hasError('pattern')">
-        Please enter a valid email
-  </p>
-  </ion-item>
+  </ng-container>
   <ion-item class="user">
     <ion-label floating>Phone Number</ion-label>
   <ion-input [(ngModel)]="user.phone" type="tel" formControlName="phone"></ion-input>
   </ion-item>
-  <ion-item *ngIf="signupform.get('phone').errors && signupform.get('phone').dirty">
-      <p class="error-message" *ngIf="signupform.get('phone').hasError('required')">
-          Please enter an phone number
+  <ng-container *ngFor="let validation of validationMsg.phone">
+      <p class="error-message" *ngIf="signupform.get('phone').hasError(validation.type) && (signupform.get('phone').dirty || signupform.get('phone').touched)">
+          {{ validation.message }}
       </p>
-      <p class="error-message" *ngIf="signupform.get('phone').hasError('pattern')">
-        Please enter a valid phone number
-  </p>
-  </ion-item>
+  </ng-container>
   <ion-item class="user">
       <ion-label floating>Address</ion-label>
-      <ion-input [(ngModel)]="user.address" type="text" [ngModelOptions]="{standalone: true}"></ion-input>
+      <ion-input [(ngModel)]="user.address" type="text" formControlName="address"></ion-input>
   </ion-item>
+  <ng-container *ngFor="let validation of validationMsg.address">
+      <p class="error-message" *ngIf="signupform.get('address').hasError(validation.type) && (signupform.get('address').dirty || signupform.get('address').touched)">
+          {{ validation.message }}
+      </p>
+  </ng-container>
   <ion-item class="user">
     <ion-label floating>Password</ion-label>
-  <ion-input [(ngModel)]="user.password" type="password" [ngModelOptions]="{standalone: true}"></ion-input>
+  <ion-input [(ngModel)]="user.password" type="password" formControlName="password" ></ion-input>
   </ion-item>
+  <ng-container *ngFor="let validation of validationMsg.password">
+      <p class="error-message" *ngIf="signupform.get('password').hasError(validation.type) && (signupform.get('password').dirty || signupform.get('password').touched)">
+          {{ validation.message }}
+      </p>
+  </ng-container>
   <button ion-button full class="btn-sign" (click)="signUp()">Sign Up </button>
     <p class="p-si">Have already an account? <a button (click)="goToHome()" style="color: gray"> Sign in now</a></p>
-</form>
+  </div>
+  </form>
 </ion-content>

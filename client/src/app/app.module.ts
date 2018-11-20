@@ -27,6 +27,7 @@ import { UserProductsComponent } from '../components/user-products/user-products
 import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
 import { CommentProvider } from '../providers/comment/comment';
+import { CommentsComponent } from '../components/comments/comments';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CommentProvider } from '../providers/comment/comment';
     ProductsComponent,
     UserProductsComponent,
     NewProductPage, 
-    UserProductPage
+    UserProductPage,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { CommentProvider } from '../providers/comment/comment';
     UserProfilePage,
     ProductsComponent,
     NewProductPage,
-    UserProductPage
+    UserProductPage,
+    CommentsComponent
   ],
   providers: [
     StatusBar,

@@ -17,4 +17,18 @@ page-new-product {
         position: relative;
         left: 100px;
     }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
+        background-color: black;
+    }
 }

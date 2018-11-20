@@ -14,6 +14,7 @@ export class ProductsPage {
   products:Product[];
   searchProducts:Product[];
   user;
+  category: string = "AllProducts";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
               public productProvider: ProductProvider) {

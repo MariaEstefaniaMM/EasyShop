@@ -3,4 +3,22 @@ page-user-account {
         position: relative;
         top: 28px;
     }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .menu {
+        position: relative;
+        left: -45px;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
+        background-color: black;
+    }
 }

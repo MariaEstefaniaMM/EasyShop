@@ -17,7 +17,6 @@ export class HomePage {
     username:"",
     password:""
   }
-  all:boolean=true;
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
