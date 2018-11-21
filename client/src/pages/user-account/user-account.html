@@ -2,14 +2,18 @@
     <menu></menu>
 </ion-toolbar> 
 
-<ion-content padding>
-    <div>
-        <h1 ion-text color="secondary">MY ACCOUNT</h1>
+<ion-content >
+    <div class="card-background-page">
+    <ion-card ion-button full (click)="goToUserProfile()">
+      <img src="/assets/imgs/girl1.jpg"/>
+      <div class="card-title">USER DATA</div>
+    </ion-card>
+  
+    <ion-card ion-button full (click)="goToWishlist()">
+      <img src="/assets/imgs/bag1.jpg"/>
+      <div class="card-title">MY CART</div>
+    </ion-card>
     </div>
-    <div class="inputs">
-        <button ion-button full (click)="goToUserProfile()">MIS DATOS</button>
-        <button ion-button full (click)="goToUserProducts()">MIS PRODUCTOS</button>
-        <button ion-button full (click)="goToWishlist()">WISHLIST</button>
-    </div>
-</ion-content>
+  
+  </ion-content>
   

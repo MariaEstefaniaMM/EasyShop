@@ -21,4 +21,41 @@ page-user-account {
     button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
         background-color: black;
     }
+    .card-background-page {
+
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+      
+        .card-title {
+          position: absolute;
+          top: 36%;
+          font-size: 2.0em;
+          width: 100%;
+          font-weight: bold;
+          color: rgb(255, 155, 23);
+          left: -70px;
+        }
+      
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 52%;
+          width: 100%;
+          color: rgb(0, 0, 0);
+        }
+      
+      }
+      .card-background-page {
+        position: relative;
+        top: 76px;
+    }
+    .card-background-page ion-card {
+        position: relative;
+        text-align: center;
+        width: auto;
+        height: 160px;
+    }
 }
+
