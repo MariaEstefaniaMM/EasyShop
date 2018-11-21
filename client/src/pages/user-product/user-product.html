@@ -18,23 +18,23 @@
               {{this.product.name_product}}
               </ion-card-title>
             <p>
-            <strong>Descrption:</strong>
+            <strong>Description:</strong>
               {{this.product.des_product}}
             </p>
             <p>
-              <strong>Category:</strong> {{this.product.des_category}
+              <strong>Category: </strong> {{this.product.des_category}}
             </p>
             <p>
-              <strong>Price:</strong>{{this.product.price_product}}
+              <strong>Quantity: </strong>{{this.product.quantity}}
             </p>
             <p>
-              <strong>Quantity:</strong>{{this.product.quantity}}
+              <strong>Published by: </strong>{{this.product.username}}
             </p>
           </ion-card-content>
           <ion-row>
               <ion-col center text-center>
                   <ion-note>
-                    Published by: {{this.product.username}}
+                     ${{this.product.price_product}}
                   </ion-note>
                 </ion-col>
                 <ion-col *ngIf="!owner">
@@ -44,11 +44,11 @@
                   </button>
                 </ion-col>
                 <ion-col>
-                    <ion-fab *ngIf="owner" class="fab" bottom right edge>
+                    <ion-fab class="fab-btn" col-sm *ngIf="owner" bottom right edge>
                         <button ion-fab mini><ion-icon name="md-more"></ion-icon></button>
                         <ion-fab-list side="top">
                           <button ion-fab (click)="deleteAlert()"><ion-icon name="trash"></ion-icon></button>
-                          <button ion-fab (click)="goToEditProduct()"><ion-icon name="edit"></ion-icon></button>
+                          <button ion-fab (click)="goToEditProduct()"><ion-icon name="create"></ion-icon></button>
                         </ion-fab-list>
                       </ion-fab>
                 </ion-col>

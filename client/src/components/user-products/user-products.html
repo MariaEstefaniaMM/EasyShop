@@ -5,7 +5,7 @@
       <img class="img-note" *ngIf="!product.img_product" src="/assets/imgs/logo.png">
     </ion-thumbnail>
     <h4>{{product.name_product}}</h4>
-    <h5>{{product.price_product}}</h5>
+    <h5>${{product.price_product}}</h5>
   </button>
   <ion-item-options side="right">
     <button ion-button color="danger" (click)="deleteProduct()">

@@ -64,14 +64,14 @@ export class SignupPage {
  initForm(){
   let emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     this.signupform = this.formBuilder.group({
-      name: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3), Validators.maxLength(20), Validators.required]]),
-      lastName: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(20), Validators.required]]),
+      name: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2), Validators.maxLength(20), Validators.required]]),
+      lastName: (['', [Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2), Validators.maxLength(20), Validators.required]]),
       email:(['', [Validators.pattern(emailPattern), Validators.required]]),
       phone:(['', [Validators.pattern('[0-9]*'), Validators.required]]),
       //^[0-9]{3,4}-[0-9]{7}$
       //^[a-zA-Z0-9_.+-]+@[A-Za-z0-9-]+.[A-Za-z0-9-.]+$
       password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
-      address: (['', [Validators.pattern('^[a-zA-Z0-9]'), Validators.required]]),
+      address: (['', [Validators.required]]),
     });
   }
 

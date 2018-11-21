@@ -3,31 +3,23 @@
     <div class="head" text-center>
       <img class="logo" src="/assets/imgs/logoes.png" >
     </div>
-    <form [formGroup]="signinForm">
+    
     <div class="inputs">
       <ion-item class="user">
         <ion-label floating>Email</ion-label>
-        <ion-input [(ngModel)]="user.username" type="email" formControlName="email"></ion-input>
+        <ion-input [(ngModel)]="user.username" type="email" ></ion-input>
       </ion-item>
-      <ng-container *ngFor="let validation of validationMsg.email">
-          <p class="error-message" *ngIf="signinForm.get('email').hasError(validation.type) && (signinForm.get('email').dirty || signinForm.get('email').touched)">
-           {{ validation.message }}
-          </p>
-        </ng-container>
+      
       <ion-item class="pass">
         <ion-label floating>Password</ion-label>
-        <ion-input fomrControlName="password" clearOnEdit="true" [(ngModel)]="user.password" formControlName="password" type="password"></ion-input>
+        <ion-input fomrControlName="password" clearOnEdit="true" [(ngModel)]="user.password" type="password"></ion-input>
       </ion-item>
-      <ng-container *ngFor="let validation of validationMsg.password">
-        <p class="error-message" *ngIf="signinForm.get('password').hasError(validation.type) && (signinForm.get('password').dirty || signinForm.get('password').touched)">
-         {{ validation.message }}
-        </p>
-      </ng-container>
+      
       <div class="inf">
           <button ion-button full class="btn-login" (click)="gotoToProducts()">login</button>
           <p class="p-su">New To EasyShop? <a button (click)="goToSignUp()" style="color: gray"> Sign up now</a></p>
       </div>
     </div>
-  </form>
+  
   </div>
 </ion-content>

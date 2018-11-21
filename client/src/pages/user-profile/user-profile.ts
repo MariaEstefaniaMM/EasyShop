@@ -49,7 +49,7 @@ export class UserProfilePage {
       email:(['', [Validators.pattern(emailPattern), Validators.required]]),
       phone:(['', [Validators.pattern('^[0-9]{3,4}-[0-9]{7}$'), Validators.required]]),
       password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
-      address: (['', [Validators.pattern('^[a-zA-Z0-9]'), Validators.required]]),
+      address: (['', [Validators.required]]),
     });
   }
 
@@ -153,11 +153,12 @@ export class UserProfilePage {
   }
 
   deleteUser(){
-    this.errorAlert(this.user.user_password)
+    //this.errorAlert(this.user.user_password)
     this.userProvider.deleteUser(this.user).subscribe((res:any) => {
       console.log('deleted');
         if (res.status==200){
           console.log(res);
+          this.tokenProvider.removeToken();
           this.navCtrl.setRoot(HomePage);
       }else{
         console.log(res.message)

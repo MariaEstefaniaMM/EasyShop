@@ -15,58 +15,84 @@
 <ion-content padding>
   <div class="slides">
       <ion-slides>
-          <ion-slide *ngFor="let product of productProvider.products">
+          <ion-slide>
             <div class="swiper-zoom-container">
-              <img src="{{{{product.img_product}}}}" >
+              <img src="/assets/imgs/m1.jpg" >
             </div>
           </ion-slide>
-      </ion-slides>
+          <ion-slide>
+              <div class="swiper-zoom-container">
+                  <img src="/assets/imgs/img2.jpg" >
+                </div>
+          </ion-slide>
+          <ion-slide>
+              <div class="swiper-zoom-container">
+                  <img src="/assets/imgs/img3.jpg" >
+                </div>
+          </ion-slide>
+        </ion-slides>
   </div>
     <div class="segments" padding *ngIf="!myInput">
-        <ion-segment [(ngModel)]="category">
-          <ion-segment-button value="allProducts">
-            Products
+        <ion-segment [(ngModel)]="category" (ionChange)="segmentChange($event)">
+          <ion-segment-button value="AllProducts">
+            All
           </ion-segment-button>
-          <ion-segment-button value="clothes">
+          <ion-segment-button value="Clothes">
             Clothes
           </ion-segment-button>
-          <ion-segment-button value="shoes">
+          <ion-segment-button value="Shoes">
             Shoes
           </ion-segment-button> 
-          <ion-segment-button value="accessories">
+          <ion-segment-button value="Accessories">
             Accessories
           </ion-segment-button>         
         </ion-segment>
       </div>
-      <div [ngSwitch]="category" *ngIf="!myInput">
+      <div *ngIf="!myInput">
+      <div [ngSwitch]="category" >
         <div *ngIf="!user">
-          <ion-list *ngSwitchCase="'allProducts'" *ngFor="let product of productProvider.products">
+          <div *ngSwitchCase="'AllProducts'"> 
+          <ion-list *ngFor="let product of productProvider.products">
               <products  [product]= "product"></products>
           </ion-list>
         </div>
+        </div>
         <div *ngIf="user">
-            <ion-list *ngSwitchCase="'allProducts'" *ngFor="let product of productProvider.userProducts">
+          <div *ngSwitchCase="'AllProducts'">
+            <ion-list *ngFor="let product of productProvider.userProducts">
                 <user-products  [product]= "product"></user-products>
             </ion-list>
+          <div *ngIf="productProvider.userProducts.length==0" >
+                  You haven't published anything yet...
+              <div>
+                  <button ion-button icon-start clear small (click)="goToNewProduct()">
+                    PUBLISH NOW
+                  </button>
+              </div>
+          </div>
+          </div>
         </div>        
-          <ion-list *ngSwitchCase="'clothes'">
-            <ion-item>
-              <products class="products"></products>
-            </ion-item>
-          </ion-list>
+          <div *ngSwitchCase="'Clothes'">
+            <ion-list *ngFor="let product of filter">
+              <products  *ngIf="!user" [product]= "product"></products>
+              <user-products *ngIf="user" [product]= "product"></user-products>
+            </ion-list>
+          </div>
 
-          <ion-list *ngSwitchCase="'shoes'">
-            <ion-item>
-              <products class="products"></products>
-            </ion-item>
-          </ion-list>
-
-          <ion-list *ngSwitchCase="'accessories'">
-            <ion-item>
-              <products class="products"></products>
-            </ion-item>
-          </ion-list>
+          <div *ngSwitchCase="'Shoes'">
+              <ion-list *ngFor="let product of filter">
+                  <products  *ngIf="!user" [product]= "product"></products>
+                  <user-products *ngIf="user" [product]= "product"></user-products>
+              </ion-list>
+          </div>
+          <div *ngSwitchCase="'Accessories'">
+            <ion-list *ngFor="let product of filter">
+              <products  *ngIf="!user" [product]= "product"></products>
+              <user-products *ngIf="user" [product]= "product"></user-products>
+            </ion-list>
+          </div>
         </div>
+      </div>
         <div *ngIf="myInput" >
             <ion-list  *ngFor="let product of searchProducts">
                 <products *ngIf="!user" [product]= "product"></products>
