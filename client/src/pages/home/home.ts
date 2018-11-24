@@ -30,7 +30,7 @@ export class HomePage {
 
   ionViewCanEnter(){
     console.log('CanEnter HomePage');
-    if (this.tokenProvider.getToken()){
+    if (this.tokenProvider.getToken()!==""){
       console.log('go to ProductPage');
       this.navCtrl.setRoot(ProductsPage);
     }else{

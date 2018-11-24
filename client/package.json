@@ -29,8 +29,10 @@
     "@ionic-native/status-bar": "~4.15.0",
     "@ionic/pro": "2.0.3",
     "@ionic/storage": "2.2.0",
+    "cordova-android": "7.1.2",
     "cordova-plugin-camera": "~4.0.3",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-file-transfer": "~1.7.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^2.0.0",
     "cordova-plugin-nativestorage": "~2.3.2",
@@ -64,6 +66,8 @@
       "cordova-plugin-nativestorage": {},
       "cordova-plugin-file-transfer": {}
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }

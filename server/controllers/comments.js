@@ -5,7 +5,7 @@ const isAuth = require('../middlewares/isAuth').isAuth;
 
 router.get('/getProductComments',isAuth,(req,res)=>{ 
   console.log(req);
-      comment.getProductComments(req.body.id_product).then((data) => {
+      comment.getProductComments(req.query.id_product).then((data) => {
           res.send({status:200, comments:data});
         }).catch((err) => {
           console.log(err);
@@ -14,8 +14,8 @@ router.get('/getProductComments',isAuth,(req,res)=>{
 });
 
 router.post('/createComment',isAuth,(req,res)=>{
-      console.log(req.body.id_product, req.user.id_user, req.body.comment_text)
-      comment.createComment(req.body.id_product, req.user.id_user, req.body.comment_text).then((data) => {
+      console.log(req.body.id_product, req.user.id_user, req.body.comment_text, req.body.id_first_comment)
+      comment.createComment(req.body.id_product, req.user.id_user, req.body.comment_text, req.body.id_first_comment).then((data) => {
         res.send({
           data:data,
           status:200});

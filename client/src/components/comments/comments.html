@@ -1,6 +1,26 @@
 <ion-item class="user">
-    <ion-input type="text" placeholder="Write something"></ion-input>
+    <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text" [readonly]="readonlyComment"></ion-input>
 </ion-item>
 <ion-item>
-    <button ion-button small> Comment</button>
+    <button ion-button small *ngIf="readonlyComment" (click)="showResponses()"> SEE ANSWERS </button>
+    <button ion-button small *ngIf="owner && readonly" (click)="enableInput(comment)"> EDIT </button>
+    <button ion-button small *ngIf="owner && !readonly" (click)="updateComment(comment)"> SAVE </button>
+    <button ion-button small *ngIf="owner && readonly" (click)="deleteAlert(comment)"> DELETE </button>
 </ion-item>
+<div *ngIf="show" >
+<ion-item *ngFor="let response of commentProvider.commentResponses" >
+    <ion-item class="user">
+        <ion-input type="text" placeholder="Write something" [(ngModel)]="response.comment_text" [readonly]="readonlyResponse"></ion-input>
+    </ion-item>
+    <ion-item>
+        <button ion-button small *ngIf="owner && readonly" (click)="enableInputR(response)"> EDIT </button>
+        <button ion-button small *ngIf="owner && !readonly" (click)="updateComment(response)"> SAVE </button>
+        <button ion-button small *ngIf="owner && readonly" (click)="deleteAlert(response)"> DELETE </button>
+    </ion-item> 
+</ion-item>
+<ion-item class="user">
+        <ion-input type="text" placeholder="Write something" [(ngModel)]="response.comment_text"></ion-input>
+</ion-item>
+<ion-item><button ion-button small (click)="createComment()">ANSWER</button></ion-item>
+</div>
+

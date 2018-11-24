@@ -1,10 +1,10 @@
 const db = require('../config/db');
 const comment = require('../queries').comments;
 
-module.exports.createComment = (id_product, id_user, comment_text)=>{
+module.exports.createComment = (id_product, id_user, comment_text, first_comment)=>{
     return new Promise((res,rej)=>{
         db.connect().then((obj)=>{
-            obj.one(comment.create, [id_product, id_user, comment_text]).then((data)=>{
+            obj.one(comment.create, [id_product, id_user, comment_text, first_comment]).then((data)=>{
                 res(data);
                 obj.done();
             }).catch((error)=>{

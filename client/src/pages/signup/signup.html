@@ -8,7 +8,7 @@
 <form [formGroup]="signupform">
   <div class="div-img" align="center">
       <img class="img-camera" *ngIf="user.photo" src="{{ user.photo }}"> 
-      <img *ngIf="!user.photo" class="img-note" src="/assets/imgs/user.png">
+      <img class="img-camera" *ngIf="!user.photo" class="img-note" src="/assets/imgs/user.png">
   </div>
   <div>
   <button ion-button class="btn-si" (click)="chooseImag()">Add a photo</button>

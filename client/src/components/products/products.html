@@ -2,15 +2,25 @@
   <button ion-item (click)="goToProduct(product)">
     <ion-thumbnail item-start>
       <img class="img-note" *ngIf="product.img_product"  src="{{product.img_product}}">
-      <img class="img-note" *ngIf="!product.img_product" src="/assets/imgs/logo.png">
+      <img class="img-note" *ngIf="!product.img_product" src="/assets/imgs/logoess.png">
     </ion-thumbnail>
     <h4>{{product.name_product}}</h4>
     <h5>${{product.price_product}}</h5>
   </button>
-  <ion-item-options side="right">
+  <ion-item-options side="right" *ngIf="!user" >
     <button ion-button color="primary" (click)="addAlert()">
       <ion-icon name="cart" ></ion-icon>
       ADD TO WISHLIST
+    </button>
+  </ion-item-options>
+  <ion-item-options side="right" *ngIf="user">
+    <button ion-button style="background-color: orange" (click)="goToEditProduct(product)">
+        <ion-icon name="trash" ></ion-icon>
+         EDIT
+    </button>
+    <button ion-button color="danger" (click)="deleteAlert(product)">
+        <ion-icon name="trash" ></ion-icon>
+        DELETE
     </button>
   </ion-item-options>
 </ion-item-sliding>

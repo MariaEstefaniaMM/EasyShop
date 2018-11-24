@@ -57,7 +57,7 @@ export class NewProductPage {
       if (this.newProduct){
         this.createProduct();
       }else if(JSON.stringify(this.originalProduct)!==JSON.stringify(this.product)){
-        console.log("updateNote");
+        console.log("updateProduct");
         this.updateProduct();
       }
   }

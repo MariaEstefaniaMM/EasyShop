@@ -1,3 +1,4 @@
+import { CommentProvider } from './../../providers/comment/comment';
 import { ProductsPage } from './../products/products';
 import { ProductProvider } from './../../providers/product/product';
 import { NewProductPage } from './../new-product/new-product';
@@ -16,9 +17,18 @@ export class UserProductPage {
 
   product: Product;
   owner:boolean;
+  comment={
+    id_comment:null,
+    id_product:null,
+    comment_text:"",
+    id_first_comment:null,
+    readonly:true
+  };
+  //productComments;
+  //commentResponses;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public toastCtrl: ToastController,
-              public productProvider: ProductProvider, public userProvider: UserProvider) {
+              public productProvider: ProductProvider, public userProvider: UserProvider, public commentProvider: CommentProvider) {
       this.product=this.navParams.data;
   }
 
@@ -27,7 +37,20 @@ export class UserProductPage {
     if(this.product.id_user==this.userProvider.user.id_user){
       this.owner=true;
     }  
-    console.log(this.owner);      
+    console.log(this.owner);    
+    this.commentProvider.getProductComments(this.product.id_product)/*.subscribe((res:any) => {
+      if (res.status==200){
+        console.log(res);
+        this.productComments=res.comments.filter(function(comment:any){return comment.id_first_comment===null});
+        console.log(this.productComments);        
+        this.commentResponses=res.comments.filter(function(comment:any){return comment.id_first_comment!==null});;
+        console.log(this.commentResponses);                
+      }else{
+        console.log(res.message);
+      }
+    }), (err) => {
+      console.log(err);
+    }*/
   }
 
   addAlert(){
@@ -109,6 +132,25 @@ export class UserProductPage {
       ]
     });
     confirm.present();
+  }
+
+  createComment(){
+    if (this.comment.comment_text!==""){
+    this.comment.id_product=this.product.id_product;
+    console.log(this.comment);
+    this.commentProvider.createComment(this.comment).subscribe((res:any) => {
+      if (res.status==200){
+          console.log(res);    
+          this.toast(res.message);
+          this.comment.id_comment=res.data.id_comment;
+          this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.comment)));
+      }else{
+        this.errorAlert(res.message);
+      }
+    }), (err) => {
+      this.errorAlert(JSON.stringify(err)); 
+    }
+    }
   }
 
   errorAlert(message){

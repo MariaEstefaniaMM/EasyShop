@@ -26,8 +26,8 @@ import { ProductsComponent } from '../components/products/products';
 import { UserProductsComponent } from '../components/user-products/user-products';
 import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
-import { CommentProvider } from '../providers/comment/comment';
 import { CommentsComponent } from '../components/comments/comments';
+import { CommentProvider } from '../providers/comment/comment';
 
 @NgModule({
   declarations: [

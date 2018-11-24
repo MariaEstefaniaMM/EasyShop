@@ -12,7 +12,7 @@
   <div>
       <ion-card>
         <img class="img-camera" *ngIf="product.img_product"  src="{{product.img_product}}"> 
-        <img class="img-camera" *ngIf="!product.img_product" src="/assets/imgs/logo.png"> 
+        <img class="img-camera" *ngIf="!product.img_product" src="/assets/imgs/logoess.png"> 
           <ion-card-content>
             <ion-card-title>
               {{this.product.name_product}}
@@ -58,9 +58,13 @@
             <ion-card-header>
               Comments
             </ion-card-header>
-            <ion-card-content>
-              <comments></comments>
+            <ion-card-content *ngFor="let comment of commentProvider.productComments"> 
+              <comments [comment]="comment"></comments>
             </ion-card-content>
+          <ion-item>
+              <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text"></ion-input>
+          </ion-item>
+            <ion-item><button ion-button small (click)="createComment()">Comment</button></ion-item>
           </ion-card>
   </div>
 </ion-content>
