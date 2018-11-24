@@ -24,6 +24,7 @@ export class UserProductPage {
     id_first_comment:null,
     readonly:true
   };
+  show:boolean=false;
   //productComments;
   //commentResponses;
 
@@ -51,6 +52,10 @@ export class UserProductPage {
     }), (err) => {
       console.log(err);
     }*/
+  }
+
+  showComments(){
+    this.show=!this.show
   }
 
   addAlert(){

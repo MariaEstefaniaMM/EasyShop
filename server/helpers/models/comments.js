@@ -20,7 +20,7 @@ module.exports.createComment = (id_product, id_user, comment_text, first_comment
 }
 
 module.exports.updateComment = (comment_text, id_commet)=>{
-    console.log('updateCommet'+commit.update)
+    console.log('updateCommet'+comment.update)
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
               obj.none(comment.update,[comment_text, id_commet]).then((data)=>{

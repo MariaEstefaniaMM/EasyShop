@@ -40,7 +40,7 @@ router.put('/updateComment',isAuth,(req,res)=>{
 
   router.post('/deleteComment', isAuth, (req, res) => {
     console.log(req.body.id_comment)
-      comment.deleteCommet(req.body.id_comment).then((data) => {
+      comment.deleteComment(req.body.id_comment).then((data) => {
           console.log(data);
           res.send({status:200});
         }).catch((err) => {

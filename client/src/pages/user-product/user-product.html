@@ -53,13 +53,14 @@
                       </ion-fab>
                 </ion-col>
             </ion-row>
+            <button ion-button small (click)="showComments()">See Comments</button>
         </ion-card>
-        <ion-card>
+        <ion-card *ngIf="show">
             <ion-card-header>
               Comments
             </ion-card-header>
             <ion-card-content *ngFor="let comment of commentProvider.productComments"> 
-              <comments [comment]="comment"></comments>
+              <comments [comment]="comment" [owner]="owner"></comments>
             </ion-card-content>
           <ion-item>
               <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text"></ion-input>

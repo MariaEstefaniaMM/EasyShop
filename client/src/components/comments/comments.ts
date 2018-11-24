@@ -20,13 +20,13 @@ export class CommentsComponent {
   readonlyComment:boolean=true;
   readonlyResponse:boolean=true;
   show:boolean=false;
+  @Input() owner;
   @Input() comment;
-  owner:boolean;
+  ownerComment:boolean;
 
   constructor(private alertCtrl: AlertController, public toastCtrl: ToastController, public commentProvider: CommentProvider,
               public userProvider:UserProvider) {
-    console.log('Hello CommentsComponent Component');            
-    //this.owner= this.comment.id_user==this.userProvider.user.id_user
+    console.log('Hello CommentsComponent Component'); 
     //console.log('Hello CommentsComponent Component', this.ownerComment, this.comment);
     //this.commentResponses= this.commentResponses.filter((comment:any)=>{return comment.id_first_comment===this.comment.id_comment})
   }
@@ -60,7 +60,7 @@ export class CommentsComponent {
         {
           text: 'Delete',
           handler: data =>{
-            console.log('cancel clicked');
+            console.log('delete clicked');
             this.deleteComment(comment);
           }
         }
@@ -89,7 +89,8 @@ export class CommentsComponent {
     if(JSON.stringify(this.originalComment)!==JSON.stringify(comment)){
     this.commentProvider.updateComment(comment).subscribe((res:any) => {
       if (res.status==200){
-          console.log(res);    
+          console.log(res); 
+          this.readonlyComment=true;   
           this.toast(res.message);
       }else{
         this.comment=this.originalComment;
