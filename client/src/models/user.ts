@@ -1,5 +1,5 @@
 export interface User {
-    id_number: number;
+    id_user: number;
     user_name: string;
     user_lastname: string;
     user_email: string;
@@ -8,4 +8,5 @@ export interface User {
     user_photo: string;
     user_address: string;
     user_phone: string;
+    username:string;
 }

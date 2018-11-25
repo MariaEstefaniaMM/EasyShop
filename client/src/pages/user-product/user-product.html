@@ -1,0 +1,71 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>User Product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+      <ion-card>
+        <img class="img-camera" *ngIf="product.img_product"  src="{{product.img_product}}"> 
+        <img class="img-camera" *ngIf="!product.img_product" src="/assets/imgs/logoess.png"> 
+          <ion-card-content>
+            <ion-card-title>
+              {{this.product.name_product}}
+              </ion-card-title>
+            <p>
+            <strong>Description:</strong>
+              {{this.product.des_product}}
+            </p>
+            <p>
+              <strong>Category: </strong> {{this.product.des_category}}
+            </p>
+            <p>
+              <strong>Quantity: </strong>{{this.product.quantity}}
+            </p>
+            <p>
+              <strong>Published by: </strong>{{this.product.username}}
+            </p>
+          </ion-card-content>
+          <ion-row>
+              <ion-col center text-center>
+                  <ion-note>
+                     ${{this.product.price_product}}
+                  </ion-note>
+                </ion-col>
+                <ion-col *ngIf="!owner">
+                  <button ion-button icon-start clear small>
+                    <ion-icon name="shop"></ion-icon>
+                    <div>Shop</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                    <ion-fab class="fab-btn" col-sm *ngIf="owner" bottom right edge>
+                        <button ion-fab mini><ion-icon name="md-more"></ion-icon></button>
+                        <ion-fab-list side="top">
+                          <button ion-fab (click)="deleteAlert()"><ion-icon name="trash"></ion-icon></button>
+                          <button ion-fab (click)="goToEditProduct()"><ion-icon name="create"></ion-icon></button>
+                        </ion-fab-list>
+                      </ion-fab>
+                </ion-col>
+            </ion-row>
+            <button ion-button small (click)="showComments()">See Comments</button>
+        </ion-card>
+        <ion-card *ngIf="show">
+            <ion-card-header>
+              Comments
+            </ion-card-header>
+            <ion-card-content *ngFor="let comment of commentProvider.productComments"> 
+              <comments [comment]="comment" [owner]="owner"></comments>
+            </ion-card-content>
+          <ion-item>
+              <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text"></ion-input>
+          </ion-item>
+            <ion-item><button ion-button small (click)="createComment()">Comment</button></ion-item>
+          </ion-card>
+  </div>
+</ion-content>

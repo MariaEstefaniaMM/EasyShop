@@ -1,20 +1,25 @@
 <ion-content padding>
   <div class="bg">
     <div class="head" text-center>
-      <img class="logo" src="/assets/imgs/logo.png" >
-      <h1>EasyShop</h1>
+      <img class="logo" src="/assets/imgs/logoes.png" >
     </div>
+    
     <div class="inputs">
       <ion-item class="user">
         <ion-label floating>Email</ion-label>
-        <ion-input [(ngModel)]="user.username" type="email"></ion-input>
+        <ion-input [(ngModel)]="user.username" type="email" ></ion-input>
       </ion-item>
+      
       <ion-item class="pass">
         <ion-label floating>Password</ion-label>
         <ion-input fomrControlName="password" clearOnEdit="true" [(ngModel)]="user.password" type="password"></ion-input>
       </ion-item>
-      <button ion-button full class="btn-login" (click)="gotoToProducts()">login</button>
-      <p class="p-su">New To EasyShop? <a button (click)="goToSignUp()" style="color: gray"> Sign up now</a></p>
+      
+      <div class="inf">
+          <button ion-button full class="btn-login" (click)="gotoToProducts()">login</button>
+          <p class="p-su">New To EasyShop? <a button (click)="goToSignUp()" style="color: gray"> Sign up now</a></p>
+      </div>
     </div>
+  
   </div>
 </ion-content>

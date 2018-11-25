@@ -5,18 +5,25 @@
 <ion-content padding>
     <ion-card>
         <ion-card-header>
-            Header
+            Change Password
         </ion-card-header>
         <ion-card-content>
+        <form [formGroup]="passForm">
             <ion-item>
-                <ion-label color="primary" fixed>Current Password:</ion-label>
-                <ion-input [(ngModel)]="password.old_password" type="text" placeholder="Name"></ion-input>
+                <ion-label fixed><strong>Password:</strong> </ion-label>
+                <ion-input [(ngModel)]="password.old_password" type="password" [ngModelOptions]="{standalone:true}" placeholder="Current Password"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label color="primary" fixed> New Password:</ion-label>
-                <ion-input [(ngModel)]="password.new_password" type="text" placeholder="Name"></ion-input>
+                <ion-label fixed><strong>New Password:</strong> </ion-label>
+                <ion-input [(ngModel)]="password.new_password" type="password" formControlName="password" placeholder="New Password"></ion-input>
             </ion-item>
+            <ng-container *ngFor="let validation of validationMsg.password">
+                <p class="error-message" *ngIf="passForm.get('password').hasError(validation.type) && (passForm.get('password').dirty || passForm.get('password').touched)">
+                    {{ validation.message }}
+                </p>
+            </ng-container>
             <button ion-button full (click)="updatePassword()">UPDATE PASSWORD</button>
+            </form>
         </ion-card-content>
     </ion-card>
 </ion-content>

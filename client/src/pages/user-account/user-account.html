@@ -2,41 +2,24 @@
     <menu></menu>
 </ion-toolbar> 
 
-<ion-content padding>
-    <div>
-        <h1 ion-text color="secondary">MY ACCOUT</h1>
+<ion-content >
+    <div class="card-background-page">
+    <ion-card ion-button full (click)="goToUserProfile()">
+      <img src="/assets/imgs/girl1.jpg"/>
+      <div class="card-title">MY PROFILE</div>
+    </ion-card>
+  
+    <ion-card ion-button full (click)="goToUserProducts()">
+      <img src="/assets/imgs/bag1.jpg"/>
+      <div class="card-title">MY PRODUCTS</div>
+    </ion-card>
+
+    <ion-card ion-button full (click)="goToWishlist()">
+      <img src="/assets/imgs/shop3.jpg"/>
+      <div class="card-title">MY CART</div>
+    </ion-card>
+
     </div>
-    <div class="inputs">
-        <div class="div-img" align="center">
-            <img *ngIf="user.user_photo" class="img-camera"src="{{ user.user_photo }}"> 
-            <img *ngIf="!user.user_photo" class="img-note" src="/assets/imgs/logo.png">
-        </div>   
-        <button *ngIf="user.user_photo && !readonly"ion-button class="btn-si" (click)="chooseImage()">Change photo</button>          
-        <button *ngIf="!user.user_photo && !readonly" ion-button class="btn-si" (click)="chooseImage()">Add photo</button>
-        <ion-item>
-            <ion-label color="primary" fixed>Name:</ion-label>
-            <ion-input [(ngModel)]="user.user_name" type="text" placeholder="Name" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Lastname:</ion-label>
-            <ion-input [(ngModel)]="user.user_lastname" type="text" placeholder="Lastname" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Email:</ion-label>
-            <ion-input [(ngModel)]="user.user_email" type="email" placeholder="email" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Phone Number:</ion-label>
-            <ion-input [(ngModel)]="user.user_phone" type="tel" placeholder="Phone Number" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary" fixed>Address:</ion-label>
-            <ion-input [(ngModel)]="user.user_address"  type="text" placeholder="Phone Number" [readonly]="readonly"></ion-input>
-        </ion-item>
-        <button *ngIf="readonly" ion-button full (click)="goToEditProfile()">EDIT PROFILE</button>
-        <button *ngIf="readonly" ion-button full (click)="deleteAccout()" color="danger">DELETE PROFILE</button>
-        <button *ngIf="!readonly" ion-button full (click)="updateUser()">SAVE</button>
-        <button *ngIf="!readonly" ion-button full (click)="changePass()">CHANGE PASSORD</button>
-    </div>
-</ion-content>
+  
+  </ion-content>
   

@@ -1,0 +1,1 @@
+SELECT id_user, user_email, username FROM users WHERE user_email = $1 OR  username= $2

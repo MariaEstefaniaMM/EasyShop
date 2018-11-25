@@ -20,6 +20,14 @@ import { WishlistPage } from '../pages/wishlist/wishlist';
 import { MenuComponent } from '../components/menu/menu';
 import { ChangepassPage } from '../pages/changepass/changepass';
 import { ProductsPage } from '../pages/products/products';
+import { ProductProvider } from '../providers/product/product';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { ProductsComponent } from '../components/products/products';
+import { UserProductsComponent } from '../components/user-products/user-products';
+import { NewProductPage } from '../pages/new-product/new-product';
+import { UserProductPage } from '../pages/user-product/user-product';
+import { CommentsComponent } from '../components/comments/comments';
+import { CommentProvider } from '../providers/comment/comment';
 
 @NgModule({
   declarations: [
@@ -30,8 +38,13 @@ import { ProductsPage } from '../pages/products/products';
     ProductsPage,
     UserAccountPage,
     WishlistPage,
-    MenuComponent,
-    ChangepassPage
+    ChangepassPage,
+    UserProfilePage,
+    ProductsComponent,
+    UserProductsComponent,
+    NewProductPage, 
+    UserProductPage,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,8 +61,13 @@ import { ProductsPage } from '../pages/products/products';
     ProductsPage,
     UserAccountPage,
     WishlistPage,
-    MenuComponent,
-    ChangepassPage
+    UserProductsComponent,
+    ChangepassPage,
+    UserProfilePage,
+    ProductsComponent,
+    NewProductPage,
+    UserProductPage,
+    CommentsComponent
   ],
   providers: [
     StatusBar,
@@ -61,7 +79,9 @@ import { ProductsPage } from '../pages/products/products';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     CameraProvider,
-    TokenProvider
+    TokenProvider,
+    ProductProvider,
+    CommentProvider
   ]
 })
 export class AppModule {}

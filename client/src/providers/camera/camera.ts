@@ -1,6 +1,6 @@
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Injectable } from '@angular/core';
-import { AlertController, ActionSheetController } from 'ionic-angular';
+import { AlertController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
 
 @Injectable()
 export class CameraProvider {
@@ -64,5 +64,6 @@ export class CameraProvider {
   getBase64(){
     return this.image;
   }
+
 
 }

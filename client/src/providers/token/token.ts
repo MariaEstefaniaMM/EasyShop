@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TokenProvider {
 
-  public token:string;
+  public token:string="";
 
   constructor(private nativeStorage:NativeStorage) {
     console.log('Hello TokenProvider Provider');
   }
 
   getToken(){
+    this.token="";
     this.nativeStorage.getItem('userToken')
     .then((data) => 
                 this.token = data,

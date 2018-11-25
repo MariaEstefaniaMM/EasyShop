@@ -1,3 +1,31 @@
 page-wishlist {
-
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .item-md p {
+        margin: 6px 6px 4px;
+        overflow: inherit;
+        font-size: 2.2rem;
+        line-height: normal;
+        text-overflow: inherit;
+        color: black;
+        /* position: relative; */
+        /* left: 5px; */
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md {
+        background-color: black;
+    }
+    .st{
+        font-weight: bold;
+        position: relative;
+        left: 15px;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
 }

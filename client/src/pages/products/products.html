@@ -1,7 +1,98 @@
 <ion-toolbar>
-  <menu></menu>
+  <ion-grid>
+  <ion-row>
+    <ion-col col-1>
+      <menu></menu>
+    </ion-col>
+    <ion-col col-sm>
+        <ion-searchbar [(ngModel)]="myInput" class="serachbar" showCancelButton="true" (ionInput)="onInput()" (ionCancel)="isSearchbarOpened=false">
+        </ion-searchbar>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-toolbar> 
 
 <ion-content padding>
-    <h1>Products</h1>
+  <div class="slides">
+      <ion-slides>
+          <ion-slide>
+            <div class="swiper-zoom-container">
+              <img src="/assets/imgs/m1.jpg" >
+            </div>
+          </ion-slide>
+          <ion-slide>
+              <div class="swiper-zoom-container">
+                  <img src="/assets/imgs/img2.jpg" >
+                </div>
+          </ion-slide>
+          <ion-slide>
+              <div class="swiper-zoom-container">
+                  <img src="/assets/imgs/img3.jpg" >
+                </div>
+          </ion-slide>
+        </ion-slides>
+  </div>
+    <div class="segments" padding *ngIf="!myInput">
+        <ion-segment [(ngModel)]="category" (ionChange)="segmentChange($event)">
+          <ion-segment-button value="AllProducts">
+            All
+          </ion-segment-button>
+          <ion-segment-button value="Clothes">
+            Clothes
+          </ion-segment-button>
+          <ion-segment-button value="Shoes">
+            Shoes
+          </ion-segment-button> 
+          <ion-segment-button value="Accessories">
+            Accessories
+          </ion-segment-button>         
+        </ion-segment>
+      </div>
+      <div *ngIf="!myInput">
+      <div [ngSwitch]="category" >
+        <div *ngIf="!user" class="not-user">
+          <div *ngSwitchCase="'AllProducts'"> 
+          <ion-list *ngFor="let product of productProvider.products">
+              <products  [product]= "product" [user]="user"></products>
+          </ion-list>
+          </div>
+        </div>
+        <div *ngIf="user" class="user">
+          <div *ngSwitchCase="'AllProducts'">
+            <ion-list *ngFor="let product of productProvider.userProducts">
+              <products  [product]= "product" [user]="user"></products>
+            </ion-list>
+          <div class="empty" *ngIf="productProvider.userProducts.length==0" >
+                  You haven't published anything yet...
+              <div>
+                  <button ion-button icon-start clear small (click)="goToNewProduct()">
+                    PUBLISH NOW
+                  </button>
+              </div>
+          </div>
+          </div>
+        </div>        
+          <div *ngSwitchCase="'Clothes'">
+            <ion-list *ngFor="let product of filter">
+              <products  [product]= "product" [user]="user"></products>
+            </ion-list>
+          </div>
+
+          <div *ngSwitchCase="'Shoes'">
+              <ion-list *ngFor="let product of filter">
+                <products  [product]= "product" [user]="user"></products>
+              </ion-list>
+          </div>
+          <div *ngSwitchCase="'Accessories'">
+            <ion-list *ngFor="let product of filter">
+              <products  [product]= "product" [user]="user"></products>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+        <div *ngIf="myInput" >
+            <ion-list  *ngFor="let product of searchProducts">
+              <products  [product]= "product" [user]="user"></products>
+            </ion-list>
+        </div>
 </ion-content>

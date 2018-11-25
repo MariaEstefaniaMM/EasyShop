@@ -1,0 +1,34 @@
+page-new-product {   
+    .div-img{
+        display: inline-block;
+        border-radius: 50%;
+        box-shadow: inset 0 0 10rem transparent, 0 0  4rem transparent;
+        position: relative;
+        left: 100px;
+        img{
+            border-radius: 30%;
+            width: 140px;
+            height: 140px;
+        }
+    }
+    .btn-si{
+        background-color: black;
+        top: -7px;
+        position: relative;
+        left: 100px;
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
+        background-color: black;
+    }
+}

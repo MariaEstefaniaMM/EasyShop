@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-
-/**
- * Generated class for the ProductsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Product } from '../../models/product';
+import { ProductProvider } from '../../providers/product/product';
+import { NewProductPage } from '../new-product/new-product';
 
 @IonicPage()
 @Component({
@@ -15,7 +11,17 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 })
 export class ProductsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
+  myInput:string;
+  products:Product[];
+  searchProducts:Product[];
+  user;
+  category: string = "AllProducts";
+  filter:Product[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
+              public productProvider: ProductProvider) {
+        this.user=navParams.get('data');
+        console.log(this.user);
   }
 
   ionViewDidLoad() {
@@ -23,4 +29,41 @@ export class ProductsPage {
     this.menuCtrl.enable(true);
   }
 
+  segmentChange(category){
+      console.log(category.value);
+    if(!this.user){
+        this.filter=this.productProvider.products.filter(function(product:any){return product.des_category===category.value});
+        console.log(this.products);
+    }else{
+        this.filter=this.productProvider.userProducts.filter(function(product:any){return product.des_category===category.value});
+
+    }
+  }
+
+  ionViewWillLoad() {
+    console.log('ionViewWillLoad ProductsPage');
+    if(!this.user){
+        this.productProvider.getAllProducts();
+        //this.products=this.productProvider.products;
+        console.log(this.products);
+    }else{
+      //this.products=this.productProvider.userProducts;
+    }
+  }
+
+  goToNewProduct(){
+    this.navCtrl.push(NewProductPage);
+  }
+
+  onInput(){
+    if(!this.user){
+      this.products=this.productProvider.products;
+      console.log(this.products);
+    }else{
+      this.products=this.productProvider.userProducts;
+    }
+    this.searchProducts = this.products.filter((product) => {
+          return product.name_product.toLowerCase().indexOf(this.myInput.toLowerCase()) > -1;
+      }); 
+    }
 }

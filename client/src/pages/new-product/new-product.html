@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="inputs">
+        <div class="div-img" align="center">
+            <img class="img-camera" *ngIf="product.img_product"  src="{{product.img_product}}"> 
+            <img class="img-camera" *ngIf="!product.img_product" src="/assets/imgs/logoess.png"> 
+        </div>
+        <div class="labels">  
+        <button *ngIf="!readonly" ion-button class="btn-si" (click)="chooseImage()">Choose Image</button>          
+        <ion-item>
+            <ion-label color="primary" fixed>Name:</ion-label>
+            <ion-input  type="text" [(ngModel)]="product.name_product" placeholder="Name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Description:</ion-label>
+            <ion-textarea type="text" [(ngModel)]="product.des_product" placeholder="Description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Quantity:</ion-label>
+            <ion-input  type="number" [(ngModel)]="product.quantity" placeholder="1"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Price:</ion-label>
+            <ion-input  type="number" [(ngModel)]="product.price_product" placeholder="Price"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" fixed>Category:</ion-label>
+            <ion-select class="selector" [(ngModel)]="product.id_category" placeholder=" Select a Category">
+              <ion-option *ngFor="let cat of productProvider.category" value="{{cat.id}}">
+                  {{cat.title}}
+              </ion-option>
+            </ion-select>
+        </ion-item>
+        <button ion-button full (click)="saveProduct()">SAVE</button>
+      </div> 
+    </div>
+</ion-content>

@@ -1,22 +1,61 @@
 page-user-account {
-    .btn-si{
+    .inputs {
+        position: relative;
+        top: 28px;
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .menu {
+        position: relative;
+        left: -45px;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
         background-color: black;
-        top: 15px;
-        position: relative;
-        left: -35px;
     }
+    .card-background-page {
 
-    .div-img{
-        display: inline-block;
-        border-radius: 50%;
-        box-shadow: inset 0 0 10rem transparent, 0 0  4rem transparent;
-        position: relative;
-        left: 100px;
-        img{
-            border-radius: 30%;
-            width: 140px;
-            height: 140px;
+        ion-card {
+          position: relative;
+          text-align: center;
         }
+      
+        .card-title {
+          position: absolute;
+          top: 26%;
+          font-size: 1.7em;
+          width: 100%;
+          font-weight: bold;
+          color: rgb(255, 155, 23);
+          left: -81px;
+        }
+      
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 52%;
+          width: 100%;
+          color: rgb(0, 0, 0);
+        }
+      
+      }
+      .card-background-page {
+        position: relative;
+        top: 76px;
     }
-
+    .card-background-page ion-card {
+        position: relative;
+        text-align: center;
+        width: auto;
+        height: 160px;
+    }
 }
+
