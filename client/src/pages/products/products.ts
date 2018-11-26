@@ -13,6 +13,7 @@ export class ProductsPage {
 
   myInput:string;
   products:Product[];
+  dashboard_arr=[];
   searchProducts:Product[];
   user;
   category: string = "AllProducts";
@@ -22,7 +23,28 @@ export class ProductsPage {
               public productProvider: ProductProvider) {
         this.user=navParams.get('data');
         console.log(this.user);
+        //this.loadProducts();
   }
+
+ /* loadProducts(){
+    this.productProvider.getAllProducts();
+    this.products = this.productProvider.products;
+    this.products=[];
+    for (let i = 0; i < 2; i++) {
+      this.dashboard_arr.push(this.products[this.dashboard_arr.length]);
+    }
+  } */
+
+ /* doInfinite(infiniteScroll) {
+    setTimeout( ()=> {
+      this.products=[];
+      for (let i = 0; i < 2; i++) {
+        this.dashboard_arr.push(this.products[this.dashboard_arr.length]);
+      }    
+      infiniteScroll.complete();
+    }, 2000);
+  } */
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsPage');
@@ -40,12 +62,12 @@ export class ProductsPage {
     }
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     console.log('ionViewWillLoad ProductsPage');
     if(!this.user){
-        this.productProvider.getAllProducts();
-        //this.products=this.productProvider.products;
-        console.log(this.products);
+      this.productProvider.getAllProducts();
+      //this.products=this.productProvider.products;
+      console.log(this.products);
     }else{
       //this.products=this.productProvider.userProducts;
     }

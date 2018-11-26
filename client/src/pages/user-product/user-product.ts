@@ -50,6 +50,28 @@ export class UserProductPage {
     this.commentProvider.getProductComments(this.product.id_product)
   }
 
+  doInfinite(event) {
+    setTimeout( ()=> {
+      for (let i = 0; i < 3 ; i++) {
+        this.commentProvider.getProductComments(this.product.id_product);
+        //this.commentProvider.productComments = this.commentProvider.productComments.concat(this.product.id_product)
+        //this.commentProvider.commentResponses.push(this.product.id_product);
+      }    
+      event.complete();
+    }, 2000);    
+  }
+
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+      this.commentProvider.productComments;
+      console.log(this.commentProvider.productComments);
+    }, 2000);
+  }
+
   showComments(){
     this.show=!this.show;
     this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})

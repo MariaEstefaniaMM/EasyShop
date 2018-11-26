@@ -6,7 +6,7 @@ import { Product } from '../../models/product';
 @Injectable()
 export class ProductProvider {
 
-  serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.0.102:3000";
   products:Product[];
   userProducts: Product[];
   category=[
@@ -24,6 +24,7 @@ export class ProductProvider {
         if (res.status==200){
           this.products=[];
           this.products=res.products;
+          //this.products.sort()
           console.log(this.products);
         }else{
           console.log(res.message);

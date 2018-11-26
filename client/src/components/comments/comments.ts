@@ -1,6 +1,6 @@
 import { CommentProvider } from './../../providers/comment/comment';
 import { Component, Input } from '@angular/core';
-import { ToastController, AlertController } from 'ionic-angular';
+import { ToastController, AlertController, LoadingController, NavController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 @Component({
@@ -18,6 +18,7 @@ export class CommentsComponent {
     comment_text:"",
     id_first_comment:null,
   };
+  loading:any;
   readonlyComment:boolean=true;
   show:boolean=false;
   commentResponses;
@@ -26,7 +27,7 @@ export class CommentsComponent {
   ownerComment:boolean;
 
   constructor(private alertCtrl: AlertController, public toastCtrl: ToastController, public commentProvider: CommentProvider,
-              public userProvider:UserProvider) {
+              public userProvider:UserProvider, public loadingCtrl: LoadingController) {
     console.log('Hello CommentsComponent Component'); 
     //console.log('Hello CommentsComponent Component', this.ownerComment, this.comment);
     //this.commentResponses= this.commentResponses.filter((comment:any)=>{return comment.id_first_comment===this.comment.id_comment})
@@ -103,6 +104,7 @@ export class CommentsComponent {
           this.readonlyComment=true; 
           comment.readonly=true;  
           this.toast(res.message);
+          this.showLoader();
       }else{
         this.comment=this.originalComment;
         this.errorAlert(res.message);
@@ -114,6 +116,10 @@ export class CommentsComponent {
       this.readonlyComment=true; 
       comment.readonly=true; 
     }
+  }
+
+  cancelComment(){
+    console.log('cancel');
   }
 
   createComment(){
@@ -144,6 +150,25 @@ export class CommentsComponent {
     }
   }
   }
+
+  
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      console.log('created')
+    }, 1000);
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 3000);
+  }
+
 
   errorAlert(message){
     (this.alertCtrl.create({

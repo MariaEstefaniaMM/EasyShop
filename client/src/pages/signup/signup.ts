@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController, ToastController, MenuController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { CameraProvider } from './../../providers/camera/camera';
@@ -21,6 +21,8 @@ export class SignupPage {
     phone: "",
     username:"",
   }
+
+  loading:any;
 
   signupform: FormGroup;
   validationMsg={
@@ -57,7 +59,7 @@ export class SignupPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,public toastCtrl: ToastController,
               public  cameraProvider:CameraProvider, private userProvider: UserProvider,
-              public menuCtrl: MenuController, public formBuilder: FormBuilder) {
+              public menuCtrl: MenuController, public formBuilder: FormBuilder, public loadingCtrl: LoadingController) {
                this.initForm();
   }
 
@@ -73,6 +75,23 @@ export class SignupPage {
       password: (['', [Validators.minLength(6), Validators.maxLength(12), Validators.required]]),
       address: (['', [Validators.required]]),
     });
+  }
+
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.push(HomePage);
+    }, 1000);
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 3000);
   }
 
   ionViewDidLoad() {
@@ -101,7 +120,8 @@ export class SignupPage {
       this.user.username=this.user.username.toLowerCase()
     this.userProvider.createUser(this.user).subscribe((res:any) => {
       if (res.status==200){
-          console.log(res);    
+          console.log(res);
+          this.showLoader();    
           this.presentToast(res.message);
           this.navCtrl.setRoot(HomePage);
       }else{
