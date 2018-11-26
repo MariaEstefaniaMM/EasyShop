@@ -5,7 +5,7 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CommentProvider {
 
-  serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.0.102:3000";
   productComments=[];
   commentResponses=[];
 
@@ -20,6 +20,7 @@ export class CommentProvider {
         console.log(res.comments.filter((comment:any)=>{return comment.id_first_comment===null}));
         this.productComments=res.comments.filter((comment:any)=>{return comment.id_first_comment===null})
         this.commentResponses=res.comments.filter((comment:any)=>{return comment.id_first_comment!==null})
+        this.productComments.reverse();
       }else{
         console.log(res.message);
       }

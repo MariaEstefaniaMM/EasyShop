@@ -28,6 +28,7 @@ import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
 import { CommentsComponent } from '../components/comments/comments';
 import { CommentProvider } from '../providers/comment/comment';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { CommentProvider } from '../providers/comment/comment';
     CameraProvider,
     TokenProvider,
     ProductProvider,
-    CommentProvider
+    CommentProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

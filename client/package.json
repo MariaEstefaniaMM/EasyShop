@@ -25,6 +25,7 @@
     "@ionic-native/file-transfer": "^4.17.0",
     "@ionic-native/image-picker": "^4.17.0",
     "@ionic-native/native-storage": "^4.17.0",
+    "@ionic-native/screen-orientation": "^4.17.0",
     "@ionic-native/splash-screen": "~4.15.0",
     "@ionic-native/status-bar": "~4.15.0",
     "@ionic/pro": "2.0.3",
@@ -36,6 +37,7 @@
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^2.0.0",
     "cordova-plugin-nativestorage": "~2.3.2",
+    "cordova-plugin-screen-orientation": "3.0.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-telerik-imagepicker": "~2.2.2",
@@ -64,7 +66,8 @@
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "EasyShop"
       },
       "cordova-plugin-nativestorage": {},
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-screen-orientation": {}
     },
     "platforms": [
       "android"

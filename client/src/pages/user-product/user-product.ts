@@ -39,7 +39,8 @@ export class UserProductPage {
       this.owner=true;
     }  
     console.log(this.owner);    
-    this.commentProvider.getProductComments(this.product.id_product)/*.subscribe((res:any) => {
+    this.commentProvider.getProductComments(this.product.id_product)
+    /*.subscribe((res:any) => {
       if (res.status==200){
         console.log(res);
         this.productComments=res.comments.filter(function(comment:any){return comment.id_first_comment===null});
@@ -52,6 +53,28 @@ export class UserProductPage {
     }), (err) => {
       console.log(err);
     }*/
+  }
+
+  doInfinite(event) {
+    setTimeout( ()=> {
+      for (let i = 0; i < 3 ; i++) {
+        this.commentProvider.getProductComments(this.product.id_product);
+        //this.commentProvider.productComments = this.commentProvider.productComments.concat(this.product.id_product)
+        //this.commentProvider.commentResponses.push(this.product.id_product);
+      }    
+      event.complete();
+    }, 2000);    
+  }
+
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+      this.commentProvider.productComments;
+      console.log(this.commentProvider.productComments);
+    }, 2000);
   }
 
   showComments(){

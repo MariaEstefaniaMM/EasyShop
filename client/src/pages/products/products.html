@@ -13,7 +13,7 @@
 </ion-toolbar> 
 
 <ion-content padding>
-  <div class="slides">
+  <div *ngIf="!user" class="slides">
       <ion-slides>
           <ion-slide>
             <div class="swiper-zoom-container">
@@ -31,6 +31,12 @@
                 </div>
           </ion-slide>
         </ion-slides>
+  </div>
+  <div *ngIf="user" class="myproducts">
+    <ion-card ion-button>
+      <img src="/assets/imgs/bag1.jpg"/>
+      <div class="card-title">MY PRODUCTS</div>
+    </ion-card>
   </div>
     <div class="segments" padding *ngIf="!myInput">
         <ion-segment [(ngModel)]="category" (ionChange)="segmentChange($event)">
@@ -55,6 +61,9 @@
           <ion-list *ngFor="let product of productProvider.products">
               <products  [product]= "product" [user]="user"></products>
           </ion-list>
+          <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll> -->
           </div>
         </div>
         <div *ngIf="user" class="user">

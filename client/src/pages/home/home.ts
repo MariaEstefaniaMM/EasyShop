@@ -3,9 +3,10 @@ import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { NavController, AlertController, MenuController } from 'ionic-angular';
+import { NavController, AlertController, MenuController, LoadingController } from 'ionic-angular';
 import { UserProvider } from './../../providers/user/user';
 import { ProductProvider } from './../../providers/product/product';
+//import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
   selector: 'page-home',
@@ -17,15 +18,36 @@ export class HomePage {
     username:"",
     password:""
   }
+  loading:any;
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
-    public alertCtrl: AlertController, public menuCtrl: MenuController, private productProvider: ProductProvider) {
+    public alertCtrl: AlertController, public menuCtrl: MenuController, 
+    private productProvider: ProductProvider, public loadingCtrl: LoadingController) {
 
+  }
+
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      this.navCtrl.push(ProductsPage);
+    }, 1000);
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 5000);
   }
 
   ionViewDidLoad(){
     this.menuCtrl.enable(false);
+   //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE_SECONDARY);
+  // this.screenOrientation.lock('portrait')
   }
 
   ionViewCanEnter(){
@@ -48,6 +70,7 @@ export class HomePage {
   }else this.userProvider.login(this.user).subscribe((res:any) => {
     this.user.username=this.user.username.toLowerCase()
     if(res.status === 200) {
+      this.showLoader()
       this.nativeStorage.setItem('userToken', res.token);
       this.tokenProvider.token=res.token;
       console.log(this.tokenProvider.token, res.token);
