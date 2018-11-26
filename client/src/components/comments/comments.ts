@@ -14,12 +14,13 @@ export class CommentsComponent {
   response={
     id_comment:null,
     id_product:null,
+    id_user:null,
     comment_text:"",
     id_first_comment:null,
   };
   readonlyComment:boolean=true;
-  readonlyResponse:boolean=true;
   show:boolean=false;
+  commentResponses;
   @Input() owner;
   @Input() comment;
   ownerComment:boolean;
@@ -37,13 +38,19 @@ export class CommentsComponent {
   }
 
   enableInputR(comment){
-    this.readonlyResponse=false;
+    comment.readonly=false;
+    console.log(comment);
     this.originalComment=JSON.parse(JSON.stringify(comment));
   }
 
   showResponses(){
     this.show=!this.show;
-    this.commentProvider.commentResponses= this.commentProvider.commentResponses.filter((comment:any)=>{return comment.id_first_comment===this.comment.id_comment})
+    this.commentResponses= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===this.comment.id_comment})
+    for (var i=0;i<this.commentResponses.length;i++){
+      this.commentResponses[i]["readonly"]=true;
+      console.log(this.commentResponses[i].readonly)
+    }
+    console.log( this.commentResponses);
   }
 
   deleteAlert(comment){
@@ -74,7 +81,10 @@ export class CommentsComponent {
       console.log('deleted');
         if (res.status==200){
           console.log(res);
-          this.commentProvider.productComments.splice(this.commentProvider.productComments.indexOf(comment),1);
+          console.log(this.commentProvider.productComments.indexOf(comment));
+          if(this.commentProvider.productComments.indexOf(comment)>-1){
+              this.commentProvider.productComments.splice(this.commentProvider.productComments.indexOf(comment),1);
+          }
           this.toast('Comment deleted');
       }else{
         this.errorAlert(res.message);
@@ -90,7 +100,8 @@ export class CommentsComponent {
     this.commentProvider.updateComment(comment).subscribe((res:any) => {
       if (res.status==200){
           console.log(res); 
-          this.readonlyComment=true;   
+          this.readonlyComment=true; 
+          comment.readonly=true;  
           this.toast(res.message);
       }else{
         this.comment=this.originalComment;
@@ -99,6 +110,9 @@ export class CommentsComponent {
     }), (err) => {
       this.errorAlert(JSON.stringify(err)); 
     }
+    }else{
+      this.readonlyComment=true; 
+      comment.readonly=true; 
     }
   }
 
@@ -106,13 +120,22 @@ export class CommentsComponent {
     if(this.response.comment_text!==""){
     this.response.id_product=this.comment.id_product;
     this.response.id_first_comment=this.comment.id_comment;
+    this.response.id_user=this.comment.id_user;
     console.log(this.response);
     this.commentProvider.createComment(this.response).subscribe((res:any) => {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
           this.response.id_comment=res.data.id_comment;
-          this.commentProvider.commentResponses.push(this.response);
+          this.response["readonly"]=true;
+          this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.response)));
+          this.response={
+            id_comment:null,
+            id_product:null,
+            id_user:null,
+            comment_text:"",
+            id_first_comment:null
+          };
       }else{
         this.errorAlert(res.message);
       }

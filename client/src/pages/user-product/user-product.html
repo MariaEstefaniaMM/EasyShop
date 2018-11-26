@@ -38,9 +38,9 @@
                   </ion-note>
                 </ion-col>
                 <ion-col *ngIf="!owner">
-                  <button ion-button icon-start clear small>
+                  <button ion-button icon-start clear small (click)="addAlert()">
                     <ion-icon name="shop"></ion-icon>
-                    <div>Shop</div>
+                    <div>ADD TO CART</div>
                   </button>
                 </ion-col>
                 <ion-col>
@@ -59,7 +59,7 @@
             <ion-card-header>
               Comments
             </ion-card-header>
-            <ion-card-content *ngFor="let comment of commentProvider.productComments"> 
+            <ion-card-content *ngFor="let comment of productComments"> 
               <comments [comment]="comment" [owner]="owner"></comments>
             </ion-card-content>
           <ion-item>

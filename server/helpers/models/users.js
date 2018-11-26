@@ -1,7 +1,6 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const user = require('../queries').users;
-let cart = require('../models/carts');
 
 module.exports.getUserByEmail = (email)=>{
     return new Promise((res,rej)=>{
@@ -35,25 +34,23 @@ module.exports.comparePassword = (candidatePassword, hash)=>{
 module.exports.signup = (name, lastname, email, password, photo, address, phone, username)=>{
     //console.log(name+lastname+email+password+user.create)
     return new Promise((res,rej)=>{
-        cart.createCart().then((data) => {
-            let hashedPass = bcrypt.hashSync(password, 10);
-            console.log(name+lastname+email+password+user.create)
-              db.connect().then((obj)=>{
-                  obj.any(user.create,
-                    [name, lastname,email, hashedPass, data.id_cart, photo, address, phone, username]).then((data)=>{
-                    console.log(data)
-                      res(data);
-                      obj.done();
-                  }).catch((error)=>{
-                      console.log(error);
-                      rej(error);
-                      obj.done();
-                  });
-              }).catch((error)=>{
-                  console.log(error);
-                  rej(error);
-              });
-          });
+        let hashedPass = bcrypt.hashSync(password, 10);
+        console.log(name+lastname+email+password+user.create)
+        db.connect().then((obj)=>{
+            obj.any(user.create,
+                [name, lastname,email, hashedPass, photo, address, phone, username]).then((data)=>{
+                console.log(data)
+                res(data);
+                obj.done();
+            }).catch((error)=>{
+                console.log(error);
+                rej(error);
+                obj.done();
+            });
+        }).catch((error)=>{
+            console.log(error);
+            rej(error);
+        });
       }).catch((error) => {
         console.log(error)
     });    

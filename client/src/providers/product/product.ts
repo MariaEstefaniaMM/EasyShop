@@ -12,7 +12,7 @@ export class ProductProvider {
   category=[
     { id:1,  title: 'Clothes'},
     { id:2, title: 'Shoes'},
-    { id:3, title: 'Accesories'},
+    { id:3, title: 'Accessories'},
   ];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {

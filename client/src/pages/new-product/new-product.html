@@ -34,7 +34,7 @@
         <ion-item>
             <ion-label color="primary" fixed>Category:</ion-label>
             <ion-select class="selector" [(ngModel)]="product.id_category" placeholder=" Select a Category">
-              <ion-option *ngFor="let cat of productProvider.category" value="{{cat.id}}">
+              <ion-option *ngFor="let cat of productProvider.category" value={{cat.id}}>
                   {{cat.title}}
               </ion-option>
             </ion-select>

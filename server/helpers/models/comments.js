@@ -42,6 +42,7 @@ module.exports.getProductComments = (id_product)=>{
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
               obj.any(comment.read,[id_product]).then((data)=>{
+                  console.log(data);
                   res(data);
                   obj.done();
               }).catch((error)=>{
