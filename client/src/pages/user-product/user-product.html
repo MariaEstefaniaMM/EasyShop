@@ -62,9 +62,9 @@
                   </ion-note>
                 </ion-col>
                 <ion-col col-3 *ngIf="!owner">
-                  <button ion-button icon-start clear small>
+                  <button ion-button icon-start clear small (click)="addAlert()">
                     <ion-icon name="cash"></ion-icon>
-                    <div>Shop</div>
+                    <div>ADD TO CART</div>
                   </button>
                 </ion-col>
                 <ion-col col-13 *ngIf="owner">
@@ -97,12 +97,12 @@
               </ion-item>
             </ion-col>
             </ion-row>
-            <ion-card-content *ngFor="let comment of commentProvider.productComments"> 
+            <ion-card-content *ngFor="let comment of productComments"> 
               <comments [comment]="comment" [owner]="owner"></comments>
             </ion-card-content>
-            <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <!----<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
                 <ion-infinite-scroll-content></ion-infinite-scroll-content>
-              </ion-infinite-scroll>
+              </ion-infinite-scroll>---->
           </ion-card>
   </div>
 </ion-content>

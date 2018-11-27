@@ -1,5 +1,6 @@
+import { CartProvider } from './../../providers/cart/cart';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the WishlistPage page.
@@ -15,11 +16,56 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WishlistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  wishlist:boolean=true;
+
+  cart={
+    amount:null,
+    payment_mode:"",
+  }
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
+              public alertCtrl: AlertController, public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');
+  }
+
+  shopProduct(){
+    this.cartProvider.shop(this.cart).subscribe((res:any) => {
+      console.log('purchase');
+        if (res.status==200){
+          console.log(res);
+          this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart),1].id_bill=res.id_bill;
+          this.toast(res.message);
+      }else{
+        this.errorAlert(res.message);
+      }
+      }, (err) => {
+        this.errorAlert(JSON.stringify(err));         
+      }
+      );
+  }
+
+  errorAlert(message){
+    (this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })).present();  
+  }
+
+  toast(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() =>{
+      console.log('dissmissed toast');
+    });
+    toast.present();
   }
 
 }

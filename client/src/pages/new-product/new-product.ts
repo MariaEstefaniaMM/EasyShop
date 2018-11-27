@@ -71,7 +71,9 @@ export class NewProductPage {
           this.presentToast(res.message);
           this.product.id_product=res.data.id_product;
           this.product.id_user=this.userProvider.user.id_user;
+          this.product["des_category"]=this.productProvider.category[this.product.id_category-1].title;
           this.productProvider.userProducts.push(this.product);
+          console.log(this.productProvider.userProducts)
           this.navCtrl.setRoot(ProductsPage, {data:true});
       }else{
         this.errorAlert(res.message);

@@ -17,7 +17,7 @@ router.get('/getAll', (req, res) => {
 });
 
 router.get('/getUserProducts',isAuth,(req,res)=>{ 
-  console.log(req);
+  //console.log(req);
       product.getUserProducts(req.user.id_user).then((data) => {
           res.send({status:200, products:data});
         }).catch((err) => {

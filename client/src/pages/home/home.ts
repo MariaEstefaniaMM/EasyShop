@@ -1,3 +1,4 @@
+import { CartProvider } from './../../providers/cart/cart';
 import { ProductsPage } from './../products/products';
 import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
@@ -23,7 +24,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
     public alertCtrl: AlertController, public menuCtrl: MenuController, 
-    private productProvider: ProductProvider, public loadingCtrl: LoadingController) {
+    private productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider:CartProvider) {
 
   }
 
@@ -77,6 +78,7 @@ export class HomePage {
       this.userProvider.user=res.user;
       console.log(this.userProvider.user);
       this.productProvider.getUserProducts();
+      this.cartProvider.getUserCart();
       this.navCtrl.setRoot(ProductsPage);
   } else {
     console.log('err');

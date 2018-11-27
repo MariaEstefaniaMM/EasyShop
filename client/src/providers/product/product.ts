@@ -6,13 +6,13 @@ import { Product } from '../../models/product';
 @Injectable()
 export class ProductProvider {
 
-  serverUrl:string = "http://192.168.0.102:3000";
+  serverUrl:string = "http://localhost:3000";
   products:Product[];
   userProducts: Product[];
   category=[
     { id:1,  title: 'Clothes'},
     { id:2, title: 'Shoes'},
-    { id:3, title: 'Accesories'},
+    { id:3, title: 'Accessories'},
   ];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {

@@ -63,26 +63,26 @@
         <ion-row>
             <ion-col col-8>
                 <ion-item class="user">
-                    <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text" [readonly]="readonlyResponse"></ion-textarea>
+                    <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text" [readonly]="response.readonly"></ion-textarea>
                 </ion-item> 
             </ion-col>
-            <ion-col col-2 *ngIf="readonlyResponse">
-                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && readonlyResponse" (click)="enableInputR(response)">
+            <ion-col col-2 *ngIf="response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
                     <ion-icon name="create"></ion-icon>
                 </button>   
             </ion-col>
-            <ion-col col-1 *ngIf="!readonlyResponse">
-                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && readonlyResponse" (click)="enableInputR(response)">
+            <ion-col col-1 *ngIf="!response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
                     <ion-icon name="create"></ion-icon>
                 </button>   
             </ion-col>
             <ion-col col-1>
-                <button ion-button small icon-start clear *ngIf="owner || response.id_user==userProvider.user.id_user && readonlyResponse" (click)="deleteAlert(response)">
+                <button ion-button small icon-start clear *ngIf="owner || response.id_user==userProvider.user.id_user && response.readonly" (click)="deleteAlert(response)">
                     <ion-icon name="trash"></ion-icon>
                 </button>   
             </ion-col>
             <ion-col col-1>
-                <button ion-button small icon-start clear class="save-a" *ngIf="response.id_user==userProvider.user.id_user && !readonlyResponse" (click)="updateComment(response)">
+                <button ion-button small icon-start clear class="save-a" *ngIf="response.id_user==userProvider.user.id_user && !response.readonly" (click)="updateComment(response)">
                     <ion-icon name="checkmark"></ion-icon>
                     <div>Save</div>
                 </button>

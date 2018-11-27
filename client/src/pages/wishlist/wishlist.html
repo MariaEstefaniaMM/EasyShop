@@ -9,6 +9,11 @@
   <ion-content padding>
     <ion-grid>
       <ion-row>
+      <ion-list *ngFor="let product of cartProvider.productsFromCart">
+          <products  [product]= "product" [wishlist]="wishlist"></products>
+      </ion-list>
+      </ion-row>
+      <ion-row>
         <ion-col col-12>
             <ion-item left>
                 <p>
