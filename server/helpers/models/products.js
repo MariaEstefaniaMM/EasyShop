@@ -92,3 +92,23 @@ module.exports.deleteProduct = (id_product)=>{
       });
     });
   }
+
+  module.exports.getProductById = (id_product)=>{
+    console.log(product.readAll);
+    return new Promise((res,rej)=>{
+          db.connect().then((obj)=>{
+              obj.one(product.readById,[id_product]).then((data)=>{
+                  console.log(data);
+                  res(data);
+                  obj.done();
+              }).catch((error)=>{
+                  console.log(error);
+                  rej(error);
+                  obj.done();
+              });
+          }).catch((error)=>{
+              console.log(error);
+              rej(error);
+        });
+    });
+}

@@ -5,7 +5,7 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CommentProvider {
 
-  serverUrl:string = "http://192.168.0.102:3000";
+  serverUrl:string = "http://localhost:3000";
   productComments=[];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {

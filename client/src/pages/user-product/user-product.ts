@@ -27,8 +27,10 @@ export class UserProductPage {
     readonly:true
   };
   cart={
+    id_cart:null,
     id_product:null,
     product_quantity:null,
+    return:false,
   }
   productComments;
   show:boolean=false;
@@ -50,12 +52,10 @@ export class UserProductPage {
     this.commentProvider.getProductComments(this.product.id_product)
   }
 
-  doInfinite(event) {
+  /*doInfinite(event) {
     setTimeout( ()=> {
       for (let i = 0; i < 3 ; i++) {
         this.commentProvider.getProductComments(this.product.id_product);
-        //this.commentProvider.productComments = this.commentProvider.productComments.concat(this.product.id_product)
-        //this.commentProvider.commentResponses.push(this.product.id_product);
       }    
       event.complete();
     }, 2000);    
@@ -70,7 +70,7 @@ export class UserProductPage {
       this.commentProvider.productComments;
       console.log(this.commentProvider.productComments);
     }, 2000);
-  }
+  }*/
 
   showComments(){
     this.show=!this.show;
@@ -82,10 +82,10 @@ export class UserProductPage {
   addAlert(){
     console.log('alert');
     const confirm = this.alertCtrl.create({
-      title: 'how many products?',
+      title: 'How many products?',
       inputs: [
         {
-          name: 'Quantity:',
+          name: 'quantity',
           placeholder: '1',
           type: 'number'
         }
@@ -98,29 +98,16 @@ export class UserProductPage {
           }
         },
         {
-          text: 'ADD TO WISHLIST',
+          text: 'ADD TO CART',
           handler: (data)=>{
-            this.cart.product_quantity=data.Quantity;
+            this.cart.product_quantity=data.quantity;
             this.addToCart();
-            console.log('added')
+            console.log('added', data)
           }
         }
       ]
     });
     confirm.present();
-  }
-
-  addToast(){
-    let toast = this.toastCtrl.create({
-      message: 'Added!',
-      duration: 3000,
-      position: 'bottom'
-    });
-
-    toast.onDidDismiss(() =>{
-      console.log('dissmissed toast');
-    });
-    toast.present();
   }
 
   goToEditProduct(){
@@ -198,10 +185,13 @@ export class UserProductPage {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
+          this.cart.id_cart=res.data.id_cart;
           this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
           this.cart={
+            id_cart:null,
             id_product:null,
             product_quantity:null,
+            return:false
           };
       }else{
         this.errorAlert(res.message);

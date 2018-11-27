@@ -38,10 +38,11 @@ module.exports.getUserCart = (id_user)=>{
     });
 }
 
-module.exports.deleteProductCart = (id_cart)=>{
+module.exports.deleteProductCart = (id_cart, product_quantity, id_product)=>{
+    console.log(cart.delete,id_cart,product_quantity, id_product);
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
-              obj.none(cart.delete,[id_cart]).then((data)=>{
+              obj.none(cart.delete,[id_cart,product_quantity, id_product]).then((data)=>{
                   res(data);
                   obj.done();
               }).catch((error)=>{
@@ -56,10 +57,16 @@ module.exports.deleteProductCart = (id_cart)=>{
     });
 }
 
-module.exports.updateProductCart = (product_quantity,id_cart)=>{
+module.exports.updateProductCart = (product_quantity,id_cart,product_return,id_product)=>{
+    if(product_return){
+        query=cart.updateReturn;
+    }else{
+        query=cart.updateAdd;
+    }
+    console.log(query,product_quantity,id_cart,product_return,id_product)
     return new Promise((res,rej)=>{
           db.connect().then((obj)=>{
-              obj.one(cart.update,[product_quantity, id_cart]).then((data)=>{
+              obj.none(query,[product_quantity, id_cart, id_product]).then((data)=>{
                   res(data);
                   obj.done();
               }).catch((error)=>{

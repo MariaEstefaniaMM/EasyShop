@@ -28,11 +28,7 @@ import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
 import { CommentsComponent } from '../components/comments/comments';
 import { CommentProvider } from '../providers/comment/comment';
-<<<<<<< HEAD
 import { CartProvider } from '../providers/cart/cart';
-=======
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
->>>>>>> vm
 
 @NgModule({
   declarations: [
@@ -87,11 +83,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     TokenProvider,
     ProductProvider,
     CommentProvider,
-<<<<<<< HEAD
     CartProvider
-=======
-    ScreenOrientation
->>>>>>> vm
   ]
 })
 export class AppModule {}
