@@ -70,7 +70,7 @@
                 <ion-col col-13 *ngIf="owner">
                     <ion-fab bottom right edge>
                         <button ion-fab mini><ion-icon name="md-more"></ion-icon></button>
-                        <ion-fab-list side="top">
+                        <ion-fab-list side="top" class="user-op">
                           <button ion-fab (click)="deleteAlert()"><ion-icon name="trash"></ion-icon></button>
                           <button ion-fab (click)="goToEditProduct()"><ion-icon name="create"></ion-icon></button>
                         </ion-fab-list>
@@ -82,15 +82,21 @@
             <ion-card-header>
               Comments
             </ion-card-header>
-            <ion-item>
-                <ion-input type="text" placeholder="Comment" [(ngModel)]="comment.comment_text"></ion-input>
+            <ion-row>
+              <ion-col col-8>
+                <ion-item>
+                  <!--<ion-input type="text" placeholder="Comment" [(ngModel)]="comment.comment_text"></ion-input> -->
+                  <ion-textarea type="text" placeholder="Tap to comment..." row="1" [(ngModel)]="comment.comment_text"></ion-textarea>
             </ion-item>
+          </ion-col>
+          <ion-col col-3>
               <ion-item>
-                <button ion-button icon-start small clear (click)="createComment()">
-                  <ion-icon name="ios-text-outline"></ion-icon>
-                  <div>Comment</div>
+                <button ion-button icon-start small clear class="comment" (click)="createComment()">
+                  <ion-icon name="ios-text-outline" class="icon-comment"></ion-icon>
                 </button>
               </ion-item>
+            </ion-col>
+            </ion-row>
             <ion-card-content *ngFor="let comment of productComments"> 
               <comments [comment]="comment" [owner]="owner"></comments>
             </ion-card-content>

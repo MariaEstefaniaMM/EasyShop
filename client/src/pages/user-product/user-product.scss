@@ -20,14 +20,15 @@ page-user-product {
         height: 40px;
         line-height: 40px;
         position: relative;
-        left: 24px;
-    }
-    ion-fab-list.fab-list-active {
-        transform: translate(43%, 15%);
+        top: -5px;
+        left: 10px;
     }
    /* ion-fab.fab {
         left: 34px;
     } */
+    .user-op {
+        transform: translate(18%,10%);
+    }
     button.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
         position: relative;
         color: black;
@@ -38,6 +39,10 @@ page-user-product {
         position: relative;
         left: 150px;
     } */
+    button.fab.fab-md.fab-in-list.fab-md-in-list.show {
+        height: 25px;
+        /* width: 38px; */
+    }
     .toolbar-background-md {
         border-color: orange;
         background: #f8f8f8;
@@ -75,5 +80,17 @@ page-user-product {
         height: 20px;
         position: relative;
         top: -20px;
+    }
+    button.comment.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
+        position: relative;
+        top: -11px;
+        /* width: 50px; */
+    }
+    ion-icon.icon-comment.icon.icon-md.ion-ios-text-outline {
+        font-size: 2.4rem;
+    }
+    ion-item.user.item.item-block.item-md.item-input.item-textarea.ng-untouched.ng-pristine.ng-valid.input-has-value.item-input-has-value {
+        position: relative;
+        left: -20px;
     }
 }

@@ -1,70 +1,100 @@
 <ion-row>
-    <ion-col col-12>
+    <ion-col col-2>
+        <div class="div-img" align="center">
+            <ion-avatar item-start>
+                <img src="/assets/imgs/user.png">
+            </ion-avatar>
+        </div>
+    </ion-col>
+    <ion-col col-4>
+        <h4 class="h4-c">@Username </h4>
+    </ion-col>               
+</ion-row>
+
+<ion-row>
+    <ion-col col-10>
         <ion-item class="user">
-          <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text" [readonly]="readonlyComment"></ion-input>
+          <ion-textarea type="text" placeholder="Tap to comment..." row="1" [(ngModel)]="comment.comment_text" [readonly]="readonlyComment"></ion-textarea>
         </ion-item>  
     </ion-col>
-    <ion-col col-7 *ngIf="readonlyComment">
-        <ion-item >
-            <button ion-button small clear (click)="showResponses()"> SEE ANSWERS </button>
-        </ion-item>
-    </ion-col>
-    <ion-col col-1 *ngIf="readonlyComment">
-        <ion-fab bottom right edge class="comment-crud">
-            <button ion-fab mini *ngIf="comment.id_user==userProvider.user.id_user" ><ion-icon name="md-more"></ion-icon></button>
-            <ion-fab-list side="right" class="comment-list">
-                <button  *ngIf="comment.id_user==userProvider.user.id_user  && readonlyComment" ion-fab (click)="enableInput(comment)"><ion-icon name="create"></ion-icon></button>
-                <button *ngIf="owner || comment.id_user==userProvider.user.id_user && readonlyComment" ion-fab (click)="deleteAlert(comment)"><ion-icon name="trash"></ion-icon></button>
+    <ion-col col-2 *ngIf="readonlyComment">
+        <ion-fab bottom right edge>
+            <button ion-fab mini class="comment-crud" *ngIf="comment.id_user==userProvider.user.id_user" ><ion-icon name="md-more"></ion-icon></button>
+            <ion-fab-list side="top" class="comment-list">
+                <button  *ngIf="comment.id_user==userProvider.user.id_user  && readonlyComment" class="fab-comment" ion-fab (click)="enableInput(comment)"><ion-icon name="create"></ion-icon></button>
+                <button *ngIf="owner || comment.id_user==userProvider.user.id_user && readonlyComment"  class="fab-comment"  ion-fab (click)="deleteAlert(comment)"><ion-icon name="trash"></ion-icon></button>
             </ion-fab-list>
         </ion-fab>    
     </ion-col>
     <ion-col col-3 *ngIf="comment.id_user==userProvider.user.id_user && !readonlyComment">
        <button ion-fab icon-start (click)="updateComment(comment)">
            <ion-icon name="checkmark"></ion-icon>
-           <div>Save</div>
         </button> 
     </ion-col>
     <ion-col *ngIf="comment.id_user==userProvider.user.id_user && !readonlyComment">
         <button class="cancel-btn" ion-fab icon-start (click)="cancelComment()">
             <ion-icon name="close"></ion-icon>
-            <div>Cancel</div>
         </button>
     </ion-col>
+    <ion-col col-4 *ngIf="readonlyComment">
+        <h6 class="h6-c"><span right>Created at: 10 days ago</span></h6>
+    </ion-col>
+    <ion-col col-7 *ngIf="readonlyComment" class="see-answer">
+            <ion-item >
+                <button ion-button small clear class="btn-see" (click)="showResponses()"> SEE ANSWERS.. </button>
+            </ion-item>
+        </ion-col>
 </ion-row>
 
-<!--<ion-item *ngIf="comment.id_user==userProvider.user.id_user  && readonlyComment">
-    <button ion-button small  (click)="enableInput(comment)"> EDIT </button>
-</ion-item>
-<ion-item *ngIf="comment.id_user==userProvider.user.id_user && !readonlyComment">
-    <button ion-button small  (click)="updateComment(comment)"> SAVE </button>
-</ion-item> 
-<ion-item *ngIf="owner || comment.id_user==userProvider.user.id_user && readonlyComment">
-    <button ion-button small  (click)="deleteAlert(comment)"> DELETE </button>
-</ion-item> -->
-
 <div *ngIf="show" >
-<ion-item *ngFor="let response of commentResponses" >
-    <ion-item class="user">
-        <ion-input type="text" placeholder="Answer" [(ngModel)]="response.comment_text" [readonly]="response.readonly"></ion-input>
+    <ion-row class="user-a">
+        <ion-col col-2>
+            <div class="div-img" align="center">
+                <ion-avatar item-start>
+                    <img src="/assets/imgs/user.png">
+                </ion-avatar>
+            </div>
+        </ion-col>
+        <ion-col col-4>
+            <h4 class="h4-a">@Username </h4>
+        </ion-col>               
+    </ion-row>
+    <ion-item *ngFor="let response of commentProvider.commentResponses" >
+        <ion-row>
+            <ion-col col-8>
+                <ion-item class="user">
+                    <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text" [readonly]="response.readonly"></ion-textarea>
+                </ion-item> 
+            </ion-col>
+            <ion-col col-2 *ngIf="response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
+                    <ion-icon name="create"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-1 *ngIf="!response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
+                    <ion-icon name="create"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-1>
+                <button ion-button small icon-start clear *ngIf="owner || response.id_user==userProvider.user.id_user && response.readonly" (click)="deleteAlert(response)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-1>
+                <button ion-button small icon-start clear class="save-a" *ngIf="response.id_user==userProvider.user.id_user && !response.readonly" (click)="updateComment(response)">
+                    <ion-icon name="checkmark"></ion-icon>
+                    <div>Save</div>
+                </button>
+            </ion-col>
+            <ion-col col-4>
+                <h6 class="h6-c"><span right>Created at: 10 days ago</span></h6>
+            </ion-col>
+        </ion-row>
     </ion-item>
-    <ion-item>
-        <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
-            <ion-icon name="create"></ion-icon>
-            <div>Edit</div>
-        </button>
-        <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && !response.readonly" (click)="updateComment(response)">
-            <ion-icon name="checkmark"></ion-icon>
-            <div>Save</div>
-        </button>
-        <button ion-button small icon-start clear *ngIf="owner || response.id_user==userProvider.user.id_user && response.readonly" (click)="deleteAlert(response)">
-            <ion-icon name="trash"></ion-icon>
-            <div>Delete</div>
-        </button>
-    </ion-item> 
-</ion-item>
-<ion-item class="user">
-    <ion-input type="text" placeholder="Comment" [(ngModel)]="response.comment_text"></ion-input>
-        </ion-item>
+    <ion-item class="user">
+        <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text"></ion-textarea>
+    </ion-item>
     <ion-item>
         <button ion-button small (click)="createComment()">ANSWER</button>
     </ion-item>
