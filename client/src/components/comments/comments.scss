@@ -2,10 +2,10 @@ comments {
     .comment-crud {
         position: relative;
         top: 3px;
-        right: 66px;
+        /*right: 66px; */
     }
     ion-fab-list.comment-list.fab-list-active {
-        transform: translate(0%, -100%);
+        transform: translate(20%, 25%);
     }
     .cancel-btn{
         width: 70px;
@@ -16,5 +16,33 @@ comments {
         -webkit-box-shadow: inset 0 -1px 0 0 #32db64;
         box-shadow: inset 0 -1px 0 0 orange;
     }
+    img{
+        width: 20px;
+        height: 20px;
+    }
+    button.btn-see.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
+        position: relative;
+        top: -11px;
+        left: -12px;
+    }
+    ion-col.see-answer.col {
+        height: 40px;
+    }
+    .h4-c {
+        position: relative;
+        top: 6px;
+    }
+    .h6-c{
+        color: gray;
+    }
+    ion-row.user-a.row, .h4-a {
+        position: relative;
+        top: 7px;
+    }
+    button.save-a.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
+        position: relative;
+        left: -56px;
+    }
+    
 
 }
