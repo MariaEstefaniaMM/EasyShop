@@ -22,7 +22,13 @@
               </ion-item>
         </ion-col>
         <ion-col>
-          <button ion-button full edge>SHOP</button>
+          <ion-select [(ngModel)]="Payment" okText="SHOP" #mySelect class="select">
+            <ion-option>Cash</ion-option>
+            <ion-option>Credit Card</ion-option>
+            <ion-option>Debit Card</ion-option>
+            <ion-option>Agree with the seller</ion-option>
+          </ion-select>
+          <button ion-button edge full (click)="openSelect()">SHOP</button>
         </ion-col>
       </ion-row>
     </ion-grid>

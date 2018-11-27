@@ -28,23 +28,6 @@ export class HomePage {
 
   }
 
-  showLoader() {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: 'Loading Please Wait...'
-    });
-  
-    this.loading.present();
-  
-    setTimeout(() => {
-      this.navCtrl.push(ProductsPage);
-    }, 1000);
-  
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 5000);
-  }
-
   ionViewDidLoad(){
     this.menuCtrl.enable(false);
    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE_SECONDARY);
@@ -61,7 +44,20 @@ export class HomePage {
     }
   }
 
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  
+   this.loading.present();
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 2000);
+  }
+
   gotoToProducts(){
+    this.presentLoadingDefault();
     if (this.user.username=="" || this.user.password=="" ){
       (this.alertCtrl.create({
         title: 'Error',
@@ -71,7 +67,6 @@ export class HomePage {
   }else this.userProvider.login(this.user).subscribe((res:any) => {
     this.user.username=this.user.username.toLowerCase()
     if(res.status === 200) {
-      this.showLoader()
       this.nativeStorage.setItem('userToken', res.token);
       this.tokenProvider.token=res.token;
       console.log(this.tokenProvider.token, res.token);

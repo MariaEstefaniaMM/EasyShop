@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { Product } from '../../models/product';
 import { ProductProvider } from '../../providers/product/product';
 import { NewProductPage } from '../new-product/new-product';
@@ -18,33 +18,25 @@ export class ProductsPage {
   user;
   category: string = "AllProducts";
   filter:Product[];
+  loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
-              public productProvider: ProductProvider) {
+              public productProvider: ProductProvider, public loadingCtrl: LoadingController) {
         this.user=navParams.get('data');
         console.log(this.user);
-        //this.loadProducts();
   }
 
- /* loadProducts(){
-    this.productProvider.getAllProducts();
-    this.products = this.productProvider.products;
-    this.products=[];
-    for (let i = 0; i < 2; i++) {
-      this.dashboard_arr.push(this.products[this.dashboard_arr.length]);
-    }
-  } */
-
- /* doInfinite(infiniteScroll) {
-    setTimeout( ()=> {
-      this.products=[];
-      for (let i = 0; i < 2; i++) {
-        this.dashboard_arr.push(this.products[this.dashboard_arr.length]);
-      }    
-      infiniteScroll.complete();
-    }, 2000);
-  } */
-
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Loading Products, Please wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 4000);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsPage');
@@ -66,6 +58,7 @@ export class ProductsPage {
     console.log('ionViewWillLoad ProductsPage');
     if(!this.user){
       this.productProvider.getAllProducts();
+      this.presentLoadingDefault();
       //this.products=this.productProvider.products;
       console.log(this.products);
     }else{
