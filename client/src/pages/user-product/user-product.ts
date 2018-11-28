@@ -16,7 +16,7 @@ import { UserProvider } from '../../providers/user/user';
 
 export class UserProductPage {
 
-  product: Product;
+  product;
   owner:boolean;
   comment={
     id_comment:null,
@@ -185,6 +185,13 @@ export class UserProductPage {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
+          this.cart["img_product"]=this.product.img_product;
+          this.cart["name_product"]=this.product.name_product;
+          this.cart["price_product"]=this.product.price_product;          
+          this.cart["des_product"]=this.product.des_product;  
+          this.cart["des_category"]=this.product.des_category;   
+          this.cart["quantity"]=this.product.quantity;  
+          this.cart["username"]=this.product.username;          
           this.cart.id_cart=res.data.id_cart;
           this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
           this.cart={

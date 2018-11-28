@@ -7,7 +7,7 @@
         </div>
     </ion-col>
     <ion-col col-4>
-        <h4 class="h4-c">@Username </h4>
+        <h4 class="h4-c">@{{comment.username}} </h4>
     </ion-col>               
 </ion-row>
 
@@ -37,7 +37,7 @@
         </button>
     </ion-col>
     <ion-col col-4 *ngIf="readonlyComment">
-        <h6 class="h6-c"><span right>Created at: 10 days ago</span></h6>
+        <h6 class="h6-c"><span right>Created at: {{comment.created_at}}</span></h6>
     </ion-col>
     <ion-col col-7 *ngIf="readonlyComment" class="see-answer">
             <ion-item >
@@ -59,7 +59,7 @@
             <h4 class="h4-a">@Username </h4>
         </ion-col>               
     </ion-row>
-    <ion-item *ngFor="let response of commentProvider.commentResponses" >
+    <ion-item *ngFor="let response of commentResponses" >
         <ion-row>
             <ion-col col-8>
                 <ion-item class="user">
@@ -88,7 +88,7 @@
                 </button>
             </ion-col>
             <ion-col col-4>
-                <h6 class="h6-c"><span right>Created at: 10 days ago</span></h6>
+                <h6 class="h6-c"><span right>Created at: {{response.created_at}}</span></h6>
             </ion-col>
         </ion-row>
     </ion-item>

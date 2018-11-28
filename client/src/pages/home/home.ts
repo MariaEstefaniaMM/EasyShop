@@ -62,6 +62,7 @@ export class HomePage {
   }
 
   gotoToProducts(){
+    this.showLoader();
     if (this.user.username=="" || this.user.password=="" ){
       (this.alertCtrl.create({
         title: 'Error',
@@ -71,7 +72,6 @@ export class HomePage {
   }else this.userProvider.login(this.user).subscribe((res:any) => {
     this.user.username=this.user.username.toLowerCase()
     if(res.status === 200) {
-      this.showLoader()
       this.nativeStorage.setItem('userToken', res.token);
       this.tokenProvider.token=res.token;
       console.log(this.tokenProvider.token, res.token);
