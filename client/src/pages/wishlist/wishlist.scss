@@ -28,9 +28,13 @@ page-wishlist {
         font-weight: 500;
         color: white;
     }
-
     ion-list.list.list-md {
         position: relative;
         top: -50px;
+    }
+    .select{
+        /* position: relative; */
+        width: 0px;
+        height: 0px;
     }
 }

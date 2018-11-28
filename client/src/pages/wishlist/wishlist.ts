@@ -1,6 +1,6 @@
 import { CartProvider } from './../../providers/cart/cart';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, Events, Select } from 'ionic-angular';
 
 /**
  * Generated class for the WishlistPage page.
@@ -23,12 +23,17 @@ export class WishlistPage {
     payment_mode:"",
   }
 
+  @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
-              public alertCtrl: AlertController, public toastCtrl: ToastController) {
+              public alertCtrl: AlertController, public toastCtrl: ToastController, public events: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');
+  }
+
+  openSelect(){
+    this.selectRef.open();
   }
 
   shopProduct(){
