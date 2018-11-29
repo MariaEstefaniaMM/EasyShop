@@ -9,7 +9,7 @@
   <ion-content padding>
     <ion-grid>
       <ion-row>
-      <ion-list *ngFor="let product of cartProvider.productsFromCart">
+      <ion-list *ngFor="let product of productsFromCart">
           <products  [product]= "product" [wishlist]="wishlist"></products>
       </ion-list>
       </ion-row>
@@ -22,7 +22,7 @@
               </ion-item>
         </ion-col>
         <ion-col>
-          <ion-select [(ngModel)]="Payment" okText="SHOP" #mySelect class="select">
+          <ion-select [(ngModel)]="cart.payment_mode" okText="SHOP" #mySelect class="select" (ionChange)="shopProduct()">
             <ion-option>Cash</ion-option>
             <ion-option>Credit Card</ion-option>
             <ion-option>Debit Card</ion-option>

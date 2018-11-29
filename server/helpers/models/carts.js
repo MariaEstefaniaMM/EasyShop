@@ -119,7 +119,9 @@ module.exports.createBill=(amount, payment_mode)=>{
 
 module.exports.shop=(amount, payment_mode,id_user)=>{
     return new Promise((res,rej)=>{
-        createBill(amount, payment_mode).then((data)=>{
+        this.createBill(amount, payment_mode).then((data)=>{
+            console.log(data);
+            console.log(bill.add,data.id_bill, id_user);
             db.connect().then((obj)=>{
                 obj.none(bill.add,[data.id_bill, id_user]).then((data)=>{
                     res(data);
