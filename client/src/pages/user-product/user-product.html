@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content
         pullingIcon="arrow-dropdown"
         pullingText="Pull to refresh"
         refreshingSpinner="circles"
         refreshingText="Refreshing...">
       </ion-refresher-content>
-    </ion-refresher>  
+    </ion-refresher> --> 
   <div>
       <ion-card>
         <img class="img-camera" *ngIf="product.img_product"  src="{{product.img_product}}"> 
@@ -32,7 +32,7 @@
               <strong>Category: </strong> {{this.product.des_category}}
             </p>
             <p>
-              <strong>Quantity: </strong>{{this.product.quantity}}
+              <strong>Left in Stock: </strong>{{this.product.quantity}}
             </p>
             <p>
               <strong>Published by: </strong>{{this.product.username}}
@@ -85,7 +85,6 @@
             <ion-row>
               <ion-col col-8>
                 <ion-item>
-                  <!--<ion-input type="text" placeholder="Comment" [(ngModel)]="comment.comment_text"></ion-input> -->
                   <ion-textarea type="text" placeholder="Tap to comment..." row="1" [(ngModel)]="comment.comment_text"></ion-textarea>
             </ion-item>
           </ion-col>
@@ -98,11 +97,8 @@
             </ion-col>
             </ion-row>
             <ion-card-content *ngFor="let comment of productComments"> 
-              <comments [comment]="comment" [owner]="owner"></comments>
+              <comments [comment]="comment" [owner]="owner" (commentDeleted)="deleteFromView($event)"></comments>
             </ion-card-content>
-            <!----<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-                <ion-infinite-scroll-content></ion-infinite-scroll-content>
-              </ion-infinite-scroll>---->
           </ion-card>
   </div>
 </ion-content>

@@ -5,8 +5,9 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CommentProvider {
 
-  serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.43.185:3000";
   productComments=[];
+  //comment_arr=[];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {
     console.log('Hello ProductProvider Provider');
@@ -19,6 +20,9 @@ export class CommentProvider {
         this.productComments=res.comments;
         console.log(this.productComments);
         console.log(res.comments);
+       /* for(let i = 0; i < 2; i++) {
+          this.comment_arr.push(this.productComments[this.comment_arr.length]);
+        }*/
       }else{
         console.log(res.message);
       }
