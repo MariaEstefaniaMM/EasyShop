@@ -17,7 +17,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController, 
 export class WishlistPage {
 
   wishlist:boolean=true;
-
+  productsFromCart;
   cart={
     amount:null,
     payment_mode:"",
@@ -30,6 +30,8 @@ export class WishlistPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');
+    this.productsFromCart=this.cartProvider.productsFromCart.filter((product:any)=>{return product.id_bill===null})
+    console.log(this.cartProvider.productsFromCart, this.productsFromCart)
   }
 
   openSelect(){
@@ -41,10 +43,18 @@ export class WishlistPage {
       console.log('purchase');
         if (res.status==200){
           console.log(res);
-          this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart),1].id_bill=res.id_bill;
+          this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.toast(res.message);
+          this.cart={
+            amount:null,
+            payment_mode:"",
+          }
       }else{
         this.errorAlert(res.message);
+        this.cart={
+          amount:null,
+          payment_mode:"",
+        }
       }
       }, (err) => {
         this.errorAlert(JSON.stringify(err));         
