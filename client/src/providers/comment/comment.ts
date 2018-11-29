@@ -13,18 +13,22 @@ export class CommentProvider {
   }
 
   getProductComments(id_product){
-    return this.http.get(this.serverUrl+'/comments/getProductComments?id_product='+id_product, {headers:new HttpHeaders().set("Authorization", "Bearer "+ this.tokenProvider.token)})
-    .subscribe((res:any) => {
-      if (res.status==200){
-        this.productComments=res.comments;
-        console.log(this.productComments);
-        console.log(res.comments);
-      }else{
-        console.log(res.message);
-      }
-    }), (err) => {
-      console.log(err);
-    }
+    return new Promise ((resolve,reject)=>{
+        this.http.get(this.serverUrl+'/comments/getProductComments?id_product='+id_product, {headers:new HttpHeaders().set("Authorization", "Bearer "+ this.tokenProvider.token)})
+        .subscribe((res:any) => {
+          if (res.status==200){
+            this.productComments=res.comments;
+            resolve(this.productComments);
+            console.log(this.productComments);
+            console.log(res.comments);
+          }else{
+            reject(res.message);
+          }
+        }), (err) => {
+          reject(err);
+        }}
+    )
+    
   }
 
   createComment(comment){

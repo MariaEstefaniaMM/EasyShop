@@ -8,11 +8,11 @@
     <h4>{{product.name_product}}</h4>
     <h5>${{product.price_product}}</h5>
   </button>
-    <button *ngIf="wishlist" ion-button style="background-color: orange" (click)="editAlert(product)">
+    <button *ngIf="wishlist && !bill" ion-button style="background-color: orange" (click)="editAlert(product)">
       <ion-icon name="trash" ></ion-icon>
        EDIT
     </button>
-    <button *ngIf="wishlist" ion-button color="danger" (click)="deleteAlertWishList(product)">
+    <button *ngIf="wishlist && !bill" ion-button color="danger" (click)="deleteAlertWishList(product)">
         <ion-icon name="trash" ></ion-icon>
         DELETE
     </button>
