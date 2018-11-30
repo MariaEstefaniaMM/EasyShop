@@ -23,6 +23,7 @@ export class WishlistPage {
     payment_mode:"",
   }
   bill;
+  total: number=0;
 
   @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
@@ -40,6 +41,9 @@ export class WishlistPage {
     console.log('ionViewDidLoad WishlistPage');
     if (!this.bill){
     this.productsFromCart=this.cartProvider.productsFromCart.filter((product:any)=>{return product.id_bill===null})
+    }
+    for(var i=0; i<this.productsFromCart.length; i++){
+      this.total=this.total+parseInt(this.productsFromCart[i].price_product)*this.productsFromCart[i].product_quantity;
     } 
     console.log(this.cartProvider.productsFromCart, this.productsFromCart);
     console.log(this.bill);
@@ -48,7 +52,8 @@ export class WishlistPage {
 
   openModal(){  
     const myModalOptions: ModalOptions = {
-      enableBackdropDismiss: false
+      enableBackdropDismiss: false,
+      showBackdrop: false
     }
 
     const modalCart = this.modalCtrl.create('ModalCartPage', myModalOptions);
@@ -60,6 +65,8 @@ export class WishlistPage {
   }
 
   shopProduct(){
+    console.log('hii');
+
     this.cartProvider.shop(this.cart).subscribe((res:any) => {
       console.log('purchase');
         if (res.status==200){
@@ -67,6 +74,10 @@ export class WishlistPage {
           console.log(res);
           //this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.cartProvider.getUserCart();
+          this.productsFromCart=[]
+          this.total=0
+          //console.log(this.cartProvider.productsFromCart.indexOf(this.cart));
+         // this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.toast(res.message);
           this.cart={
             amount:null,
@@ -85,6 +96,14 @@ export class WishlistPage {
       );
   }
 
+  deleteFromView(product){
+    if(this.productsFromCart){
+      if(this.productsFromCart.indexOf(product)>-1){
+            this.productsFromCart.splice(this.productsFromCart.indexOf(product),1);
+          }
+    }
+    
+  }
   errorAlert(message){
     (this.alertCtrl.create({
       title: 'Error',
@@ -107,3 +126,4 @@ export class WishlistPage {
   }
 
 }
+

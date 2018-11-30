@@ -1,7 +1,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>user-bills</ion-title>
+    <ion-row>
+        <ion-col col-1>
+            <menu></menu>
+          </ion-col>
+          <ion-col>
+            <ion-title>Bills</ion-title>
+          </ion-col>
+    </ion-row>
+    
   </ion-navbar>
 
 </ion-header>
@@ -10,10 +18,12 @@
 <ion-content padding>
   <ion-list>
     <div *ngFor="let bill of bills">
-    <ion-item  *ngIf="bill" (click)="goToBillDetail(bill)" >
-        <h4>{{bill[0].id_bill}}</h4>
-        <h4>{{bill[0].amount}}</h4>
-    </ion-item>
+      <ion-card *ngIf="bill"(click)="goToBillDetail(bill)">
+        <ion-item >
+          <h4>Payment ID: {{bill[0].id_bill}}</h4>
+          <h4>{{bill[0].amount}}</h4>
+        </ion-item>
+      </ion-card>
     </div>
   </ion-list>
 

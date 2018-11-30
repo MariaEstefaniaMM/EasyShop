@@ -31,8 +31,7 @@ export class MyApp {
       { title: 'My Cart', component: WishlistPage, icon: 'cart' },
       { title: 'My Account', component: UserAccountPage, icon: 'contact' },
       { title: 'New Product', component: NewProductPage, icon: 'add' },
-      { title: 'Logout', component: HomePage, icon: 'log-out' },
-      { title: 'Bills', component: UserBillsPage, icon: 'log-out' },      
+      { title: 'Logout', component: HomePage, icon: 'log-out' }     
     ];
   }
 
