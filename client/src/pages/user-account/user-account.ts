@@ -10,6 +10,7 @@ import { TokenProvider } from './../../providers/token/token';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { WishlistPage } from '../wishlist/wishlist';
+import { UserBillsPage } from '../user-bills/user-bills';
 
 @IonicPage()
 @Component({
@@ -42,6 +43,10 @@ export class UserAccountPage {
 
   goToWishlist(){
     this.navCtrl.push(WishlistPage);
+  }
+
+  goToBill(){
+    this.navCtrl.push(UserBillsPage);
   }
 
   

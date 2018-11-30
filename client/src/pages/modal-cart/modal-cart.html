@@ -5,16 +5,33 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>modalCart</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="closeModal()">Close</button>
-    </ion-buttons>
+    <ion-row>
+      <ion-col col-9>
+        <ion-title>PAYMENT COMPLETE</ion-title>
+      </ion-col>
+      <ion-col>
+        <button ion-button end clear (click)="closeModal()" style="color: white">Close</button>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-    <p class="p-su">Do you want change your address? <a button (click)="goToEditProfile()" style="color: gray"> Edit your address now!</a></p>
-</ion-content>
+      <ion-card ion-button clear>
+          <img style="width:356px; height: 90px; position: relative; top: -40px" src="/assets/imgs/check.jpg"/>
+          <div class="card-title"><strong>Congratulations!</strong></div>
+          <div class="card-subtitle">Payment complete  </div>
+      </ion-card>
+      <div align="center">
+      <ion-item>
+        <h2>A confirmation email has been sent to: </h2>
+        <h2 align="center"><strong>{{userProvider.user.user_email}}</strong></h2>
+      </ion-item>
+      <ion-item>
+        <h2>Your products will be delivered to:</h2>
+        <h2 align="center"><strong>{{userProvider.user.user_address}}</strong></h2>
+      </ion-item>
+  </div>
+<ion-content>

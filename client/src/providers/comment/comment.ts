@@ -5,7 +5,8 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CommentProvider {
 
-  serverUrl:string = "http://localhost:3000";
+  //serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.43.114:3000";
   productComments=[];
   //comment_arr=[];
 

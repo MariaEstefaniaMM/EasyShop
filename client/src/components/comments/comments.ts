@@ -112,6 +112,7 @@ export class CommentsComponent {
           this.readonlyComment=true; 
           comment.readonly=true;  
           this.toast(res.message);
+          this.showLoader();
       }else{
         this.comment=this.originalComment;
         this.errorAlert(res.message);

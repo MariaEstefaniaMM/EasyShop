@@ -2,7 +2,7 @@ import { CartProvider } from './../../providers/cart/cart';
 import { NewProductPage } from './../../pages/new-product/new-product';
 import { ProductsPage } from './../../pages/products/products';
 import { Product } from './../../models/product';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AlertController, ToastController, NavController } from 'ionic-angular';
 import { UserProductPage } from '../../pages/user-product/user-product';
 import { ProductProvider } from '../../providers/product/product';
@@ -21,6 +21,7 @@ export class ProductsComponent {
   @Input() user: boolean;
   @Input() wishlist: boolean;
   @Input() bill: boolean;
+  @Output() productDeleted: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController,
               public productProvider: ProductProvider, public cartProvider: CartProvider) {
@@ -210,6 +211,7 @@ export class ProductsComponent {
           console.log(res);
           this.cartProvider.productsFromCart.splice(this.cartProvider.productsFromCart.indexOf(product),1);
           this.toast('Product deleted');
+          this.productDeleted.emit(product);
       }else{
         this.errorAlert(res.message);
       }

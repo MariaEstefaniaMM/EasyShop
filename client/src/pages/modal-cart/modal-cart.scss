@@ -1,3 +1,65 @@
 page-modal-cart {
+    .inputs {
+        position: relative;
+        top: 28px;
+    }
+    .toolbar-background-md {
+        border-color: orange;
+        background: #f8f8f8;
+        background-color: orange;
+    }
+    .menu {
+        position: relative;
+        left: -45px;
+    }
+    .toolbar-title-md {
+        padding: 0 12px;
+        font-size: 2rem;
+        font-weight: 500;
+        color: white;
+    }
+    button.disable-hover.button.button-md.button-default.button-default-md.button-full.button-full-md {
+        background-color: black;
+    }
+    
+
+        ion-card {
+          position: relative;
+          text-align: center;
+        }
+        .card-title {
+          position: absolute;
+          top: 50%;
+          font-size: 1.7em;
+          width: 100%;
+          font-weight: bold;
+          color: rgb(255, 155, 23);
+          left: -2px;
+        } 
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          top: 76%;
+          width: 100%;
+          color: rgb(0, 0, 0);
+        }
+      
+      .card-background-page {
+        position: relative;
+        top: 76px;
+    }
+    .card-background-page ion-card {
+        position: relative;
+        text-align: center;
+        width: auto;
+        height: 160px;
+    }
+    ion-card.disable-hover.card.card-md.button.button-md.button-clear.button-clear-md {
+        width: 363px;
+        height: 139px;
+        position: relative;
+        left: -29px;
+        top: -17px;
+    }
 
 }

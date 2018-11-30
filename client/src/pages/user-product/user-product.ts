@@ -7,6 +7,7 @@ import { Product } from './../../models/product';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { WishlistPage } from '../wishlist/wishlist';
 
 @IonicPage()
 @Component({
@@ -175,7 +176,8 @@ export class UserProductPage {
     console.log(this.cart);
     this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
       if (res.status==200){
-          console.log(res);    
+          console.log(res);   
+          this.showAlert(); 
           this.toast(res.message);
           this.cart["img_product"]=this.product.img_product;
           this.cart["name_product"]=this.product.name_product;
@@ -186,6 +188,8 @@ export class UserProductPage {
           this.cart["username"]=this.product.username;
           this.cart["id_bill"]=null;
           this.cart.id_cart=res.data.id_cart;
+          console.log(this.product.quantity,this.cart.product_quantity)
+          this.product.quantity=this.product.quantity-this.cart.product_quantity
           this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
           this.cart={
             id_cart:null,
@@ -195,6 +199,7 @@ export class UserProductPage {
           };
       }else{
         this.errorAlert(res.message);
+        //this.soldOutAlert()
       }
     }), (err) => {
       this.errorAlert(JSON.stringify(err)); 
@@ -207,6 +212,29 @@ export class UserProductPage {
       title: 'Error',
       subTitle: message,
       buttons: ['OK']
+    })).present();  
+  }
+
+  soldOutAlert(){
+    (this.alertCtrl.create({
+      title: 'Sold Out!',
+      buttons: ['OK']
+    })).present();  
+  }
+
+  showAlert(){
+    (this.alertCtrl.create({
+      title: 'Product Added!',
+      buttons: [
+        {
+          text: 'Continue Shopping',
+          handler: ()=>{ console.log('ok'); }
+        },
+        {
+          text: 'Go to My Cart',
+          handler: ()=>{ this.navCtrl.push(WishlistPage); }
+        }
+      ]
     })).present();  
   }
 

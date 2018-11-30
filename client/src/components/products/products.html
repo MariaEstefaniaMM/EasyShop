@@ -59,12 +59,12 @@
           <h4>{{product.name_product}}</h4>
           <h5>${{product.price_product}}</h5>
         </button>
-  <ion-item-options side="right" *ngIf="!user && !wishlist" >
+  <!--<ion-item-options side="right" *ngIf="!user && !wishlist" >
     <button ion-button color="primary" (click)="addAlert()">
       <ion-icon name="cart" ></ion-icon>
       ADD TO MY CART
     </button>
-  </ion-item-options>
+  </ion-item-options>-->
   <ion-item-options side="right" *ngIf="user && !wishlist">
     <button ion-button style="background-color: orange" (click)="goToEditProduct(product)">
         <ion-icon name="trash" ></ion-icon>

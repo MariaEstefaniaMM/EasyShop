@@ -1,7 +1,7 @@
 import { WishlistPage } from './../wishlist/wishlist';
 import { CartProvider } from './../../providers/cart/cart';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -12,11 +12,13 @@ export class UserBillsPage {
 
   bills;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
+              public menuCtrl: MenuController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserBillsPage');
+    this.menuCtrl.enable(true);
     this.groupBy(this.cartProvider.productsFromCart, i=>i.id_bill);
   }
 
