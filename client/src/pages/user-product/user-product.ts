@@ -184,6 +184,7 @@ export class UserProductPage {
           this.cart["des_category"]=this.product.des_category;
           this.cart["quantity"]=this.product.quantity;
           this.cart["username"]=this.product.username;
+          this.cart["id_bill"]=null;
           this.cart.id_cart=res.data.id_cart;
           this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
           this.cart={

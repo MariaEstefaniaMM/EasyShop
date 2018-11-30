@@ -8,13 +8,13 @@
     <h5>${{product.price_product}}</h5>
   </button>
   <ion-item-options side="right">
-    <button ion-button style="background-color: orange" (click)="deleteProduct()">
+    <button ion-button icon-start style="background-color: orange" (click)="deleteProduct()">
         <ion-icon name="trash" ></ion-icon>
-         EDIT
+         <div>EDIT</div>
     </button>
-    <button ion-button color="danger" (click)="deleteAlert(product)">
+    <button ion-button icon-start color="danger" (click)="deleteAlert(product)">
         <ion-icon name="trash" ></ion-icon>
-        DELETE
+        <div>DELETE</div>
     </button>
   </ion-item-options>
 </ion-item-sliding>

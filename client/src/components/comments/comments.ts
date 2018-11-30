@@ -160,6 +160,23 @@ export class CommentsComponent {
   }
   }
 
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      console.log('created')
+    }, 1000);
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 2000);
+  }
+
   errorAlert(message){
     (this.alertCtrl.create({
       title: 'Error',

@@ -6,7 +6,7 @@ import { Product } from '../../models/product';
 @Injectable()
 export class ProductProvider {
 
-  serverUrl:string = "http://192.168.43.185:3000";
+  serverUrl:string = "http://localhost:3000";
   products:Product[];
   userProducts: Product[];
   category=[

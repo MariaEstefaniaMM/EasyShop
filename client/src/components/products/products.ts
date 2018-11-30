@@ -14,6 +14,8 @@ import { ProductProvider } from '../../providers/product/product';
 export class ProductsComponent {
 
   text: string;
+  total:any;
+  Subtotal:any;
   originalProduct;
   @Input() product: Product;
   @Input() user: boolean;
@@ -24,6 +26,16 @@ export class ProductsComponent {
     console.log('Hello ProductsComponent Component',this.product);
     this.text = 'Hello World';
     //this.originalProduct=JSON.parse(JSON.stringify(this.product));
+  }
+
+  getSubtotal(){
+    this.Subtotal = this.Subtotal + this.total;
+    return this.Subtotal;
+  }
+
+  getTotal(product){
+    this.total= product.product_quantity*product.price_product;
+    return this.total;
   }
 
   goToProduct(product){

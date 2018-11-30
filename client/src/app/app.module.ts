@@ -29,6 +29,8 @@ import { UserProductPage } from '../pages/user-product/user-product';
 import { CommentsComponent } from '../components/comments/comments';
 import { CommentProvider } from '../providers/comment/comment';
 import { CartProvider } from '../providers/cart/cart';
+import { ModalCartPage } from '../pages/modal-cart/modal-cart';
+import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,14 @@ import { CartProvider } from '../providers/cart/cart';
     UserProductsComponent,
     NewProductPage, 
     UserProductPage,
-    CommentsComponent
+    CommentsComponent,
+    //ModalCartPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    ModalCartPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +72,8 @@ import { CartProvider } from '../providers/cart/cart';
     ProductsComponent,
     NewProductPage,
     UserProductPage,
-    CommentsComponent
+    CommentsComponent,
+    ModalCartPage
   ],
   providers: [
     StatusBar,
