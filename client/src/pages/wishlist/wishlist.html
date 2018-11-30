@@ -10,14 +10,14 @@
     <ion-grid>
       <ion-row>
       <ion-list *ngFor="let product of productsFromCart">
-          <products  [product]= "product" [wishlist]="wishlist"></products>
+          <products  [product]= "product" [wishlist]="wishlist" [bill]="bill"></products>
       </ion-list>
       </ion-row>
       <ion-row>
         <ion-col col-12>
             <ion-item left>
                 <p>
-                  SubTotal:<strong class="st">$100</strong> 
+                  Total:<strong class="st">{{this.cart.amount}}</strong> 
                 </p>
               </ion-item>
         </ion-col>
@@ -28,7 +28,7 @@
             <ion-option>Debit Card</ion-option>
             <ion-option>Agree with the seller</ion-option>
           </ion-select>
-          <button ion-button edge full (click)="openSelect()">SHOP</button>
+          <button *ngIf="!bill"  ion-button edge full (click)="openSelect()">SHOP</button>
         </ion-col>
       </ion-row>
     </ion-grid>

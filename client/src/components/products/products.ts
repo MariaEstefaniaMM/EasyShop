@@ -20,6 +20,7 @@ export class ProductsComponent {
   @Input() product: Product;
   @Input() user: boolean;
   @Input() wishlist: boolean;
+  @Input() bill: boolean;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController,
               public productProvider: ProductProvider, public cartProvider: CartProvider) {

@@ -37,11 +37,11 @@
     </ion-row>  
   </button>
   <ion-buttons>
-    <button icon-start ion-button style="background-color: orange" (click)="editAlert(product)">
+    <button *ngIf="wishlist && !bill" icon-start ion-button style="background-color: orange" (click)="editAlert(product)">
       <ion-icon name="trash" ></ion-icon>
        EDIT
     </button>
-    <button *ngIf="wishlist"  icon-start ion-button color="danger" (click)="deleteAlertWishList(product)">
+    <button *ngIf="wishlist && !bill" icon-start ion-button color="danger" (click)="deleteAlertWishList(product)">
         <ion-icon name="trash" ></ion-icon>
         DELETE
     </button>
@@ -49,7 +49,7 @@
   </ion-item>
 </ion-item-sliding>
   
-<ion-item-sliding *ngIf="!user && !wishlist">
+<ion-item-sliding *ngIf="!wishlist || user">
     <ion-item>
         <button ion-item (click)="goToProduct(product)">
           <ion-thumbnail item-start>
@@ -59,7 +59,7 @@
           <h4>{{product.name_product}}</h4>
           <h5>${{product.price_product}}</h5>
         </button>
-  <ion-item-options side="right"  >
+  <ion-item-options side="right" *ngIf="!user && !wishlist" >
     <button ion-button color="primary" (click)="addAlert()">
       <ion-icon name="cart" ></ion-icon>
       ADD TO MY CART

@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>user-bills</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <div *ngFor="let bill of bills">
+    <ion-item  *ngIf="bill" (click)="goToBillDetail(bill)" >
+        <h4>{{bill[0].id_bill}}</h4>
+        <h4>{{bill[0].amount}}</h4>
+    </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>

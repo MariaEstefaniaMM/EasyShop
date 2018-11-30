@@ -31,6 +31,8 @@ import { CommentProvider } from '../providers/comment/comment';
 import { CartProvider } from '../providers/cart/cart';
 import { ModalCartPage } from '../pages/modal-cart/modal-cart';
 import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
+import { UserBillsPage } from '../pages/user-bills/user-bills';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
     UserProductPage,
     CommentsComponent,
     //ModalCartPage
+    UserBillsPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
     NewProductPage,
     UserProductPage,
     CommentsComponent,
-    ModalCartPage
+    ModalCartPage,
+    UserBillsPage
   ],
   providers: [
     StatusBar,

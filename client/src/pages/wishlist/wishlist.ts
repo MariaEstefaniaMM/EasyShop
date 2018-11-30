@@ -22,17 +22,28 @@ export class WishlistPage {
     amount:null,
     payment_mode:"",
   }
+  bill;
 
   @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
-              public alertCtrl: AlertController, public toastCtrl: ToastController, public events: Events, 
+              public alertCtrl: AlertController, public toastCtrl: ToastController, public events: Events,
               public modalCtrl: ModalController) {
+                console.log(navParams.data)
+                if(navParams.data[0]){
+                this.bill=true
+                this.productsFromCart=navParams.data;
+                this.cart.amount=this.productsFromCart[0].amount
+                console.log(this.bill);}
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WishlistPage');
+    if (!this.bill){
     this.productsFromCart=this.cartProvider.productsFromCart.filter((product:any)=>{return product.id_bill===null})
-    console.log(this.cartProvider.productsFromCart, this.productsFromCart)
+    } 
+    console.log(this.cartProvider.productsFromCart, this.productsFromCart);
+    console.log(this.bill);
+
   }
 
   openModal(){  
@@ -56,6 +67,8 @@ export class WishlistPage {
           console.log(res);
           //this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.cartProvider.getUserCart();
+         // console.log(this.cartProvider.productsFromCart.indexOf(this.cart));
+         // this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.toast(res.message);
           this.cart={
             amount:null,

@@ -48,14 +48,14 @@ export class UserProductPage {
       this.owner=true;
     }  
     console.log(this.owner);    
-    this.commentProvider.getProductComments(this.product.id_product);
-    this.showLoader();
+    this.commentProvider.getProductComments(this.product.id_product).then((data:any)=>{
+        this.productComments= data.filter((comment:any)=>{return comment.id_first_comment===null})      
+    })
   }
 
   showComments(){
     this.show=!this.show;
-    this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
-    //this.productComments.reverse();
+    //this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
     console.log(this.productComments)
     console.log(this.commentProvider.productComments)
   }
