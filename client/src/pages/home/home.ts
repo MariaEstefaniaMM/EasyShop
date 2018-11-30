@@ -20,6 +20,7 @@ export class HomePage {
     password:""
   }
   loading:any;
+  loadingP:any;
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider,
     private nativeStorage: NativeStorage, private tokenProvider:TokenProvider,
@@ -52,8 +53,20 @@ export class HomePage {
    this.loading.present();
   
     setTimeout(() => {
-      this.loading.dismiss();
+        this.loading.dismiss();
     }, 2000);
+  }
+
+  loadingProducts() {
+    this.loadingP = this.loadingCtrl.create({
+      content: 'Loading Products, Please wait...'
+    });
+  
+    this.loadingP.present();
+  
+    setTimeout(() => {
+      this.loadingP.dismiss();
+    }, 4000);
   }
 
   gotoToProducts(){
@@ -67,6 +80,7 @@ export class HomePage {
   }else this.userProvider.login(this.user).subscribe((res:any) => {
     this.user.username=this.user.username.toLowerCase()
     if(res.status === 200) {
+      this.loadingProducts();
       this.nativeStorage.setItem('userToken', res.token);
       this.tokenProvider.token=res.token;
       console.log(this.tokenProvider.token, res.token);

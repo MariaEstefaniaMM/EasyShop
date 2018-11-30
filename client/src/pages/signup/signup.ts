@@ -79,19 +79,14 @@ export class SignupPage {
 
   showLoader() {
     this.loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: 'Loading Please Wait...'
+      content: 'Please wait...'
     });
   
-    this.loading.present();
-  
-    setTimeout(() => {
-      this.navCtrl.push(HomePage);
-    }, 1000);
+   this.loading.present();
   
     setTimeout(() => {
       this.loading.dismiss();
-    }, 3000);
+    }, 2000);
   }
 
   ionViewDidLoad() {
@@ -112,6 +107,7 @@ export class SignupPage {
   }
 
   signUp() {
+    this.showLoader(); 
     console.log(this.user)
     if (this.user.name=="" || this.user.lastName=="" || this.user.email=="" || this.user.password=="" || this.user.username==""){
       this.errorAlert('Please fill all the fields');
@@ -120,8 +116,7 @@ export class SignupPage {
       this.user.username=this.user.username.toLowerCase()
     this.userProvider.createUser(this.user).subscribe((res:any) => {
       if (res.status==200){
-          console.log(res);
-          this.showLoader();    
+          console.log(res);   
           this.presentToast(res.message);
           this.navCtrl.setRoot(HomePage);
       }else{

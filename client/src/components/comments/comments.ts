@@ -1,5 +1,5 @@
 import { CommentProvider } from './../../providers/comment/comment';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ToastController, AlertController, LoadingController, NavController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
@@ -24,6 +24,7 @@ export class CommentsComponent {
   commentResponses;
   @Input() owner;
   @Input() comment;
+  @Output() commentDeleted: EventEmitter<any> = new EventEmitter<any>();
   ownerComment:boolean;
 
   constructor(private alertCtrl: AlertController, public toastCtrl: ToastController, public commentProvider: CommentProvider,
@@ -86,6 +87,13 @@ export class CommentsComponent {
           if(this.commentProvider.productComments.indexOf(comment)>-1){
               this.commentProvider.productComments.splice(this.commentProvider.productComments.indexOf(comment),1);
           }
+          if(this.commentResponses){
+            if(this.commentResponses.indexOf(comment)>-1){
+            this.commentResponses.splice(this.commentProvider.productComments.indexOf(comment),1);
+          }
+          }
+          
+          this.commentDeleted.emit(comment);
           this.toast('Comment deleted');
       }else{
         this.errorAlert(res.message);
@@ -104,7 +112,6 @@ export class CommentsComponent {
           this.readonlyComment=true; 
           comment.readonly=true;  
           this.toast(res.message);
-          this.showLoader();
       }else{
         this.comment=this.originalComment;
         this.errorAlert(res.message);
@@ -126,7 +133,7 @@ export class CommentsComponent {
     if(this.response.comment_text!==""){
     this.response.id_product=this.comment.id_product;
     this.response.id_first_comment=this.comment.id_comment;
-    this.response.id_user=this.comment.id_user;
+    this.response.id_user=this.userProvider.user.id_user;
     console.log(this.response);
     this.commentProvider.createComment(this.response).subscribe((res:any) => {
       if (res.status==200){
@@ -134,7 +141,9 @@ export class CommentsComponent {
           this.toast(res.message);
           this.response.id_comment=res.data.id_comment;
           this.response["readonly"]=true;
+          this.response["username"]=this.comment.username;
           this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.response)));
+          this.commentResponses.push(JSON.parse(JSON.stringify(this.response)));
           this.response={
             id_comment:null,
             id_product:null,
@@ -151,7 +160,6 @@ export class CommentsComponent {
   }
   }
 
-  
   showLoader() {
     this.loading = this.loadingCtrl.create({
       spinner: 'hide',
@@ -166,9 +174,8 @@ export class CommentsComponent {
   
     setTimeout(() => {
       this.loading.dismiss();
-    }, 3000);
+    }, 2000);
   }
-
 
   errorAlert(message){
     (this.alertCtrl.create({

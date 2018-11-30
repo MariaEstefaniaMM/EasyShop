@@ -30,7 +30,8 @@ import { CommentsComponent } from '../components/comments/comments';
 import { CommentProvider } from '../providers/comment/comment';
 import { CartProvider } from '../providers/cart/cart';
 import { UserBillsPage } from '../pages/user-bills/user-bills';
-
+import { ModalCartPage } from '../pages/modal-cart/modal-cart';
+import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
 
 @NgModule({
   declarations: [
@@ -49,11 +50,13 @@ import { UserBillsPage } from '../pages/user-bills/user-bills';
     UserProductPage,
     CommentsComponent,
     UserBillsPage
+    //ModalCartPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    ModalCartPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,7 +75,8 @@ import { UserBillsPage } from '../pages/user-bills/user-bills';
     NewProductPage,
     UserProductPage,
     CommentsComponent,
-    UserBillsPage
+    UserBillsPage,
+    ModalCartPage
   ],
   providers: [
     StatusBar,

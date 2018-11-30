@@ -7,6 +7,7 @@ export class CommentProvider {
 
   serverUrl:string = "http://localhost:3000";
   productComments=[];
+  //comment_arr=[];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {
     console.log('Hello ProductProvider Provider');

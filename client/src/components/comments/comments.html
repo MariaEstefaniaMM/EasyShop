@@ -1,13 +1,7 @@
 <ion-row>
-    <ion-col col-2>
-        <div class="div-img" align="center">
-            <ion-avatar item-start>
-                <img src="/assets/imgs/user.png">
-            </ion-avatar>
-        </div>
-    </ion-col>
     <ion-col col-4>
-        <h4 class="h4-c">@{{comment.username}} </h4>
+        <h4 class="h4-c">@{{this.comment.username}}</h4>
+       <!-- <h4 class="h4-c">@{{comment.username}} </h4>-->
     </ion-col>               
 </ion-row>
 
@@ -19,7 +13,7 @@
     </ion-col>
     <ion-col col-2 *ngIf="readonlyComment">
         <ion-fab bottom right edge>
-            <button ion-fab mini class="comment-crud" *ngIf="comment.id_user==userProvider.user.id_user" ><ion-icon name="md-more"></ion-icon></button>
+            <button ion-fab mini class="comment-crud" *ngIf="owner || comment.id_user==userProvider.user.id_user" ><ion-icon name="md-more"></ion-icon></button>
             <ion-fab-list side="top" class="comment-list">
                 <button  *ngIf="comment.id_user==userProvider.user.id_user  && readonlyComment" class="fab-comment" ion-fab (click)="enableInput(comment)"><ion-icon name="create"></ion-icon></button>
                 <button *ngIf="owner || comment.id_user==userProvider.user.id_user && readonlyComment"  class="fab-comment"  ion-fab (click)="deleteAlert(comment)"><ion-icon name="trash"></ion-icon></button>
@@ -31,13 +25,11 @@
            <ion-icon name="checkmark"></ion-icon>
         </button> 
     </ion-col>
-    <ion-col *ngIf="comment.id_user==userProvider.user.id_user && !readonlyComment">
-        <button class="cancel-btn" ion-fab icon-start (click)="cancelComment()">
-            <ion-icon name="close"></ion-icon>
-        </button>
-    </ion-col>
-    <ion-col col-4 *ngIf="readonlyComment">
-        <h6 class="h6-c"><span right>Created at: {{comment.created_at}}</span></h6>
+    <ion-col col-5 *ngIf="readonlyComment">
+        <h6 class="h6-c">
+            <ion-datetime *ngIf="!comment.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_created_at"></ion-datetime>
+            <ion-datetime *ngIf="comment.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_updated_at"></ion-datetime>
+        </h6>
     </ion-col>
     <ion-col col-7 *ngIf="readonlyComment" class="see-answer">
             <ion-item >
@@ -47,19 +39,12 @@
 </ion-row>
 
 <div *ngIf="show" >
-    <ion-row class="user-a">
-        <ion-col col-2>
-            <div class="div-img" align="center">
-                <ion-avatar item-start>
-                    <img src="/assets/imgs/user.png">
-                </ion-avatar>
-            </div>
-        </ion-col>
-        <ion-col col-4>
-            <h4 class="h4-a">@Username </h4>
-        </ion-col>               
-    </ion-row>
     <ion-item *ngFor="let response of commentResponses" >
+        <ion-row class="user-a">
+            <ion-col col-4>
+                <h4 class="h4-a" >@{{this.response.username}}</h4>
+            </ion-col>               
+        </ion-row>
         <ion-row>
             <ion-col col-8>
                 <ion-item class="user">
@@ -87,8 +72,11 @@
                     <div>Save</div>
                 </button>
             </ion-col>
-            <ion-col col-4>
-                <h6 class="h6-c"><span right>Created at: {{response.created_at}}</span></h6>
+            <ion-col col-5 *ngIf="!response.readonly">
+                <h6 class="h6-c">
+                    <ion-datetime *ngIf="!response.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="response.comment_created_at"></ion-datetime>
+                    <ion-datetime *ngIf="response.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="response.comment_updated_at"></ion-datetime>
+                </h6>
             </ion-col>
         </ion-row>
     </ion-item>

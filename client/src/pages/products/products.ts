@@ -26,18 +26,6 @@ export class ProductsPage {
         console.log(this.user);
   }
 
-  presentLoadingDefault() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Loading Products, Please wait...'
-    });
-  
-    this.loading.present();
-  
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 4000);
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsPage');
     this.menuCtrl.enable(true);
@@ -58,7 +46,6 @@ export class ProductsPage {
     console.log('ionViewWillLoad ProductsPage');
     if(!this.user){
       this.productProvider.getAllProducts();
-      this.presentLoadingDefault();
       //this.products=this.productProvider.products;
       console.log(this.products);
     }else{

@@ -1,6 +1,6 @@
 import { CartProvider } from './../../providers/cart/cart';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, Events, Select } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, Events, Select, ModalController, ModalOptions } from 'ionic-angular';
 
 /**
  * Generated class for the WishlistPage page.
@@ -26,7 +26,8 @@ export class WishlistPage {
 
   @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
-              public alertCtrl: AlertController, public toastCtrl: ToastController, public events: Events) {
+              public alertCtrl: AlertController, public toastCtrl: ToastController, public events: Events,
+              public modalCtrl: ModalController) {
                 console.log(navParams.data)
                 if(navParams.data[0]){
                 this.bill=true
@@ -45,6 +46,15 @@ export class WishlistPage {
 
   }
 
+  openModal(){  
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    }
+
+    const modalCart = this.modalCtrl.create('ModalCartPage', myModalOptions);
+    modalCart.present();
+  }
+
   openSelect(){
     this.selectRef.open();
   }
@@ -53,9 +63,10 @@ export class WishlistPage {
     this.cartProvider.shop(this.cart).subscribe((res:any) => {
       console.log('purchase');
         if (res.status==200){
+          this.openModal();
           console.log(res);
-          console.log(this.cartProvider.productsFromCart.indexOf(this.cart));
-          this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
+          //this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
+          this.cartProvider.getUserCart();
           this.toast(res.message);
           this.cart={
             amount:null,

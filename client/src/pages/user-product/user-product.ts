@@ -5,7 +5,7 @@ import { ProductProvider } from './../../providers/product/product';
 import { NewProductPage } from './../new-product/new-product';
 import { Product } from './../../models/product';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
@@ -34,12 +34,11 @@ export class UserProductPage {
   }
   productComments;
   show:boolean=false;
-  //productComments;
-  //commentResponses;
+  loading:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public toastCtrl: ToastController,
               public productProvider: ProductProvider, public userProvider: UserProvider, public commentProvider: CommentProvider,
-              public cartProvider:CartProvider) {
+              public cartProvider:CartProvider, public loadingCtrl: LoadingController) {
       this.product=this.navParams.data;
   }
 
@@ -52,6 +51,7 @@ export class UserProductPage {
     this.commentProvider.getProductComments(this.product.id_product).then((data:any)=>{
         this.productComments= data.filter((comment:any)=>{return comment.id_first_comment===null})      
     })
+    this.showLoader();
   }
 
   showComments(){
@@ -133,15 +133,17 @@ export class UserProductPage {
   createComment(){
     if (this.comment.comment_text!==""){
     this.comment.id_product=this.product.id_product;
-    this.comment.id_user=this.product.id_user;
+    this.comment.id_user=this.userProvider.user.id_user;
     console.log(this.comment);
     this.commentProvider.createComment(this.comment).subscribe((res:any) => {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
           this.comment.id_comment=res.data.id_comment;
+          this.comment["username"]=this.userProvider.user.username;
           this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.comment)));
           this.productComments.push(JSON.parse(JSON.stringify(this.comment)));
+          //this.productComments.reverse();
           this.comment={
             id_comment:null,
             id_product:null,
@@ -159,6 +161,15 @@ export class UserProductPage {
     }
   }
 
+  deleteFromView(comment){
+    if(this.productComments){
+      if(this.productComments.indexOf(comment)>-1){
+            this.productComments.splice(this.productComments.indexOf(comment),1);
+          }
+    }
+    
+  }
+
   addToCart(){
     if (this.cart.product_quantity!==""){
     this.cart.id_product=this.product.id_product;
@@ -169,11 +180,12 @@ export class UserProductPage {
           this.toast(res.message);
           this.cart["img_product"]=this.product.img_product;
           this.cart["name_product"]=this.product.name_product;
-          this.cart["price_product"]=this.product.price_product;          
-          this.cart["des_product"]=this.product.des_product;  
-          this.cart["des_category"]=this.product.des_category;   
-          this.cart["quantity"]=this.product.quantity;  
-          this.cart["username"]=this.product.username;          
+          this.cart["price_product"]=this.product.price_product;
+          this.cart["des_product"]=this.product.des_product;
+          this.cart["des_category"]=this.product.des_category;
+          this.cart["quantity"]=this.product.quantity;
+          this.cart["username"]=this.product.username;
+          this.cart["id_bill"]=null;
           this.cart.id_cart=res.data.id_cart;
           this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
           this.cart={
@@ -210,6 +222,23 @@ export class UserProductPage {
       console.log('dissmissed toast');
     });
     toast.present();
+  }
+
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+  
+    this.loading.present();
+  
+    setTimeout(() => {
+      console.log('created')
+    }, 1000);
+  
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 2000);
   }
 
 }
