@@ -65,8 +65,8 @@ export class WishlistPage {
   }
 
   shopProduct(){
-    console.log('hii');
-
+    console.log(this.productsFromCart);
+    if(!(this.productsFromCart.length==0)){
     this.cartProvider.shop(this.cart).subscribe((res:any) => {
       console.log('purchase');
         if (res.status==200){
@@ -94,6 +94,7 @@ export class WishlistPage {
         this.errorAlert(JSON.stringify(err));         
       }
       );
+    }
   }
 
   deleteFromView(product){

@@ -3,7 +3,6 @@ import { CommentProvider } from './../../providers/comment/comment';
 import { ProductsPage } from './../products/products';
 import { ProductProvider } from './../../providers/product/product';
 import { NewProductPage } from './../new-product/new-product';
-import { Product } from './../../models/product';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
@@ -49,14 +48,17 @@ export class UserProductPage {
       this.owner=true;
     }  
     console.log(this.owner);    
-    this.commentProvider.getProductComments(this.product.id_product).then((data:any)=>{
-        this.productComments= data.filter((comment:any)=>{return comment.id_first_comment===null})      
-    })
+    //this.commentProvider.getProductComments(this.product.id_product);
+    this.getComments();
+  }
+
+  async getComments(){
+    await this.commentProvider.getProductComments(this.product.id_product);
   }
 
   showComments(){
     this.show=!this.show;
-    //this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
+    this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
     console.log(this.productComments)
     console.log(this.commentProvider.productComments)
   }
@@ -82,7 +84,7 @@ export class UserProductPage {
         {
           text: 'ADD TO CART',
           handler: (data)=>{
-            this.cart.product_quantity=data.quantity;
+            this.cart.product_quantity=parseInt(data.quantity);
             this.addToCart();
             console.log('added', data)
           }
@@ -173,6 +175,9 @@ export class UserProductPage {
   addToCart(){
     if (this.cart.product_quantity!==""){
     this.cart.id_product=this.product.id_product;
+    console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product}));
+    var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product})
+    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product})){
     console.log(this.cart);
     this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
       if (res.status==200){
@@ -203,6 +208,23 @@ export class UserProductPage {
       }
     }), (err) => {
       this.errorAlert(JSON.stringify(err)); 
+    }
+    }else{
+      console.log("Producto ya se encuentra en el carrito");
+      this.cart["return"]=false;
+      this.cart.id_cart=inCart.id_cart;
+      this.cartProvider.updateProductCart(this.cart).subscribe((res:any) => {
+        if (res.status==200){
+            console.log(res);    
+            this.toast(res.message);
+            inCart.product_quantity=inCart.product_quantity+this.cart.product_quantity
+            console.log(this.cart);
+        }else{
+          this.errorAlert(res.message);
+        }
+      }), (err) => {
+        this.errorAlert(JSON.stringify(err)); 
+      }
     }
     }
   }
