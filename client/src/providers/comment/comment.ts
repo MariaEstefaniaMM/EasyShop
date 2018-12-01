@@ -5,8 +5,8 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CommentProvider {
 
-  //serverUrl:string = "http://localhost:3000";
-  serverUrl:string = "http://192.168.43.114:3000";
+  serverUrl:string = "http://localhost:3000";
+  //serverUrl:string = "http://192.168.43.114:3000";
   productComments=[];
   //comment_arr=[];
 
@@ -15,22 +15,17 @@ export class CommentProvider {
   }
 
   getProductComments(id_product){
-    return new Promise ((resolve,reject)=>{
         this.http.get(this.serverUrl+'/comments/getProductComments?id_product='+id_product, {headers:new HttpHeaders().set("Authorization", "Bearer "+ this.tokenProvider.token)})
         .subscribe((res:any) => {
           if (res.status==200){
             this.productComments=res.comments;
-            resolve(this.productComments);
-            console.log(this.productComments);
             console.log(res.comments);
           }else{
-            reject(res.message);
+            console.log(res.message);
           }
         }), (err) => {
-          reject(err);
-        }}
-    )
-    
+          console.log(err);
+        }    
   }
 
   createComment(comment){

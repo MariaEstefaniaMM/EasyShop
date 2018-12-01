@@ -164,10 +164,12 @@ export class ProductsComponent {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
+          console.log(product,this.originalProduct);
+          
           if(!product.return){
-            product.product_quantity=product.product_quantity+this.originalProduct.product_quantity
+            product.product_quantity=product.product_quantity+parseInt(this.originalProduct.product_quantity)
           }else{
-            product.product_quantity=this.originalProduct.product_quantity-product.product_quantity
+            product.product_quantity=parseInt(this.originalProduct.product_quantity)-product.product_quantity
           }
           this.originalProduct.product_quantity=product.product_quantity
           console.log(product,this.originalProduct);
