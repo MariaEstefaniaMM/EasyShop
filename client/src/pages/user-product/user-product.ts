@@ -48,17 +48,28 @@ export class UserProductPage {
       this.owner=true;
     }  
     console.log(this.owner);    
-    //this.commentProvider.getProductComments(this.product.id_product);
-    this.getComments();
+    this.commentProvider.getProductComments(this.product.id_product);
+    //this.getComments();
   }
 
-  async getComments(){
-    await this.commentProvider.getProductComments(this.product.id_product);
+  getComments(){
+    return new Promise((res,rej)=>{
+        let comments = this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null});
+        console.log(comments);
+        if(!comments==null){
+            res(comments);
+        }else{
+            rej('could not get comments');
+        } 
+    })
   }
 
   showComments(){
     this.show=!this.show;
-    this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
+    //this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
+    this.getComments().then(data=>{
+      this.productComments= data;
+    }).catch(error=>{console.log(error);})
     console.log(this.productComments)
     console.log(this.commentProvider.productComments)
   }
@@ -175,9 +186,9 @@ export class UserProductPage {
   addToCart(){
     if (this.cart.product_quantity!==""){
     this.cart.id_product=this.product.id_product;
-    console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product}));
-    var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product})
-    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product})){
+    console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null}));
+    var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})
+    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product&& product.id_bill===null})){
     console.log(this.cart);
     this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
       if (res.status==200){
@@ -217,6 +228,7 @@ export class UserProductPage {
         if (res.status==200){
             console.log(res);    
             this.toast(res.message);
+            this.product.quantity=this.product.quantity-this.cart.product_quantity
             inCart.product_quantity=inCart.product_quantity+this.cart.product_quantity
             console.log(this.cart);
         }else{

@@ -15,7 +15,7 @@ export class CommentProvider {
   }
 
   getProductComments(id_product){
-        this.http.get(this.serverUrl+'/comments/getProductComments?id_product='+id_product, {headers:new HttpHeaders().set("Authorization", "Bearer "+ this.tokenProvider.token)})
+    this.http.get(this.serverUrl+'/comments/getProductComments?id_product='+id_product, {headers:new HttpHeaders().set("Authorization", "Bearer "+ this.tokenProvider.token)})
         .subscribe((res:any) => {
           if (res.status==200){
             this.productComments=res.comments;
