@@ -79,6 +79,7 @@ export class CommentsComponent {
   }
 
   deleteComment(comment){
+    console.log(comment, this.commentProvider.productComments);
     this.commentProvider.deleteComment(comment).subscribe((res:any) => {
       console.log('deleted');
         if (res.status==200){
@@ -89,9 +90,10 @@ export class CommentsComponent {
           }
           if(this.commentResponses){
             if(this.commentResponses.indexOf(comment)>-1){
-            this.commentResponses.splice(this.commentProvider.productComments.indexOf(comment),1);
+            this.commentResponses.splice(this.commentResponses.indexOf(comment),1);
           }
           }
+          console.log(this.commentProvider.productComments);
           
           this.commentDeleted.emit(comment);
           this.toast('Comment deleted');

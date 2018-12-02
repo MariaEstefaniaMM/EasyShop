@@ -52,11 +52,16 @@ export class UserProductPage {
     //this.getComments();
   }
 
+  ionViewWillLeave(){
+    this.commentProvider.productComments=[];
+    console.log(this.commentProvider.productComments);
+  }
+
   getComments(){
     return new Promise((res,rej)=>{
         let comments = this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null});
-        console.log(comments);
-        if(!comments==null){
+        console.log(comments, 'espere');
+        if(comments){
             res(comments);
         }else{
             rej('could not get comments');
@@ -175,6 +180,7 @@ export class UserProductPage {
   }
 
   deleteFromView(comment){
+    console.log(comment);
     if(this.productComments){
       if(this.productComments.indexOf(comment)>-1){
             this.productComments.splice(this.productComments.indexOf(comment),1);
