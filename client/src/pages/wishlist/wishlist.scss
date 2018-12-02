@@ -28,10 +28,6 @@ page-wishlist {
         font-weight: 500;
         color: white;
     }
-    ion-list.list.list-md {
-        position: relative;
-        top: -50px;
-    }
     .select{
         /* position: relative; */
         width: 0px;
@@ -42,5 +38,13 @@ page-wishlist {
     }
     button#btn-cart {
         width: 300px;
+    }
+    .menu {
+        position: relative;
+        left: -48px;
+    }
+    .card-cart{
+        position: relative;
+        left: -18px;
     }
 }

@@ -11,7 +11,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 export class UserBillsPage {
 
   bills;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public cartProvider:CartProvider,
               public menuCtrl: MenuController) {
   }

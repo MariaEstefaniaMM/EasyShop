@@ -142,7 +142,7 @@ export class CommentsComponent {
           this.toast(res.message);
           this.response.id_comment=res.data.id_comment;
           this.response["readonly"]=true;
-          this.response["username"]=this.comment.username;
+          this.response["username"]=this.userProvider.user.username;
           this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.response)));
           this.commentResponses.push(JSON.parse(JSON.stringify(this.response)));
           this.response={

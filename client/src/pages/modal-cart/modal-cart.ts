@@ -5,6 +5,7 @@ import { UserProvider } from '../../providers/user/user';
 import { ProductsPage } from '../products/products';
 import { CartProvider } from '../../providers/cart/cart';
 import { UserBillsPage } from '../user-bills/user-bills';
+import { WishlistPage } from '../wishlist/wishlist';
 
 /**
  * Generated class for the ModalCartPage page.
@@ -20,6 +21,8 @@ import { UserBillsPage } from '../user-bills/user-bills';
 })
 export class ModalCartPage {
 
+  data = this.navParams.get('data');
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController,
     public userProvider: UserProvider, public cartProvider:CartProvider,public menuCtrl: MenuController) {
   }
@@ -27,6 +30,8 @@ export class ModalCartPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalCartPage');
     this.menuCtrl.enable(true);
+    this.data;
+    console.log(this.data)
   }
 
   closeModal(){
@@ -37,8 +42,12 @@ export class ModalCartPage {
     this.navCtrl.push(UserProfilePage);
   }
 
-  goToBill(){
-    this.navCtrl.setRoot(UserBillsPage);
+  goToBills(){
+    this.navCtrl.push(UserBillsPage);
+  }
+
+  goToProducts(){
+    this.navCtrl.setRoot(ProductsPage)
   }
 
 

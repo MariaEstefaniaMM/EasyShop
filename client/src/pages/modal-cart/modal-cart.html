@@ -24,14 +24,20 @@
           <div class="card-title"><strong>Congratulations!</strong></div>
           <div class="card-subtitle">Payment complete  </div>
       </ion-card>
-      <div align="center">
+      <div>
       <ion-item>
-        <h2>A confirmation email has been sent to: </h2>
-        <h2 align="center"><strong>{{userProvider.user.user_email}}</strong></h2>
+        <h2><strong>A confirmation email has been sent to:</strong> </h2>
+        <h2 align="center">{{userProvider.user.user_email}}</h2>
+        <h2 align="center"><strong>Payment ID:</strong> {{data}}</h2>
       </ion-item>
       <ion-item>
-        <h2>Your products will be delivered to:</h2>
-        <h2 align="center"><strong>{{userProvider.user.user_address}}</strong></h2>
+        <h2 align="center"><strong>Your products will be delivered to:</strong></h2>
+        <h2 align="center">{{userProvider.user.user_address}}</h2>
+        <h2 align="center" class="p-su">Do you want change your address?</h2>
+        <h2 align="center"><a button (click)="goToEditProfile()" style="color: rgb(255, 110, 14)"> Change Now!</a></h2>
+      </ion-item>
+      <ion-item>
+        <button ion-button edge full (click)="goToBills()">Go to Bill</button>
       </ion-item>
   </div>
 <ion-content>

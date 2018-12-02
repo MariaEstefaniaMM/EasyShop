@@ -1,10 +1,9 @@
 <ion-header>
-
-    <ion-navbar>
-      <ion-title>Wishlist</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="!bill">My Cart</ion-title>
+    <ion-title *ngIf="bill" >Bill</ion-title>
+  </ion-navbar>
+</ion-header>
   
   <ion-content padding>
     <ion-grid>
@@ -14,21 +13,29 @@
       </ion-list>
       </ion-row>
       <ion-row>
+        <ion-col col-12 *ngIf="!bill && !total">
+          <h2>You haven't added anything yet...</h2>
+        </ion-col>
+        <ion-col col-12 *ngIf="!bill">
+          <ion-item left>
+            <p>Total:<strong class="st">${{this.total}}</strong></p>            
+          </ion-item>
+        </ion-col>
+        <ion-col col-12 *ngIf="bill">
+          <ion-item left>
+            <p>Total:<strong class="st">${{this.total}}</strong></p>            
+          </ion-item>
+        </ion-col>
         <ion-col col-12>
-            <ion-item left>
-                <p>
-                  Total:<strong class="st">${{this.total}}</strong> 
-                </p>
-              </ion-item>
+          <button *ngIf="!bill && total" ion-button edge full (click)="openSelect()">SHOP</button>
         </ion-col>
         <ion-col>
-          <ion-select [(ngModel)]="cart.payment_mode" okText="SHOP" #mySelect class="select" (ionChange)="shopProduct()">
+          <ion-select  [(ngModel)]="cart.payment_mode" okText="SHOP" #mySelect (ionChange)="shopProduct()">
             <ion-option>Cash</ion-option>
             <ion-option>Credit Card</ion-option>
             <ion-option>Debit Card</ion-option>
             <ion-option>Agree with the seller</ion-option>
-          </ion-select>
-          <button *ngIf="!bill"  ion-button edge full (click)="shopProduct()">SHOP</button>
+          </ion-select> 
         </ion-col>
       </ion-row>
     </ion-grid>

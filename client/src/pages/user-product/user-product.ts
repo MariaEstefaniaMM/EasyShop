@@ -188,7 +188,7 @@ export class UserProductPage {
     this.cart.id_product=this.product.id_product;
     console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null}));
     var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})
-    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product&& product.id_bill===null})){
+    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})){
     console.log(this.cart);
     this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
       if (res.status==200){
@@ -226,6 +226,7 @@ export class UserProductPage {
       this.cart.id_cart=inCart.id_cart;
       this.cartProvider.updateProductCart(this.cart).subscribe((res:any) => {
         if (res.status==200){
+            this.showAlert(); 
             console.log(res);    
             this.toast(res.message);
             this.product.quantity=this.product.quantity-this.cart.product_quantity
