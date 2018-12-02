@@ -1,29 +1,32 @@
 <ion-header>
-
   <ion-navbar>
     <ion-row>
-        <ion-col col-1>
-            <menu></menu>
-          </ion-col>
-          <ion-col>
-            <ion-title>Bills</ion-title>
-          </ion-col>
-    </ion-row>
-    
+      <ion-col>
+        <ion-title>Bills</ion-title>
+      </ion-col>
+    </ion-row>  
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
+  <ion-list >
     <div *ngFor="let bill of bills">
-      <ion-card *ngIf="bill"(click)="goToBillDetail(bill)">
-        <ion-item >
-          <h4>Payment ID: {{bill[0].id_bill}}</h4>
+      <ion-card *ngIf="bill" (click)="goToBillDetail(bill)"> 
+        <ion-item> 
+        <ion-label class="label" style="color:black">
+          <h4><strong>Payment ID:</strong> {{bill[0].id_bill}}</h4>
           <h4>{{bill[0].amount}}</h4>
-        </ion-item>
-      </ion-card>
+          <h4><strong>Address:</strong> {{bill[0].user_address}}</h4>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h4><strong>Purchase date:</strong></h4>
+          <ion-datetime disabled displayFormat="DD MMM, YY" [(ngModel)]="bill[0].date_created"></ion-datetime>
+        </ion-label> 
+      </ion-item>
+      </ion-card>   
     </div>
   </ion-list>
 

@@ -15,5 +15,15 @@ page-user-bills {
         font-weight: 500;
         color: white;
     }
+    .datetime-disabled, .item-datetime-disabled ion-label {
+        opacity: 1; 
+        pointer-events: none;
+        position: relative;
+        top: -11px;
+    }
+    .datetime-disabled, .item-datetime-disabled ion-label {
+        opacity: 1; 
+        pointer-events: none;
+    }
 
 }

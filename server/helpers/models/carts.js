@@ -123,7 +123,7 @@ module.exports.shop=(amount, payment_mode,id_user)=>{
             console.log(data);
             console.log(bill.add,data.id_bill, id_user);
             db.connect().then((obj)=>{
-                obj.none(bill.add,[data.id_bill, id_user]).then((data)=>{
+                obj.none(bill.add,[data.id_bill, id_user]).then(()=>{
                     res(data);
                     obj.done();
                 }).catch((error)=>{

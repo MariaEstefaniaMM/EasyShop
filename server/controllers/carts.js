@@ -84,7 +84,7 @@ router.put('/updateProductCart',isAuth,(req,res)=>{
   router.post('/shop',isAuth,(req,res)=>{
     cart.shop(req.body.amount,req.body.payment_mode,req.user.id_user,req.body.id_product).then((data) => {
       console.log(data);
-      res.send({status:200, message:'Successful purchase'});
+      res.send({status:200, message:'Successful purchase', id_bill:data.id_bill});
     }).catch((err) => {
       console.log(err);
       res.send({status:403, message:'Shop failed'})

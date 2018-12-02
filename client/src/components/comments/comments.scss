@@ -39,9 +39,9 @@ comments {
         position: relative;
         top: 4px;
     }
-    button.save-a.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
-        position: relative;
-        left: -56px;
+    .datetime-disabled, .item-datetime-disabled ion-label {
+        opacity: 1;
+        pointer-events: none;
     }
     
 

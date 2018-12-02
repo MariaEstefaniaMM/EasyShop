@@ -1,6 +1,7 @@
 import { CartProvider } from './../../providers/cart/cart';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, Events, Select, ModalController, ModalOptions } from 'ionic-angular';
+import { ProductsPage } from '../products/products';
 
 /**
  * Generated class for the WishlistPage page.
@@ -50,13 +51,22 @@ export class WishlistPage {
 
   }
 
-  openModal(){  
+  goToProducts(){
+    this.navCtrl.setRoot(ProductsPage);
+  }
+
+  openModal(res){  
+
+    const myData ={
+      id: res.id_bill
+    }
+
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false,
       showBackdrop: false
     }
 
-    const modalCart = this.modalCtrl.create('ModalCartPage', myModalOptions);
+    const modalCart = this.modalCtrl.create('ModalCartPage',{data: myData.id}, myModalOptions);
     modalCart.present();
   }
 
@@ -70,7 +80,8 @@ export class WishlistPage {
     this.cartProvider.shop(this.cart).subscribe((res:any) => {
       console.log('purchase');
         if (res.status==200){
-          this.openModal();
+          this.openModal(res);
+          console.log(res.id_bill);
           console.log(res);
           //this.cartProvider.productsFromCart[this.cartProvider.productsFromCart.indexOf(this.cart)].id_bill=res.id_bill;
           this.cartProvider.getUserCart();

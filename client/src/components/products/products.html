@@ -1,4 +1,4 @@
-<ion-item-sliding *ngIf="wishlist">
+<ion-card *ngIf="wishlist" class="card-cart">
   <ion-item>
   <button ion-item (click)="goToProduct(product)" id="btn-cart">
     <ion-thumbnail item-start>
@@ -36,18 +36,20 @@
       </ion-col>
     </ion-row>  
   </button>
-  <ion-buttons>
-    <button *ngIf="wishlist && !bill" icon-start ion-button style="background-color: orange" (click)="editAlert(product)">
-      <ion-icon name="trash" ></ion-icon>
-       EDIT
-    </button>
-    <button *ngIf="wishlist && !bill" icon-start ion-button color="danger" (click)="deleteAlertWishList(product)">
-        <ion-icon name="trash" ></ion-icon>
-        DELETE
-    </button>
-  </ion-buttons>
   </ion-item>
-</ion-item-sliding>
+  <ion-item>
+      <ion-buttons>
+          <button *ngIf="wishlist && !bill" icon-start ion-button style="background-color: orange" (click)="editAlert(product)">
+            <ion-icon name="trash" ></ion-icon>
+             EDIT
+          </button>
+          <button *ngIf="wishlist && !bill" icon-start ion-button color="danger" (click)="deleteAlertWishList(product)">
+              <ion-icon name="trash" ></ion-icon>
+              DELETE
+          </button>
+        </ion-buttons>
+  </ion-item>
+</ion-card>
   
 <ion-item-sliding *ngIf="!wishlist || user">
     <ion-item>

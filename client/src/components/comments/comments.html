@@ -27,8 +27,8 @@
     </ion-col>
     <ion-col col-5 *ngIf="readonlyComment">
         <h6 class="h6-c">
-            <ion-datetime *ngIf="!comment.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_created_at"></ion-datetime>
-            <ion-datetime *ngIf="comment.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_updated_at"></ion-datetime>
+            <ion-datetime *ngIf="!comment.comment_updated_at" disabled  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_created_at"></ion-datetime>
+            <ion-datetime *ngIf="comment.comment_updated_at"  disabled  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_updated_at"></ion-datetime>
         </h6>
     </ion-col>
     <ion-col col-7 *ngIf="readonlyComment" class="see-answer">
@@ -66,7 +66,7 @@
                     <ion-icon name="trash"></ion-icon>
                 </button>   
             </ion-col>
-            <ion-col col-1>
+            <ion-col col-12>
                 <button ion-button small icon-start clear class="save-a" *ngIf="response.id_user==userProvider.user.id_user && !response.readonly" (click)="updateComment(response)">
                     <ion-icon name="checkmark"></ion-icon>
                     <div>Save</div>
