@@ -51,6 +51,15 @@ export class WishlistPage {
 
   }
 
+  getTotal(){
+    this.total=0;
+    console.log(this.productsFromCart);
+    for(var i=0; i<this.productsFromCart.length; i++){
+      this.total=this.total+parseInt(this.productsFromCart[i].price_product)*this.productsFromCart[i].product_quantity;
+      console.log(this.total, parseInt(this.productsFromCart[i].price_product), this.productsFromCart[i].product_quantity);
+    } 
+  }
+
   goToProducts(){
     this.navCtrl.setRoot(ProductsPage);
   }
@@ -114,8 +123,14 @@ export class WishlistPage {
             this.productsFromCart.splice(this.productsFromCart.indexOf(product),1);
           }
     }
-    
+    this.getTotal();    
   }
+
+  updateTotal(product){
+    console.log('update', product);
+      this.getTotal();
+  }
+
   errorAlert(message){
     (this.alertCtrl.create({
       title: 'Error',

@@ -5,8 +5,8 @@ import { TokenProvider } from '../token/token';
 @Injectable()
 export class CartProvider {
 
-  serverUrl:string = "http://localhost:3000";
-  //serverUrl:string = "http://192.168.43.114:3000";
+  //serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.43.54:3000";  
   productsFromCart=[];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {

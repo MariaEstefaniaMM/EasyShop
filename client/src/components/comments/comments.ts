@@ -34,16 +34,22 @@ export class CommentsComponent {
     //this.commentResponses= this.commentResponses.filter((comment:any)=>{return comment.id_first_comment===this.comment.id_comment})
   }
 
+  //------ENABLE COMMENT-----//
+
   enableInput(comment){
     this.readonlyComment=false;
     this.originalComment=JSON.parse(JSON.stringify(comment));
   }
+
+  //------ENABLE SPECIFIC COMMENT RESPONSE-----//
 
   enableInputR(comment){
     comment.readonly=false;
     console.log(comment);
     this.originalComment=JSON.parse(JSON.stringify(comment));
   }
+
+  //------SHOW ALL COMMENT RESPONSES-----//
 
   showResponses(){
     this.show=!this.show;
@@ -54,6 +60,8 @@ export class CommentsComponent {
     }
     console.log( this.commentResponses);
   }
+
+  //------DELETE COMMENTS AND RESPONSES-----//
 
   deleteAlert(comment){
     let alert = this.alertCtrl.create({
@@ -85,16 +93,18 @@ export class CommentsComponent {
         if (res.status==200){
           console.log(res);
           console.log(this.commentProvider.productComments.indexOf(comment));
+          //----Delete from provider array------//
           if(this.commentProvider.productComments.indexOf(comment)>-1){
               this.commentProvider.productComments.splice(this.commentProvider.productComments.indexOf(comment),1);
           }
+          //----Delete from responses array if it is a response------//
           if(this.commentResponses){
             if(this.commentResponses.indexOf(comment)>-1){
             this.commentResponses.splice(this.commentResponses.indexOf(comment),1);
           }
           }
           console.log(this.commentProvider.productComments);
-          
+          //----Tell the user-product page what comment was deleted so it can delete it from the view-----//
           this.commentDeleted.emit(comment);
           this.toast('Comment deleted');
       }else{
@@ -106,6 +116,8 @@ export class CommentsComponent {
       );
   }
 
+  //------UPDATE COMMENTS AND RESPONSES-----//
+
   updateComment(comment){
     if(JSON.stringify(this.originalComment)!==JSON.stringify(comment)){
     this.commentProvider.updateComment(comment).subscribe((res:any) => {
@@ -116,6 +128,7 @@ export class CommentsComponent {
           this.toast(res.message);
           this.showLoader();
       }else{
+        //----If an error ocurred don't change the comment------//
         this.comment=this.originalComment;
         this.errorAlert(res.message);
       }
@@ -128,9 +141,7 @@ export class CommentsComponent {
     }
   }
 
-  cancelComment(){
-    console.log('cancel');
-  }
+  //------ADD A RESPONSE-----//
 
   createComment(){
     if(this.response.comment_text!==""){
@@ -142,11 +153,12 @@ export class CommentsComponent {
       if (res.status==200){
           console.log(res);    
           this.toast(res.message);
-          this.response.id_comment=res.data.id_comment;
-          this.response["readonly"]=true;
+          this.response.id_comment=res.data.id_comment; //Set the id_comment returned from the server
+          this.response["readonly"]=true; //Add a readonly property to identify it when update
           this.response["username"]=this.userProvider.user.username;
-          this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.response)));
-          this.commentResponses.push(JSON.parse(JSON.stringify(this.response)));
+          this.commentProvider.productComments.push(JSON.parse(JSON.stringify(this.response))); //Add the reponse to the comment array in the provider
+          this.commentResponses.push(JSON.parse(JSON.stringify(this.response))); // Add the response to the response array
+          //------Reset the response variable-----//          
           this.response={
             id_comment:null,
             id_product:null,

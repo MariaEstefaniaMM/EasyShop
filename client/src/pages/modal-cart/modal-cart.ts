@@ -5,14 +5,6 @@ import { UserProvider } from '../../providers/user/user';
 import { ProductsPage } from '../products/products';
 import { CartProvider } from '../../providers/cart/cart';
 import { UserBillsPage } from '../user-bills/user-bills';
-import { WishlistPage } from '../wishlist/wishlist';
-
-/**
- * Generated class for the ModalCartPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

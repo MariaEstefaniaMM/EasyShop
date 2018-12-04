@@ -22,17 +22,13 @@ export class ProductsComponent {
   @Input() wishlist: boolean;
   @Input() bill: boolean;
   @Output() productDeleted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateTotal: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController,
               public productProvider: ProductProvider, public cartProvider: CartProvider) {
     console.log('Hello ProductsComponent Component',this.product);
     this.text = 'Hello World';
     //this.originalProduct=JSON.parse(JSON.stringify(this.product));
-  }
-
-  getSubtotal(){
-    this.Subtotal = this.Subtotal + this.total;
-    return this.Subtotal;
   }
 
   getTotal(product){
@@ -48,34 +44,7 @@ export class ProductsComponent {
     this.navCtrl.push(NewProductPage, product);
   }
 
-  addAlert(){
-    const confirm = this.alertCtrl.create({
-      title: 'how many products?',
-      inputs: [
-        {
-          name: 'Quantity:',
-          placeholder: '1',
-          type: 'number'
-        }
-      ],
-      buttons: [
-        {
-          text: 'CANCEL',
-          handler: ()=>{
-            console.log('CANCEL');
-          }
-        },
-        {
-          text: 'ADD TO WISHLIST',
-          handler: ()=>{
-            this.toast('Added!');
-            console.log('added')
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
+  //------DELETE USER PRODUCT-----//
 
   deleteAlert(product){
     let alert = this.alertCtrl.create({
@@ -105,9 +74,10 @@ export class ProductsComponent {
       console.log('deleted');
         if (res.status==200){
           console.log(res);
+          //----Delete from product array in provider-----//
           this.productProvider.userProducts.splice(this.productProvider.userProducts.indexOf(product),1);
           this.toast('Product deleted');
-          this.navCtrl.setRoot(ProductsPage,{data: true});
+          this.navCtrl.setRoot(ProductsPage,{data: true}); // Go to Products page
       }else{
         this.errorAlert(res.message);
       }
@@ -116,6 +86,8 @@ export class ProductsComponent {
       }
       );
   }
+
+  //------EDIT QUANTITY IN MY CART-----//
 
   editAlert(product){
     this.originalProduct=JSON.parse(JSON.stringify(product));
@@ -140,7 +112,7 @@ export class ProductsComponent {
         {
           text: 'EDIT QUANTITY',
           handler: (data)=>{
-            product.product_quantity=parseInt(data.quantity);
+            product.product_quantity=parseInt(data.quantity); // Get quantity in input
             this.updateQuantity(product);
             console.log('added', data.quantity)
           }
@@ -152,6 +124,7 @@ export class ProductsComponent {
 
   updateQuantity(product){
     console.log(product,this.originalProduct);
+    //------Check wants more or less of the product-----//
     if(product.product_quantity<this.originalProduct.product_quantity){
       product["return"]=true;
       product.product_quantity=this.originalProduct.product_quantity-product.product_quantity
@@ -165,15 +138,18 @@ export class ProductsComponent {
           console.log(res);    
           this.toast(res.message);
           console.log(product,this.originalProduct);
-          
+          //------Refresh the quantity in the view-----//          
           if(!product.return){
             product.product_quantity=product.product_quantity+parseInt(this.originalProduct.product_quantity)
           }else{
             product.product_quantity=parseInt(this.originalProduct.product_quantity)-product.product_quantity
           }
+          //------Update the product reference-----//
           this.originalProduct.product_quantity=product.product_quantity
           console.log(product,this.originalProduct);
+          this.updateTotal.emit(product);
       }else{
+        //------If an error ocurred don't change the product-----//
         product.product_quantity=this.originalProduct.product_quantity;
         console.log(product,this.originalProduct);
         this.errorAlert(res.message);
@@ -182,6 +158,8 @@ export class ProductsComponent {
       this.errorAlert(JSON.stringify(err)); 
     }
   }
+
+  //------DELETE PRODUCT FROM MY CART-----//
 
   deleteAlertWishList(product){
     let alert = this.alertCtrl.create({

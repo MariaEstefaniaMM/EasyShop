@@ -60,7 +60,7 @@ export class UserProductPage {
   getComments(){
     return new Promise((res,rej)=>{
         let comments = this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null});
-        console.log(comments, 'espere');
+        //console.log(comments, 'espere');
         if(comments){
             res(comments);
         }else{
@@ -78,6 +78,8 @@ export class UserProductPage {
     console.log(this.productComments)
     console.log(this.commentProvider.productComments)
   }
+  
+  //------ADD PRODUCT TO MY CART-----//
 
   addAlert(){
     console.log('alert');
@@ -110,9 +112,76 @@ export class UserProductPage {
     confirm.present();
   }
 
+  addToCart(){
+    if (this.cart.product_quantity!==""){
+    this.cart.id_product=this.product.id_product;
+    console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null}));
+    var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})
+    //------CHECK IF THE PRODUCT EXISTS IN MY CART-----//    
+    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})){
+    //------If product doesn't exist then add it-----//    
+    console.log(this.cart);
+    this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
+      if (res.status==200){
+          console.log(res);   
+          this.showAlert();
+          this.toast(res.message);
+          this.cart["img_product"]=this.product.img_product;
+          this.cart["name_product"]=this.product.name_product;
+          this.cart["price_product"]=this.product.price_product;
+          this.cart["des_product"]=this.product.des_product;
+          this.cart["des_category"]=this.product.des_category;
+          this.cart["quantity"]=this.product.quantity;
+          this.cart["username"]=this.product.username;
+          this.cart["id_bill"]=null;
+          this.cart.id_cart=res.data.id_cart;
+          console.log(this.product.quantity,this.cart.product_quantity)
+          this.product.quantity=this.product.quantity-this.cart.product_quantity
+          this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
+          //------Reset cart variable-----//              
+          this.cart={
+            id_cart:null,
+            id_product:null,
+            product_quantity:null,
+            return:false
+          };
+      }else{
+        this.errorAlert(res.message);
+        //this.soldOutAlert()
+      }
+    }), (err) => {
+      this.errorAlert(JSON.stringify(err)); 
+    }
+    }else{
+      //------If product exist then update the qunatity in my cart-----//    
+      console.log("Producto ya se encuentra en el carrito");
+      this.cart["return"]=false;
+      this.cart.id_cart=inCart.id_cart;
+      this.cartProvider.updateProductCart(this.cart).subscribe((res:any) => {
+        if (res.status==200){
+            this.showAlert(); 
+            console.log(res);    
+            this.toast(res.message);
+            this.product.quantity=this.product.quantity-this.cart.product_quantity
+            inCart.product_quantity=inCart.product_quantity+this.cart.product_quantity
+            console.log(this.cart);
+        }else{
+          this.errorAlert(res.message);
+        }
+      }), (err) => {
+        this.errorAlert(JSON.stringify(err)); 
+      }
+    }
+    }
+  }
+
+  //------UPDATE USER PRODUCT-----//
+
   goToEditProduct(){
       this.navCtrl.push(NewProductPage, this.product);
   }
+
+  //------DELETE USER PRODUCT-----//
 
   deleteProduct(){
     this.productProvider.deleteProduct(this.product).subscribe((res:any) => {
@@ -148,6 +217,8 @@ export class UserProductPage {
     confirm.present();
   }
 
+  //------ADD COMMENT TO PRODUCT-----//
+
   createComment(){
     if (this.comment.comment_text!==""){
     this.comment.id_product=this.product.id_product;
@@ -179,6 +250,8 @@ export class UserProductPage {
     }
   }
 
+  //------RESEVE DELETED COMMENT-----//
+
   deleteFromView(comment){
     console.log(comment);
     if(this.productComments){
@@ -187,65 +260,6 @@ export class UserProductPage {
           }
     }
     
-  }
-
-  addToCart(){
-    if (this.cart.product_quantity!==""){
-    this.cart.id_product=this.product.id_product;
-    console.log(this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null}));
-    var inCart = this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})
-    if(!this.cartProvider.productsFromCart.find((product:any)=>{return product.id_product===this.product.id_product && product.id_bill===null})){
-    console.log(this.cart);
-    this.cartProvider.addProductToCart(this.cart).subscribe((res:any) => {
-      if (res.status==200){
-          console.log(res);   
-          this.showAlert(); 
-          this.toast(res.message);
-          this.cart["img_product"]=this.product.img_product;
-          this.cart["name_product"]=this.product.name_product;
-          this.cart["price_product"]=this.product.price_product;
-          this.cart["des_product"]=this.product.des_product;
-          this.cart["des_category"]=this.product.des_category;
-          this.cart["quantity"]=this.product.quantity;
-          this.cart["username"]=this.product.username;
-          this.cart["id_bill"]=null;
-          this.cart.id_cart=res.data.id_cart;
-          console.log(this.product.quantity,this.cart.product_quantity)
-          this.product.quantity=this.product.quantity-this.cart.product_quantity
-          this.cartProvider.productsFromCart.push(JSON.parse(JSON.stringify(this.cart)));
-          this.cart={
-            id_cart:null,
-            id_product:null,
-            product_quantity:null,
-            return:false
-          };
-      }else{
-        this.errorAlert(res.message);
-        //this.soldOutAlert()
-      }
-    }), (err) => {
-      this.errorAlert(JSON.stringify(err)); 
-    }
-    }else{
-      console.log("Producto ya se encuentra en el carrito");
-      this.cart["return"]=false;
-      this.cart.id_cart=inCart.id_cart;
-      this.cartProvider.updateProductCart(this.cart).subscribe((res:any) => {
-        if (res.status==200){
-            this.showAlert(); 
-            console.log(res);    
-            this.toast(res.message);
-            this.product.quantity=this.product.quantity-this.cart.product_quantity
-            inCart.product_quantity=inCart.product_quantity+this.cart.product_quantity
-            console.log(this.cart);
-        }else{
-          this.errorAlert(res.message);
-        }
-      }), (err) => {
-        this.errorAlert(JSON.stringify(err)); 
-      }
-    }
-    }
   }
 
   errorAlert(message){

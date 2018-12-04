@@ -9,7 +9,7 @@
     <ion-grid>
       <ion-row>
       <ion-list *ngFor="let product of productsFromCart">
-          <products  [product]= "product" [wishlist]="wishlist" [bill]="bill" (productDeleted)="deleteFromView($event)"></products>
+          <products  [product]= "product" [wishlist]="wishlist" [bill]="bill" (productDeleted)="deleteFromView($event)" (updateTotal)="updateTotal($event)"></products>
       </ion-list>
       </ion-row>
       <ion-row>
