@@ -6,7 +6,7 @@ import { TokenProvider } from '../token/token';
 export class CommentProvider {
 
   //serverUrl:string = "http://localhost:3000";
-  serverUrl:string = "http://192.168.43.54:3000";
+  serverUrl:string = "http://192.168.43.69:3000";
   productComments=[];
   //comment_arr=[];
 
@@ -19,7 +19,7 @@ export class CommentProvider {
         .subscribe((res:any) => {
           if (res.status==200){
             this.productComments=res.comments;
-            console.log(res.comments);
+            console.log(res.comments, 'results');
           }else{
             console.log(res.message);
           }

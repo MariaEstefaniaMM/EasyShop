@@ -30,7 +30,7 @@
           <button *ngIf="!bill && total" ion-button edge full (click)="openSelect()">SHOP</button>
         </ion-col>
         <ion-col>
-          <ion-select  [(ngModel)]="cart.payment_mode" okText="SHOP" #mySelect (ionChange)="shopProduct()">
+          <ion-select *ngIf="!bill && total" [(ngModel)]="cart.payment_mode" okText="SHOP" #mySelect (ionChange)="shopProduct()">
             <ion-option>Cash</ion-option>
             <ion-option>Credit Card</ion-option>
             <ion-option>Debit Card</ion-option>

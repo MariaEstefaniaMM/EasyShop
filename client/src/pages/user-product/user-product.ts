@@ -70,11 +70,12 @@ export class UserProductPage {
   }
 
   showComments(){
-    this.show=!this.show;
     //this.productComments= this.commentProvider.productComments.filter((comment:any)=>{return comment.id_first_comment===null})
     this.getComments().then(data=>{
       this.productComments= data;
-    }).catch(error=>{console.log(error);})
+    this.show=!this.show;
+    console.log('got')
+  }).catch(error=>{console.log(error);})
     console.log(this.productComments)
     console.log(this.commentProvider.productComments)
   }
@@ -82,6 +83,7 @@ export class UserProductPage {
   //------ADD PRODUCT TO MY CART-----//
 
   addAlert(){
+    if(this.product.quantity!==0){
     console.log('alert');
     const confirm = this.alertCtrl.create({
       title: 'How many products?',
@@ -110,6 +112,9 @@ export class UserProductPage {
       ]
     });
     confirm.present();
+    }else{
+      this.errorAlert("This product is not available");
+    }
   }
 
   addToCart(){

@@ -7,7 +7,7 @@ import { Product } from '../../models/product';
 export class ProductProvider {
 
   //serverUrl:string = "http://localhost:3000";
-  serverUrl:string = "http://192.168.43.54:3000";
+  serverUrl:string = "http://192.168.43.69:3000";
   products:Product[];
   userProducts: Product[];
   category=[
