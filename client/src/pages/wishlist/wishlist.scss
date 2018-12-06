@@ -28,4 +28,23 @@ page-wishlist {
         font-weight: 500;
         color: white;
     }
+    .select{
+        /* position: relative; */
+        width: 0px;
+        height: 0px;
+    }
+    .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start] {
+        margin: 3px 2px 7px -20px;
+    }
+    button#btn-cart {
+        width: 300px;
+    }
+    .menu {
+        position: relative;
+        left: -48px;
+    }
+    .card-cart{
+        position: relative;
+        left: -18px;
+    }
 }

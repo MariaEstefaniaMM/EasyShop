@@ -2,9 +2,9 @@ page-user-product {
     .note-md {
         color: black;
         position: relative;
-        top: 6px;
-        left: 50px;
-        /* font-size: 2px; */
+        top: 3px;
+       /* left: 50px;
+        font-size: 2px; */
     }
     .card .note-md {
         font-size: 2.3rem;
@@ -14,18 +14,34 @@ page-user-product {
         color: black;
         box-shadow: none;
     } 
-    ion-fab.fab {
+    .fab[mini] {
+        margin: 8px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        top: -5px;
+        left: 10px;
+    }
+   /* ion-fab.fab {
         left: 34px;
+    } */
+    .user-op {
+        transform: translate(18%,10%);
     }
     button.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
         position: relative;
-        top: 6px;
         color: black;
+        left: -5px;
         /* font-size: 15px; */
     }
-    button.disable-hover.button.button-md.button-default.button-default-md.button-small.button-small-md {
+    /*button.disable-hover.button.button-md.button-default.button-default-md.button-small.button-small-md {
         position: relative;
         left: 150px;
+    } */
+    button.fab.fab-md.fab-in-list.fab-md-in-list.show {
+        height: 25px;
+        /* width: 38px; */
     }
     .toolbar-background-md {
         border-color: orange;
@@ -41,8 +57,8 @@ page-user-product {
         opacity: 1;
     }   
     button.button.button-md.button-default.button-default-md.button-small.button-small-md {
-        left: 150px;
-        position: relative;
+       /* left: 150px;
+        position: relative; */
         background-color: black;
     } 
     .toolbar-title-md {
@@ -52,10 +68,29 @@ page-user-product {
         color: white;
     }
     ion-fab[bottom][edge] {
-        bottom: 0px;
+        bottom: -5px;
     }
     .img-camera{
         width:380px;
         height:280px;
+    }
+    ion-infinite-scroll {
+        display: block;
+        width: 100%;
+        height: 20px;
+        position: relative;
+        top: -20px;
+    }
+    button.comment.disable-hover.button.button-md.button-clear.button-clear-md.button-small.button-small-md {
+        position: relative;
+        top: -11px;
+        /* width: 50px; */
+    }
+    ion-icon.icon-comment.icon.icon-md.ion-ios-text-outline {
+        font-size: 2.4rem;
+    }
+    ion-item.user.item.item-block.item-md.item-input.item-textarea.ng-untouched.ng-pristine.ng-valid.input-has-value.item-input-has-value {
+        position: relative;
+        left: -20px;
     }
 }

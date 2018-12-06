@@ -28,6 +28,10 @@ import { NewProductPage } from '../pages/new-product/new-product';
 import { UserProductPage } from '../pages/user-product/user-product';
 import { CommentsComponent } from '../components/comments/comments';
 import { CommentProvider } from '../providers/comment/comment';
+import { CartProvider } from '../providers/cart/cart';
+import { UserBillsPage } from '../pages/user-bills/user-bills';
+import { ModalCartPage } from '../pages/modal-cart/modal-cart';
+import { ModalCartPageModule } from '../pages/modal-cart/modal-cart.module';
 
 @NgModule({
   declarations: [
@@ -44,12 +48,15 @@ import { CommentProvider } from '../providers/comment/comment';
     UserProductsComponent,
     NewProductPage, 
     UserProductPage,
-    CommentsComponent
+    CommentsComponent,
+    UserBillsPage
+    //ModalCartPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    ModalCartPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,7 +74,9 @@ import { CommentProvider } from '../providers/comment/comment';
     ProductsComponent,
     NewProductPage,
     UserProductPage,
-    CommentsComponent
+    CommentsComponent,
+    UserBillsPage,
+    ModalCartPage
   ],
   providers: [
     StatusBar,
@@ -81,7 +90,8 @@ import { CommentProvider } from '../providers/comment/comment';
     CameraProvider,
     TokenProvider,
     ProductProvider,
-    CommentProvider
+    CommentProvider,
+    CartProvider
   ]
 })
 export class AppModule {}

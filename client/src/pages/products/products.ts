@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { Product } from '../../models/product';
 import { ProductProvider } from '../../providers/product/product';
 import { NewProductPage } from '../new-product/new-product';
@@ -13,13 +13,15 @@ export class ProductsPage {
 
   myInput:string;
   products:Product[];
+  dashboard_arr=[];
   searchProducts:Product[];
   user;
   category: string = "AllProducts";
   filter:Product[];
+  loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
-              public productProvider: ProductProvider) {
+              public productProvider: ProductProvider, public loadingCtrl: LoadingController) {
         this.user=navParams.get('data');
         console.log(this.user);
   }
@@ -40,12 +42,12 @@ export class ProductsPage {
     }
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     console.log('ionViewWillLoad ProductsPage');
     if(!this.user){
-        this.productProvider.getAllProducts();
-        //this.products=this.productProvider.products;
-        console.log(this.products);
+      this.productProvider.getAllProducts();
+      //this.products=this.productProvider.products;
+      console.log(this.products);
     }else{
       //this.products=this.productProvider.userProducts;
     }

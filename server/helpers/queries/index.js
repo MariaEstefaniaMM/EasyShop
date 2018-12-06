@@ -19,11 +19,17 @@ module.exports = {
   },
   // external queries for Carts:
   carts: {
-    create: sql("./carts/createCart.sql")
+    create: sql("./carts/createCart.sql"),
+    updateAdd: sql("./carts/updateCartAdd.sql"),
+    updateReturn: sql("./carts/updateCartReturn.sql"),
+    delete: sql("./carts/deleteCart.sql"),
+    read: sql("./carts/getCart.sql"),
+    updateStock: sql("./carts/updateStock.sql")
   },
   // external queries for Products:
   products:{
     readAll: sql("./products/getAll.sql"),
+    readById:sql("./products/getById.sql"),
     create: sql("./products/createProduct.sql"),
     update: sql("./products/updateProduct.sql"),
     read: sql("./products/getUserProducts.sql"),
@@ -36,5 +42,10 @@ module.exports = {
     update: sql("./comments/updateComment.sql"),
     read: sql("./comments/getProductComments.sql"),
     delete: sql("./comments/deleteComment.sql")
+  },
+  // external queries for Bill:
+  bills:{
+    create: sql("./bills/createBill.sql"),
+    add: sql("./bills/productsBill.sql"),
   }
 };

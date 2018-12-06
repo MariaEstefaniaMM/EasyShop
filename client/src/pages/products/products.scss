@@ -4,10 +4,13 @@ page-products {
         top: 39px;
         height: 0px;
     }
-    ion-list.list.list-md {
+    /*ion-list.list.list-md {
         position: relative;
         top: 30px;
         left: -30px;
+    } */
+    .list-md {
+        margin: -20px 0 16px;
     }
     ion-segment.segment.segment-md.ng-valid.ng-touched.ng-dirty, ion-segment.segment.segment-md.ng-untouched.ng-pristine.ng-valid {
         width: 360px;
@@ -59,8 +62,20 @@ page-products {
     .slides {
         position: relative;
         left: -3px;
-        width: 336px;
+        /*width: 336px;*/
+        width: auto;
         top: 1px;
+    }
+    ion-card.disable-hover.card.card-md.button.button-md.button-default.button-default-md {
+        width: auto;
+        height: 95px;
+    }
+    .myproducts{
+        position: relative;
+        left: -22px;
+        width: 370px;
+        top: 68px;
+        height: 160px;
     }
     .button-md-primary {
         color: #fff;
@@ -89,4 +104,13 @@ page-products {
         top: 50px;
         left: 50px;  
     }
+    .card-title {
+        position: absolute;
+        top: 26%;
+        font-size: 1.7em;
+        width: 100%;
+        font-weight: bold;
+        color: rgb(255, 155, 23);
+        left: -81px;
+      }
 }

@@ -1,19 +1,67 @@
-<ion-item-sliding>
-  <button ion-item (click)="goToProduct(product)">
+<ion-card *ngIf="wishlist" class="card-cart">
+  <ion-item>
+  <button ion-item (click)="goToProduct(product)" id="btn-cart">
     <ion-thumbnail item-start>
       <img class="img-note" *ngIf="product.img_product"  src="{{product.img_product}}">
       <img class="img-note" *ngIf="!product.img_product" src="/assets/imgs/logoess.png">
     </ion-thumbnail>
-    <h4>{{product.name_product}}</h4>
-    <h5>${{product.price_product}}</h5>
+    <ion-row>
+      <ion-col col-12>
+        <h2 style="color: orange"><strong>{{product.name_product}}</strong></h2>
+      </ion-col>
+      <ion-col>
+        <h2> By @{{product.username}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h4><strong>Quantity</strong></h4>
+      </ion-col>
+      <ion-col>
+        <h4><strong>Price</strong></h4>
+      </ion-col>
+      <ion-col>
+        <h4><strong>Total</strong></h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h5 align="center">{{product.product_quantity}}</h5>
+      </ion-col>
+      <ion-col>
+        <h5>${{product.price_product}}</h5>
+      </ion-col>
+      <ion-col>
+        <h5>${{getTotal(product)}}</h5>
+      </ion-col>
+    </ion-row>  
   </button>
-  <ion-item-options side="right" *ngIf="!user" >
-    <button ion-button color="primary" (click)="addAlert()">
-      <ion-icon name="cart" ></ion-icon>
-      ADD TO WISHLIST
-    </button>
-  </ion-item-options>
-  <ion-item-options side="right" *ngIf="user">
+  </ion-item>
+  <ion-item>
+      <ion-buttons>
+          <button *ngIf="wishlist && !bill" icon-start ion-button style="background-color: orange" (click)="editAlert(product)">
+            <ion-icon name="trash" ></ion-icon>
+             EDIT
+          </button>
+          <button *ngIf="wishlist && !bill" icon-start ion-button color="danger" (click)="deleteAlertWishList(product)">
+              <ion-icon name="trash" ></ion-icon>
+              DELETE
+          </button>
+        </ion-buttons>
+  </ion-item>
+</ion-card>
+  
+<ion-item-sliding *ngIf="!wishlist || user">
+    <ion-item>
+        <button ion-item (click)="goToProduct(product)">
+          <ion-thumbnail item-start>
+            <img class="img-note" *ngIf="product.img_product"  src="{{product.img_product}}">
+            <img class="img-note" *ngIf="!product.img_product" src="/assets/imgs/logoess.png">
+          </ion-thumbnail>
+          <h4>{{product.name_product}}</h4>
+          <h5>${{product.price_product}}</h5>
+        </button>
+  <ion-item-options side="right" *ngIf="user && !wishlist">
     <button ion-button style="background-color: orange" (click)="goToEditProduct(product)">
         <ion-icon name="trash" ></ion-icon>
          EDIT
@@ -23,4 +71,5 @@
         DELETE
     </button>
   </ion-item-options>
+</ion-item>
 </ion-item-sliding>

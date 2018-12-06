@@ -1,26 +1,91 @@
-<ion-item class="user">
-    <ion-input type="text" placeholder="Write something" [(ngModel)]="comment.comment_text" [readonly]="readonlyComment"></ion-input>
-</ion-item>
-<ion-item>
-    <button ion-button small *ngIf="readonlyComment" (click)="showResponses()"> SEE ANSWERS </button>
-    <button ion-button small *ngIf="owner && readonly" (click)="enableInput(comment)"> EDIT </button>
-    <button ion-button small *ngIf="owner && !readonly" (click)="updateComment(comment)"> SAVE </button>
-    <button ion-button small *ngIf="owner && readonly" (click)="deleteAlert(comment)"> DELETE </button>
-</ion-item>
+<ion-row>
+    <ion-col col-4>
+        <h4 class="h4-c">@{{this.comment.username}}</h4>
+       <!-- <h4 class="h4-c">@{{comment.username}} </h4>-->
+    </ion-col>               
+</ion-row>
+
+<ion-row>
+    <ion-col col-10>
+        <ion-item class="user">
+          <ion-textarea type="text" placeholder="Tap to comment..." row="1" [(ngModel)]="comment.comment_text" [readonly]="readonlyComment"></ion-textarea>
+        </ion-item>  
+    </ion-col>
+    <ion-col col-2 *ngIf="readonlyComment">
+        <ion-fab bottom right edge>
+            <button ion-fab mini class="comment-crud" *ngIf="owner || comment.id_user==userProvider.user.id_user" ><ion-icon name="md-more"></ion-icon></button>
+            <ion-fab-list side="top" class="comment-list">
+                <button  *ngIf="comment.id_user==userProvider.user.id_user  && readonlyComment" class="fab-comment" ion-fab (click)="enableInput(comment)"><ion-icon name="create"></ion-icon></button>
+                <button *ngIf="owner || comment.id_user==userProvider.user.id_user && readonlyComment"  class="fab-comment"  ion-fab (click)="deleteAlert(comment)"><ion-icon name="trash"></ion-icon></button>
+            </ion-fab-list>
+        </ion-fab>    
+    </ion-col>
+    <ion-col col-3 *ngIf="comment.id_user==userProvider.user.id_user && !readonlyComment">
+       <button ion-fab icon-start (click)="updateComment(comment)">
+           <ion-icon name="checkmark"></ion-icon>
+        </button> 
+    </ion-col>
+    <ion-col col-5 *ngIf="readonlyComment">
+        <h6 class="h6-c">
+            <ion-datetime *ngIf="!comment.comment_updated_at" disabled  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_created_at"></ion-datetime>
+            <ion-datetime *ngIf="comment.comment_updated_at"  disabled  displayFormat="DD MMM, YY" [(ngModel)]="comment.comment_updated_at"></ion-datetime>
+        </h6>
+    </ion-col>
+    <ion-col col-7 *ngIf="readonlyComment" class="see-answer">
+            <ion-item >
+                <button ion-button small clear class="btn-see" (click)="showResponses()"> SEE ANSWERS.. </button>
+            </ion-item>
+        </ion-col>
+</ion-row>
+
 <div *ngIf="show" >
-<ion-item *ngFor="let response of commentProvider.commentResponses" >
+    <ion-item *ngFor="let response of commentResponses" >
+        <ion-row class="user-a">
+            <ion-col col-4>
+                <h4 class="h4-a" >@{{this.response.username}}</h4>
+            </ion-col>               
+        </ion-row>
+        <ion-row>
+            <ion-col col-8>
+                <ion-item class="user">
+                    <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text" [readonly]="response.readonly"></ion-textarea>
+                </ion-item> 
+            </ion-col>
+            <ion-col col-2 *ngIf="response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
+                    <ion-icon name="create"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-1 *ngIf="!response.readonly">
+                <button ion-button small icon-start clear *ngIf="response.id_user==userProvider.user.id_user && response.readonly" (click)="enableInputR(response)">
+                    <ion-icon name="create"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-1>
+                <button ion-button small icon-start clear *ngIf="owner || response.id_user==userProvider.user.id_user && response.readonly" (click)="deleteAlert(response)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>   
+            </ion-col>
+            <ion-col col-12>
+                <button ion-button small icon-start clear class="save-a" *ngIf="response.id_user==userProvider.user.id_user && !response.readonly" (click)="updateComment(response)">
+                    <ion-icon name="checkmark"></ion-icon>
+                    <div>Save</div>
+                </button>
+            </ion-col>
+            <ion-col col-5 *ngIf="!response.readonly">
+                <h6 class="h6-c">
+                    <ion-datetime *ngIf="!response.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="response.comment_created_at"></ion-datetime>
+                    <ion-datetime *ngIf="response.comment_updated_at"  displayFormat="DD MMM, YY" [(ngModel)]="response.comment_updated_at"></ion-datetime>
+                </h6>
+            </ion-col>
+        </ion-row>
+    </ion-item>
     <ion-item class="user">
-        <ion-input type="text" placeholder="Write something" [(ngModel)]="response.comment_text" [readonly]="readonlyResponse"></ion-input>
+        <ion-textarea type="text" placeholder="Tap to Answer..." row="1" [(ngModel)]="response.comment_text"></ion-textarea>
     </ion-item>
     <ion-item>
-        <button ion-button small *ngIf="owner && readonly" (click)="enableInputR(response)"> EDIT </button>
-        <button ion-button small *ngIf="owner && !readonly" (click)="updateComment(response)"> SAVE </button>
-        <button ion-button small *ngIf="owner && readonly" (click)="deleteAlert(response)"> DELETE </button>
-    </ion-item> 
-</ion-item>
-<ion-item class="user">
-        <ion-input type="text" placeholder="Write something" [(ngModel)]="response.comment_text"></ion-input>
-</ion-item>
-<ion-item><button ion-button small (click)="createComment()">ANSWER</button></ion-item>
+        <button ion-button small (click)="createComment()">ANSWER</button>
+    </ion-item>
 </div>
+
 

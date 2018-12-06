@@ -6,13 +6,14 @@ import { Product } from '../../models/product';
 @Injectable()
 export class ProductProvider {
 
-  serverUrl:string = "http://localhost:3000";
+  //serverUrl:string = "http://localhost:3000";
+  serverUrl:string = "http://192.168.43.69:3000";
   products:Product[];
   userProducts: Product[];
   category=[
     { id:1,  title: 'Clothes'},
     { id:2, title: 'Shoes'},
-    { id:3, title: 'Accesories'},
+    { id:3, title: 'Accessories'},
   ];
 
   constructor(public http: HttpClient,private tokenProvider: TokenProvider) {
@@ -24,6 +25,7 @@ export class ProductProvider {
         if (res.status==200){
           this.products=[];
           this.products=res.products;
+          //this.products.sort()
           console.log(this.products);
         }else{
           console.log(res.message);

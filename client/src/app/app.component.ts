@@ -1,3 +1,4 @@
+import { UserBillsPage } from './../pages/user-bills/user-bills';
 import { UserAccountPage } from './../pages/user-account/user-account';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
@@ -27,10 +28,10 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: ProductsPage, icon: 'home' },
-      { title: 'Wishlist', component: WishlistPage, icon: 'cart' },
+      { title: 'My Cart', component: WishlistPage, icon: 'cart' },
       { title: 'My Account', component: UserAccountPage, icon: 'contact' },
       { title: 'New Product', component: NewProductPage, icon: 'add' },
-      { title: 'Logout', component: HomePage, icon: 'log-out' }
+      { title: 'Logout', component: HomePage, icon: 'log-out' }     
     ];
   }
 
@@ -50,7 +51,7 @@ export class MyApp {
       this.tokenProvider.removeToken();
       console.log(this.tokenProvider.token)
     }
-    this.nav.push(page.component);
+    this.nav.push(page.component, null);
     console.log('do iit')
   }
 }
